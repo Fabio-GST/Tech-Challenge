@@ -1,0 +1,44 @@
+import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
+import type { ServicoDeHash } from '#shared/aplicacao/servico-de-hash'
+import { ConflitoDeRecurso } from '#shared/dominio/erros'
+import type { RepositorioDeUsuarios } from '../../dominio/repositorios/repositorio-de-usuarios.js'
+import { Usuario } from '../../dominio/entidades/usuario.js'
+import { Email } from '../../dominio/objetos-de-valor/email.js'
+
+export interface EntradaRegistrarAdministrador {
+  nome: string
+  email: string
+  senha: string
+}
+
+export interface SaidaRegistrarAdministrador {
+  id: string
+  nome: string
+  email: string
+}
+
+/** Cadastra um novo usuário administrativo da oficina. */
+export class RegistrarAdministrador implements CasoDeUso<
+  EntradaRegistrarAdministrador,
+  SaidaRegistrarAdministrador
+> {
+  constructor(
+    private readonly repositorio: RepositorioDeUsuarios,
+    private readonly hash: ServicoDeHash
+  ) {}
+
+  async executar(entrada: EntradaRegistrarAdministrador): Promise<SaidaRegistrarAdministrador> {
+    const email = Email.criar(entrada.email)
+
+    if (await this.repositorio.existeComEmail(email)) {
+      throw new ConflitoDeRecurso(`Já existe um usuário com o e-mail ${email.valor}.`)
+    }
+
+    const senhaHash = await this.hash.gerar(entrada.senha)
+    const usuario = Usuario.criar({ nome: entrada.nome, email, senhaHash })
+
+    await this.repositorio.salvar(usuario)
+
+    return { id: usuario.id, nome: usuario.nome, email: usuario.email.valor }
+  }
+}
