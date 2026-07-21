@@ -1,0 +1,17 @@
+import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
+import { RecursoNaoEncontrado } from '#shared/dominio/erros'
+import type { RepositorioDePagamentos } from '../../dominio/repositorios/repositorio-de-pagamentos.js'
+import { paraDTO, type PagamentoDTO } from '../dtos.js'
+
+/** Obtém um pagamento pelo identificador. */
+export class ObterPagamento implements CasoDeUso<string, PagamentoDTO> {
+  constructor(private readonly repositorio: RepositorioDePagamentos) {}
+
+  async executar(id: string): Promise<PagamentoDTO> {
+    const pagamento = await this.repositorio.buscarPorId(id)
+    if (!pagamento) {
+      throw new RecursoNaoEncontrado('Pagamento', id)
+    }
+    return paraDTO(pagamento)
+  }
+}

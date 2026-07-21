@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/dominio/erros'
-import { coletarEventosDe } from '#shared/infraestrutura/eventos/coletor-de-eventos'
+import { coletarEventosDe } from '#shared/aplicacao/coletor-de-eventos'
 import type { RepositorioDeOrdensServico } from '../../dominio/repositorios/repositorio-de-ordens-servico.js'
 import type { OrdemServico } from '../../dominio/entidades/ordem-servico.js'
 import { StatusOS } from '../../dominio/objetos-de-valor/status-ordem-servico.js'

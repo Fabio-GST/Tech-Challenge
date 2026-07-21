@@ -1,11 +1,9 @@
 import { RepositorioDePagamentosLucid } from './persistencia/repositorios/repositorio-de-pagamentos-lucid.js'
-import {
-  GerarCobranca,
-  AplicarDesconto,
-  RegistrarPagamento,
-  EmitirNotaFiscal,
-  ObterPagamento,
-} from '../aplicacao/casos-de-uso.js'
+import { GerarCobranca } from '../aplicacao/casos-de-uso/gerar-cobranca.js'
+import { AplicarDesconto } from '../aplicacao/casos-de-uso/aplicar-desconto.js'
+import { RegistrarPagamento } from '../aplicacao/casos-de-uso/registrar-pagamento.js'
+import { EmitirNotaFiscal } from '../aplicacao/casos-de-uso/emitir-nota-fiscal.js'
+import { ObterPagamento } from '../aplicacao/casos-de-uso/obter-pagamento.js'
 
 const repositorio = new RepositorioDePagamentosLucid()
 

@@ -1,6 +1,7 @@
 import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
 import type { DespachanteDeEventos } from '#shared/aplicacao/despachante-de-eventos'
 import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
+import { configurarDespachanteDeEventos } from '#shared/aplicacao/coletor-de-eventos'
 
 /**
  * Barramento de Eventos de Domínio em memória (in-process).
@@ -46,6 +47,9 @@ export class BarramentoDeEventos implements DespachanteDeEventos {
 
 /**
  * Instância única do barramento (composition root de eventos). É aqui que os
- * manipuladores são registrados no boot (ver `start/eventos.ts`).
+ * manipuladores são registrados no boot (ver `start/eventos.ts`). Ao carregar,
+ * o barramento se pluga como despachante do coletor de eventos da camada de
+ * aplicação — a aplicação segue conhecendo apenas a interface.
  */
 export const barramentoDeEventos = new BarramentoDeEventos()
+configurarDespachanteDeEventos(barramentoDeEventos)

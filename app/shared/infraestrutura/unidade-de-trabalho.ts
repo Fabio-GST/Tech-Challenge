@@ -1,9 +1,10 @@
 import db from '@adonisjs/lucid/services/db'
+import type { UnidadeDeTrabalho } from '#shared/aplicacao/unidade-de-trabalho'
+import { publicarAposCommit } from '#shared/aplicacao/coletor-de-eventos'
 import { contextoTransacional } from './contexto-transacional.js'
-import { publicarAposCommit } from './eventos/coletor-de-eventos.js'
 
 /**
- * Unidade de Trabalho (Unit of Work).
+ * Unidade de Trabalho sobre transações do Lucid.
  *
  * Executa uma operação dentro de uma única transação de banco. Todos os
  * repositórios chamados dentro do callback participam automaticamente da mesma
@@ -14,7 +15,7 @@ import { publicarAposCommit } from './eventos/coletor-de-eventos.js'
  * são publicados somente **após o commit**, evitando reações a um estado que
  * ainda poderia sofrer rollback.
  */
-export class UnidadeDeTrabalho {
+export class UnidadeDeTrabalhoLucid implements UnidadeDeTrabalho {
   async executar<T>(operacao: () => Promise<T>): Promise<T> {
     return publicarAposCommit(() =>
       db.transaction((trx) => contextoTransacional.run(trx, operacao))

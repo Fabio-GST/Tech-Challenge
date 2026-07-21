@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import type { UnidadeDeTrabalho } from '#shared/infraestrutura/unidade-de-trabalho'
+import type { UnidadeDeTrabalho } from '#shared/aplicacao/unidade-de-trabalho'
 import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
 import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
 import { Veiculo } from '#modulos/veiculos/dominio/entidades/veiculo'

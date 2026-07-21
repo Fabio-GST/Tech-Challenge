@@ -5,17 +5,15 @@ import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notifica
 
 import { Peca } from '#modulos/estoque/dominio/entidades/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
-import { UtilizarPeca } from '#modulos/estoque/aplicacao/casos-de-uso'
-import { SolicitarCompra } from '#modulos/estoque/aplicacao/compras'
+import { UtilizarPeca } from '#modulos/estoque/aplicacao/casos-de-uso/utilizar-peca'
+import { SolicitarCompra } from '#modulos/estoque/aplicacao/casos-de-uso/solicitar-compra'
 import type { RepositorioDePecas } from '#modulos/estoque/dominio/repositorios/repositorio-de-pecas'
 import type { RepositorioDeSolicitacoesCompra } from '#modulos/estoque/dominio/repositorios/repositorio-de-solicitacoes-compra'
 import type { SolicitacaoDeCompra } from '#modulos/estoque/dominio/entidades/solicitacao-de-compra'
 
-import {
-  GerarCobranca,
-  RegistrarPagamento,
-  EmitirNotaFiscal,
-} from '#modulos/pagamento/aplicacao/casos-de-uso'
+import { GerarCobranca } from '#modulos/pagamento/aplicacao/casos-de-uso/gerar-cobranca'
+import { RegistrarPagamento } from '#modulos/pagamento/aplicacao/casos-de-uso/registrar-pagamento'
+import { EmitirNotaFiscal } from '#modulos/pagamento/aplicacao/casos-de-uso/emitir-nota-fiscal'
 import type { RepositorioDePagamentos } from '#modulos/pagamento/dominio/repositorios/repositorio-de-pagamentos'
 import type { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
 

@@ -1,4 +1,4 @@
-import { UnidadeDeTrabalho } from '#shared/infraestrutura/unidade-de-trabalho'
+import { UnidadeDeTrabalhoLucid } from '#shared/infraestrutura/unidade-de-trabalho'
 import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/infraestrutura/fabrica'
 import { fabricaServicos } from '#modulos/servicos/infraestrutura/fabrica'
@@ -27,7 +27,7 @@ import {
 } from '../aplicacao/casos-de-uso/consultas.js'
 
 const ordens = new RepositorioDeOrdensServicoLucid()
-const unidadeDeTrabalho = new UnidadeDeTrabalho()
+const unidadeDeTrabalho = new UnidadeDeTrabalhoLucid()
 
 export const fabricaOrdensServico = {
   criar: () =>

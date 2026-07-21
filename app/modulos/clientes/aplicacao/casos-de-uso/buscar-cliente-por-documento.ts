@@ -1,0 +1,24 @@
+import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
+import { publicarEventos } from '#shared/aplicacao/coletor-de-eventos'
+import type { RepositorioDeClientes } from '../../dominio/repositorios/repositorio-de-clientes.js'
+import { Documento } from '../../dominio/objetos-de-valor/documento.js'
+import { BuscaDeClienteRealizada } from '../../dominio/eventos/busca-de-cliente-realizada.js'
+import { paraDTO, type ClienteDTO } from '../dtos.js'
+
+/**
+ * Identifica um cliente pelo documento (CPF/CNPJ). Publica
+ * `clientes.busca-realizada` indicando se foi encontrado — base para a Política
+ * "se não encontrado, dispara cadastro".
+ */
+export class BuscarClientePorDocumento implements CasoDeUso<string, ClienteDTO | null> {
+  constructor(private readonly repositorio: RepositorioDeClientes) {}
+
+  async executar(documentoBruto: string): Promise<ClienteDTO | null> {
+    const documento = Documento.criar(documentoBruto)
+    const cliente = await this.repositorio.buscarPorDocumento(documento)
+    await publicarEventos([
+      new BuscaDeClienteRealizada(documento.valor, cliente !== null, cliente?.id),
+    ])
+    return cliente ? paraDTO(cliente) : null
+  }
+}

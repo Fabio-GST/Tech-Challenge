@@ -1,14 +1,12 @@
 import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
 import { RepositorioDeVeiculosLucid } from './persistencia/repositorios/repositorio-de-veiculos-lucid.js'
-import {
-  CriarVeiculo,
-  AtualizarVeiculo,
-  VincularClienteAoVeiculo,
-  BuscarVeiculoPorPlaca,
-  ObterVeiculo,
-  ListarVeiculos,
-  RemoverVeiculo,
-} from '../aplicacao/casos-de-uso.js'
+import { CriarVeiculo } from '../aplicacao/casos-de-uso/criar-veiculo.js'
+import { AtualizarVeiculo } from '../aplicacao/casos-de-uso/atualizar-veiculo.js'
+import { VincularClienteAoVeiculo } from '../aplicacao/casos-de-uso/vincular-cliente-ao-veiculo.js'
+import { BuscarVeiculoPorPlaca } from '../aplicacao/casos-de-uso/buscar-veiculo-por-placa.js'
+import { ObterVeiculo } from '../aplicacao/casos-de-uso/obter-veiculo.js'
+import { ListarVeiculos } from '../aplicacao/casos-de-uso/listar-veiculos.js'
+import { RemoverVeiculo } from '../aplicacao/casos-de-uso/remover-veiculo.js'
 
 const repositorio = new RepositorioDeVeiculosLucid()
 
