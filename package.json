@@ -12,6 +12,7 @@
     "build": "node ace build",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
+    "test:ci": "node --import=ts-node-maintained/register/esm bin/test.ts",
     "test:unit": "node ace test unit",
     "test:integration": "node ace test integration",
     "test:functional": "node ace test functional",
