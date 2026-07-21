@@ -2,6 +2,7 @@ import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-event
 import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
 import type { OrdemServicoFinalizada } from '#modulos/ordens-servico/dominio/eventos/ordem-servico-finalizada'
 import type { OrdemServicoDTO } from '#modulos/ordens-servico/aplicacao/dtos'
+import type { BuscarDestinatarioDaOrdem } from './notificar-cliente-sobre-os.js'
 
 type ObterOrdem = (ordemId: string) => Promise<OrdemServicoDTO>
 type GerarCobrancaCmd = (entrada: { ordemId: string; total: number }) => Promise<unknown>
@@ -16,7 +17,8 @@ export class GerarCobrancaAoFinalizar implements ManipuladorDeEvento<OrdemServic
   constructor(
     private readonly obterOrdem: ObterOrdem,
     private readonly gerarCobranca: GerarCobrancaCmd,
-    private readonly notificacao: ServicoDeNotificacao
+    private readonly notificacao: ServicoDeNotificacao,
+    private readonly buscarDestinatario?: BuscarDestinatarioDaOrdem
   ) {}
 
   async manipular(evento: OrdemServicoFinalizada): Promise<void> {
@@ -24,9 +26,12 @@ export class GerarCobrancaAoFinalizar implements ManipuladorDeEvento<OrdemServic
     if (ordem.orcamento > 0) {
       await this.gerarCobranca({ ordemId: ordem.id, total: ordem.orcamento })
     }
+    const destinatario = await this.buscarDestinatario?.(ordem.id)
     await this.notificacao.notificarCliente('Sua Ordem de Serviço foi finalizada.', {
       ordemServicoId: ordem.id,
       clienteId: ordem.clienteId,
+      destinatarioEmail: destinatario?.email,
+      destinatarioNome: destinatario?.nome,
     })
   }
 }
