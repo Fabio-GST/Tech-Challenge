@@ -45,3 +45,9 @@ export const alterarStatusValidator = vine.compile(
     status: vine.enum(Object.values(StatusOS)),
   })
 )
+
+export const decisaoOrcamentoValidator = vine.compile(
+  vine.object({
+    decisao: vine.enum(['APROVADO', 'RECUSADO'] as const),
+  })
+)

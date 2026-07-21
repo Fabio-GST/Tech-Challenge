@@ -5,6 +5,7 @@ import {
   adicionarServicoValidator,
   adicionarPecaValidator,
   alterarStatusValidator,
+  decisaoOrcamentoValidator,
 } from '../validadores/ordem_servico_validadores.js'
 
 export default class OrdensServicoController {
@@ -90,6 +91,25 @@ export default class OrdensServicoController {
   async alterarStatus({ params, request }: HttpContext) {
     const { status } = await request.validateUsing(alterarStatusValidator)
     return fabricaOrdensServico.alterarStatus().executar({ ordemId: params.id, novoStatus: status })
+  }
+
+  /**
+   * @decisaoOrcamento
+   * @tag Ordens de Serviço
+   * @summary Recebe a decisão externa sobre o orçamento (webhook)
+   * @description Endpoint para sistemas externos notificarem a aprovação ou recusa do orçamento pelo cliente. Protegido pelo header `x-webhook-token` (segredo compartilhado, configurado em `WEBHOOK_SECRET`). Idempotente: reenvios da mesma decisão retornam o estado atual sem erro.
+   * @paramPath id - Identificador (UUID) da OS - @type(string)
+   * @requestBody {"decisao":"APROVADO"}
+   * @responseBody 200 - {"id":"uuid","status":"EM_EXECUCAO","orcamento":210,"itens":[],"historico":[]} - Decisão aplicada (ou já refletida)
+   * @responseBody 401 - {"erro":{"codigo":"NAO_AUTENTICADO","mensagem":"Token de webhook ausente ou inválido."}} - Segredo do webhook inválido
+   * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Ordem de Serviço não encontrada."}} - OS inexistente
+   * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS não está aguardando aprovação."}} - Estado inválido para a decisão
+   */
+  async decisaoOrcamento({ params, request }: HttpContext) {
+    const { decisao } = await request.validateUsing(decisaoOrcamentoValidator)
+    return fabricaOrdensServico
+      .processarDecisaoOrcamento()
+      .executar({ ordemId: params.id, decisao })
   }
 
   /**

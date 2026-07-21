@@ -107,6 +107,13 @@ router.post('/auth/login', [AutenticacaoController, 'login'])
 router.get('/work-orders/:id/tracking', [OrdensServicoController, 'andamento'])
 
 /*
+| Webhooks (sistemas externos, protegidos por segredo compartilhado)
+*/
+router
+  .post('/work-orders/:id/budget-decision', [OrdensServicoController, 'decisaoOrcamento'])
+  .use(middleware.webhook())
+
+/*
 | Rotas administrativas protegidas por JWT
 */
 router

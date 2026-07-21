@@ -5,6 +5,7 @@ import { fabricaServicos } from '#modulos/servicos/infraestrutura/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
 import { RepositorioDeOrdensServicoLucid } from './persistencia/repositorios/repositorio-de-ordens-servico-lucid.js'
 import { CriarOrdemServico } from '../aplicacao/casos-de-uso/criar-ordem-servico.js'
+import { ProcessarDecisaoOrcamento } from '../aplicacao/casos-de-uso/processar-decisao-orcamento.js'
 import {
   AdicionarServicoNaOrdem,
   AdicionarPecaNaOrdem,
@@ -44,6 +45,7 @@ export const fabricaOrdensServico = {
     new AdicionarPecaNaOrdem(ordens, fabricaEstoque.repositorio(), unidadeDeTrabalho),
   alterarStatus: () => new AlterarStatusDaOrdem(ordens),
   aprovar: () => new AprovarOrdemServico(ordens),
+  processarDecisaoOrcamento: () => new ProcessarDecisaoOrcamento(ordens),
   iniciarDiagnostico: () => new IniciarDiagnostico(ordens),
   gerarOrcamento: () => new GerarOrcamento(ordens),
   recusar: () => new RecusarOrdemServico(ordens),

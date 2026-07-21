@@ -40,4 +40,5 @@ router.use([() => import('@adonisjs/core/bodyparser_middleware')])
  */
 export const middleware = router.named({
   auth: () => import('#middleware/autenticacao_middleware'),
+  webhook: () => import('#middleware/segredo_webhook_middleware'),
 })
