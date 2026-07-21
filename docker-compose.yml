@@ -37,6 +37,9 @@ services:
       DB_DATABASE: oficina
       JWT_SECRET: ${JWT_SECRET:-troque-este-segredo-em-producao}
       JWT_EXPIRES_IN: 1h
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-troque-este-segredo-de-webhook}
+      # "log" para dev; "email" exige as variáveis SMTP_* (ver .env.example).
+      NOTIFICACAO_DRIVER: ${NOTIFICACAO_DRIVER:-log}
     ports:
       - '3333:3333'
     # Aplica migrations, popula dados de exemplo e sobe a API.
