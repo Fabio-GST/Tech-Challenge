@@ -16,6 +16,13 @@ coverage
 .env.local
 .env.production.local
 .env.development.local
+k8s/secret.yaml
+
+# Terraform
+infra/.terraform
+infra/*.tfstate
+infra/*.tfstate.*
+infra/*.tfvars
 
 # Frontend assets compiled code
 public/assets
