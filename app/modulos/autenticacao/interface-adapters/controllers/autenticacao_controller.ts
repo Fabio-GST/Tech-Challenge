@@ -1,4 +1,8 @@
 import { inject } from '@adonisjs/core'
+import {
+  apresentarSessao,
+  apresentarAdministrador,
+} from '../presenters/apresentador-de-autenticacao.js'
 import { RegistrarAdministrador } from '../../use-cases/registrar-administrador.js'
 import { Autenticar } from '../../use-cases/autenticar.js'
 import type { HttpContext } from '@adonisjs/core/http'
@@ -25,7 +29,7 @@ export default class AutenticacaoController {
   async register({ request, response }: HttpContext) {
     const dados = await request.validateUsing(registrarAdministradorValidator)
     const saida = await this.registrarAdministrador.executar(dados)
-    return response.created(saida)
+    return response.created(apresentarAdministrador(saida))
   }
 
   /**
@@ -40,7 +44,7 @@ export default class AutenticacaoController {
    */
   async login({ request }: HttpContext) {
     const dados = await request.validateUsing(autenticarValidator)
-    return this.autenticar.executar(dados)
+    return apresentarSessao(await this.autenticar.executar(dados))
   }
 
   /**

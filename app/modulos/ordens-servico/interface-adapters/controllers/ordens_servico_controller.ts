@@ -1,4 +1,10 @@
 import { inject } from '@adonisjs/core'
+import {
+  apresentarOrdens,
+  apresentarOrdem,
+  apresentarAndamento,
+  apresentarTempoMedio,
+} from '../presenters/apresentador-de-ordem-servico.js'
 import { CriarOrdemServico } from '../../use-cases/criar-ordem-servico.js'
 import { AdicionarServicoNaOrdem, AdicionarPecaNaOrdem } from '../../use-cases/gerir-itens.js'
 import {
@@ -54,7 +60,7 @@ export default class OrdensServicoController {
    * @responseBody 200 - [{"id":"uuid","clienteId":"uuid","veiculoId":"uuid","status":"RECEBIDA","prioridade":"NORMAL","orcamento":210,"itens":[],"historico":[],"criadaEm":"2026-01-01T10:00:00.000Z"}] - Lista de OS
    */
   async index() {
-    return this.listarOrdens.executar()
+    return apresentarOrdens(await this.listarOrdens.executar())
   }
 
   /**
@@ -66,7 +72,7 @@ export default class OrdensServicoController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Ordem de Serviço não encontrada."}} - OS inexistente
    */
   async show({ params }: HttpContext) {
-    return this.detalharOrdem.executar(params.id)
+    return apresentarOrdem(await this.detalharOrdem.executar(params.id))
   }
 
   /**
@@ -82,7 +88,7 @@ export default class OrdensServicoController {
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarOrdemServicoValidator)
     const ordem = await this.criarOrdemServico.executar(dados)
-    return response.created(ordem)
+    return response.created(apresentarOrdem(ordem))
   }
 
   /**
@@ -97,7 +103,9 @@ export default class OrdensServicoController {
    */
   async adicionarServico({ params, request }: HttpContext) {
     const dados = await request.validateUsing(adicionarServicoValidator)
-    return this.adicionarServicoNaOrdem.executar({ ordemId: params.id, ...dados })
+    return apresentarOrdem(
+      await this.adicionarServicoNaOrdem.executar({ ordemId: params.id, ...dados })
+    )
   }
 
   /**
@@ -113,7 +121,9 @@ export default class OrdensServicoController {
    */
   async adicionarPeca({ params, request }: HttpContext) {
     const dados = await request.validateUsing(adicionarPecaValidator)
-    return this.adicionarPecaNaOrdem.executar({ ordemId: params.id, ...dados })
+    return apresentarOrdem(
+      await this.adicionarPecaNaOrdem.executar({ ordemId: params.id, ...dados })
+    )
   }
 
   /**
@@ -128,7 +138,9 @@ export default class OrdensServicoController {
    */
   async alterarStatus({ params, request }: HttpContext) {
     const { status } = await request.validateUsing(alterarStatusValidator)
-    return this.alterarStatusDaOrdem.executar({ ordemId: params.id, novoStatus: status })
+    return apresentarOrdem(
+      await this.alterarStatusDaOrdem.executar({ ordemId: params.id, novoStatus: status })
+    )
   }
 
   /**
@@ -145,7 +157,9 @@ export default class OrdensServicoController {
    */
   async decisaoOrcamento({ params, request }: HttpContext) {
     const { decisao } = await request.validateUsing(decisaoOrcamentoValidator)
-    return this.processarDecisaoOrcamento.executar({ ordemId: params.id, decisao })
+    return apresentarOrdem(
+      await this.processarDecisaoOrcamento.executar({ ordemId: params.id, decisao })
+    )
   }
 
   /**
@@ -158,7 +172,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS só pode ser aprovada quando estiver aguardando aprovação."}} - Estado inválido
    */
   async aprovar({ params }: HttpContext) {
-    return this.aprovarOrdemServico.executar(params.id)
+    return apresentarOrdem(await this.aprovarOrdemServico.executar(params.id))
   }
 
   /**
@@ -170,7 +184,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Transição de status inválida."}} - Estado inválido
    */
   async iniciarDiagnostico({ params }: HttpContext) {
-    return this.iniciarDiagnosticoUseCase.executar(params.id)
+    return apresentarOrdem(await this.iniciarDiagnosticoUseCase.executar(params.id))
   }
 
   /**
@@ -182,7 +196,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Não é possível gerar orçamento de uma OS sem itens."}} - OS sem itens
    */
   async gerarOrcamento({ params }: HttpContext) {
-    return this.gerarOrcamentoUseCase.executar(params.id)
+    return apresentarOrdem(await this.gerarOrcamentoUseCase.executar(params.id))
   }
 
   /**
@@ -195,7 +209,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS só pode ser recusada quando estiver aguardando aprovação."}} - Estado inválido
    */
   async recusar({ params }: HttpContext) {
-    return this.recusarOrdemServico.executar(params.id)
+    return apresentarOrdem(await this.recusarOrdemServico.executar(params.id))
   }
 
   /**
@@ -207,7 +221,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS só pode ser renegociada quando estiver aguardando aprovação."}} - Estado inválido
    */
   async renegociar({ params }: HttpContext) {
-    return this.renegociarOrdemServico.executar(params.id)
+    return apresentarOrdem(await this.renegociarOrdemServico.executar(params.id))
   }
 
   /**
@@ -220,7 +234,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Transição de status inválida."}} - Estado inválido
    */
   async finalizar({ params }: HttpContext) {
-    return this.finalizarOrdemServico.executar(params.id)
+    return apresentarOrdem(await this.finalizarOrdemServico.executar(params.id))
   }
 
   /**
@@ -232,7 +246,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Transição de status inválida."}} - Estado inválido
    */
   async entregar({ params }: HttpContext) {
-    return this.entregarVeiculo.executar(params.id)
+    return apresentarOrdem(await this.entregarVeiculo.executar(params.id))
   }
 
   /**
@@ -244,7 +258,7 @@ export default class OrdensServicoController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Ordem de Serviço não encontrada."}} - OS inexistente
    */
   async andamento({ params }: HttpContext) {
-    return this.consultarAndamento.executar(params.id)
+    return apresentarAndamento(await this.consultarAndamento.executar(params.id))
   }
 
   /**
@@ -254,6 +268,6 @@ export default class OrdensServicoController {
    * @responseBody 200 - {"tempoMedioMinutos":42,"ordensConsideradas":7} - Métrica calculada
    */
   async tempoMedioExecucao() {
-    return this.calcularTempoMedioExecucao.executar()
+    return apresentarTempoMedio(await this.calcularTempoMedioExecucao.executar())
   }
 }

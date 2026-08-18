@@ -1,4 +1,5 @@
 import { inject } from '@adonisjs/core'
+import { apresentarClientes, apresentarCliente } from '../presenters/apresentador-de-cliente.js'
 import type { HttpContext } from '@adonisjs/core/http'
 import {
   criarClienteValidator,
@@ -29,7 +30,7 @@ export default class ClientesController {
    * @responseBody 200 - [{"id":"uuid","nome":"Maria Silva","documento":"11144477735","tipoDocumento":"CPF","telefone":"11999998888","email":"maria@exemplo.com"}] - Lista de clientes
    */
   async index() {
-    return this.listarClientes.executar()
+    return apresentarClientes(await this.listarClientes.executar())
   }
 
   /**
@@ -41,7 +42,7 @@ export default class ClientesController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Cliente não encontrado."}} - Cliente inexistente
    */
   async show({ params }: HttpContext) {
-    return this.obterCliente.executar(params.id)
+    return apresentarCliente(await this.obterCliente.executar(params.id))
   }
 
   /**
@@ -57,7 +58,7 @@ export default class ClientesController {
     if (!cliente) {
       return response.notFound({ mensagem: 'Cliente não encontrado para o documento informado.' })
     }
-    return cliente
+    return apresentarCliente(cliente)
   }
 
   /**
@@ -72,7 +73,7 @@ export default class ClientesController {
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarClienteValidator)
     const cliente = await this.criarCliente.executar(dados)
-    return response.created(cliente)
+    return response.created(apresentarCliente(cliente))
   }
 
   /**
@@ -86,7 +87,7 @@ export default class ClientesController {
    */
   async update({ params, request }: HttpContext) {
     const dados = await request.validateUsing(atualizarClienteValidator)
-    return this.atualizarCliente.executar({ id: params.id, ...dados })
+    return apresentarCliente(await this.atualizarCliente.executar({ id: params.id, ...dados }))
   }
 
   /**

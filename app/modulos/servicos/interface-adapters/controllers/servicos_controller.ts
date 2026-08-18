@@ -1,4 +1,5 @@
 import { inject } from '@adonisjs/core'
+import { apresentarServicos, apresentarServico } from '../presenters/apresentador-de-servico.js'
 import { CriarServico } from '../../use-cases/criar-servico.js'
 import { AtualizarServico } from '../../use-cases/atualizar-servico.js'
 import { InativarServico } from '../../use-cases/inativar-servico.js'
@@ -33,7 +34,7 @@ export default class ServicosController {
    * @responseBody 200 - [{"id":"uuid","nome":"Troca de óleo","descricao":"Inclui filtro","preco":120,"ativo":true,"tempoEstimadoMinutos":30}] - Lista de serviços
    */
   async index() {
-    return this.listarServicos.executar()
+    return apresentarServicos(await this.listarServicos.executar())
   }
 
   /**
@@ -45,7 +46,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async show({ params }: HttpContext) {
-    return this.obterServico.executar(params.id)
+    return apresentarServico(await this.obterServico.executar(params.id))
   }
 
   /**
@@ -59,7 +60,7 @@ export default class ServicosController {
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarServicoValidator)
     const servico = await this.criarServico.executar(dados)
-    return response.created(servico)
+    return response.created(apresentarServico(servico))
   }
 
   /**
@@ -74,7 +75,7 @@ export default class ServicosController {
    */
   async update({ params, request }: HttpContext) {
     const dados = await request.validateUsing(atualizarServicoValidator)
-    return this.atualizarServico.executar({ id: params.id, ...dados })
+    return apresentarServico(await this.atualizarServico.executar({ id: params.id, ...dados }))
   }
 
   /**
@@ -86,7 +87,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async inativar({ params }: HttpContext) {
-    return this.inativarServico.executar(params.id)
+    return apresentarServico(await this.inativarServico.executar(params.id))
   }
 
   /**
@@ -98,7 +99,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async reativar({ params }: HttpContext) {
-    return this.reativarServico.executar(params.id)
+    return apresentarServico(await this.reativarServico.executar(params.id))
   }
 
   /**
@@ -112,7 +113,9 @@ export default class ServicosController {
    */
   async definirTempoEstimado({ params, request }: HttpContext) {
     const dados = await request.validateUsing(definirTempoEstimadoValidator)
-    return this.definirTempoEstimadoUseCase.executar({ id: params.id, ...dados })
+    return apresentarServico(
+      await this.definirTempoEstimadoUseCase.executar({ id: params.id, ...dados })
+    )
   }
 
   /**

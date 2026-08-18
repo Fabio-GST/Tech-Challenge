@@ -1,4 +1,5 @@
 import { inject } from '@adonisjs/core'
+import { apresentarPagamento } from '../presenters/apresentador-de-pagamento.js'
 import { GerarCobranca } from '../../use-cases/gerar-cobranca.js'
 import { AplicarDesconto } from '../../use-cases/aplicar-desconto.js'
 import { RegistrarPagamento } from '../../use-cases/registrar-pagamento.js'
@@ -29,7 +30,7 @@ export default class PagamentosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Pagamento não encontrado."}} - Pagamento inexistente
    */
   async show({ params }: HttpContext) {
-    return this.obterPagamento.executar(params.id)
+    return apresentarPagamento(await this.obterPagamento.executar(params.id))
   }
 
   /**
@@ -45,7 +46,7 @@ export default class PagamentosController {
   async gerarCobranca({ params, request, response }: HttpContext) {
     const { total } = await request.validateUsing(gerarCobrancaValidator)
     const pagamento = await this.gerarCobrancaUseCase.executar({ ordemId: params.id, total })
-    return response.created(pagamento)
+    return response.created(apresentarPagamento(pagamento))
   }
 
   /**
@@ -60,7 +61,9 @@ export default class PagamentosController {
    */
   async aplicarDesconto({ params, request }: HttpContext) {
     const { desconto } = await request.validateUsing(aplicarDescontoValidator)
-    return this.aplicarDescontoUseCase.executar({ id: params.id, desconto })
+    return apresentarPagamento(
+      await this.aplicarDescontoUseCase.executar({ id: params.id, desconto })
+    )
   }
 
   /**
@@ -76,7 +79,9 @@ export default class PagamentosController {
    */
   async registrarPagamento({ params, request }: HttpContext) {
     const { valor } = await request.validateUsing(registrarPagamentoValidator)
-    return this.registrarPagamentoUseCase.executar({ id: params.id, valor })
+    return apresentarPagamento(
+      await this.registrarPagamentoUseCase.executar({ id: params.id, valor })
+    )
   }
 
   /**
@@ -90,6 +95,6 @@ export default class PagamentosController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A Nota Fiscal só pode ser emitida após a quitação."}} - Pagamento não quitado
    */
   async emitirNotaFiscal({ params }: HttpContext) {
-    return this.emitirNotaFiscalUseCase.executar(params.id)
+    return apresentarPagamento(await this.emitirNotaFiscalUseCase.executar(params.id))
   }
 }

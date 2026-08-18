@@ -1,4 +1,5 @@
 import { inject } from '@adonisjs/core'
+import { apresentarVeiculos, apresentarVeiculo } from '../presenters/apresentador-de-veiculo.js'
 import { CriarVeiculo } from '../../use-cases/criar-veiculo.js'
 import { AtualizarVeiculo } from '../../use-cases/atualizar-veiculo.js'
 import { VincularClienteAoVeiculo } from '../../use-cases/vincular-cliente-ao-veiculo.js'
@@ -33,7 +34,7 @@ export default class VeiculosController {
    */
   async index({ request }: HttpContext) {
     const clienteId = request.qs().clienteId as string | undefined
-    return this.listarVeiculos.executar({ clienteId })
+    return apresentarVeiculos(await this.listarVeiculos.executar({ clienteId }))
   }
 
   /**
@@ -45,7 +46,7 @@ export default class VeiculosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Veículo não encontrado."}} - Veículo inexistente
    */
   async show({ params }: HttpContext) {
-    return this.obterVeiculo.executar(params.id)
+    return apresentarVeiculo(await this.obterVeiculo.executar(params.id))
   }
 
   /**
@@ -61,7 +62,7 @@ export default class VeiculosController {
     if (!veiculo) {
       return response.notFound({ mensagem: 'Veículo não encontrado para a placa informada.' })
     }
-    return veiculo
+    return apresentarVeiculo(veiculo)
   }
 
   /**
@@ -75,7 +76,9 @@ export default class VeiculosController {
    */
   async vincularCliente({ params, request }: HttpContext) {
     const dados = await request.validateUsing(vincularClienteValidator)
-    return this.vincularClienteAoVeiculo.executar({ id: params.id, ...dados })
+    return apresentarVeiculo(
+      await this.vincularClienteAoVeiculo.executar({ id: params.id, ...dados })
+    )
   }
 
   /**
@@ -91,7 +94,7 @@ export default class VeiculosController {
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarVeiculoValidator)
     const veiculo = await this.criarVeiculo.executar(dados)
-    return response.created(veiculo)
+    return response.created(apresentarVeiculo(veiculo))
   }
 
   /**
@@ -105,7 +108,7 @@ export default class VeiculosController {
    */
   async update({ params, request }: HttpContext) {
     const dados = await request.validateUsing(atualizarVeiculoValidator)
-    return this.atualizarVeiculo.executar({ id: params.id, ...dados })
+    return apresentarVeiculo(await this.atualizarVeiculo.executar({ id: params.id, ...dados }))
   }
 
   /**
