@@ -12,6 +12,8 @@ import {
 import { AlterarStatusDaOrdem } from '#modulos/ordens-servico/use-cases/gerir-status'
 import { ConsultarAndamento } from '#modulos/ordens-servico/use-cases/consultas'
 import { CriarCliente } from '#modulos/clientes/use-cases/criar-cliente'
+import { CriarPeca } from '#modulos/estoque/use-cases/criar-peca'
+import { ObterPeca } from '#modulos/estoque/use-cases/obter-peca'
 import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
 import { gerarCpf } from '#tests/helpers/dados'
@@ -126,5 +128,28 @@ test.group('Casos de uso de OS — branches de erro', (group) => {
       ),
       RecursoNaoEncontrado
     )
+  })
+  test('falha na reserva da segunda peça desfaz a reserva da primeira (rollback)', async ({
+    assert,
+  }) => {
+    const { clienteId, veiculoId } = await clienteEVeiculo()
+    const pecaA = await executar(CriarPeca, { nome: 'Filtro', preco: 30, quantidadeEstoque: 5 })
+    const pecaB = await executar(CriarPeca, { nome: 'Correia', preco: 80, quantidadeEstoque: 1 })
+
+    const erro = await capturarErro(async () =>
+      executar(CriarOrdemServico, {
+        clienteId,
+        veiculoId,
+        pecas: [
+          { pecaId: pecaA.id, quantidade: 2 },
+          { pecaId: pecaB.id, quantidade: 5 },
+        ],
+      })
+    )
+    assert.instanceOf(erro, RegraDeNegocioViolada)
+
+    // A transação da Unidade de Trabalho desfaz a reserva da primeira peça.
+    const recarregadaA = await executar(ObterPeca, pecaA.id)
+    assert.equal(recarregadaA.quantidadeEstoque, 5)
   })
 })

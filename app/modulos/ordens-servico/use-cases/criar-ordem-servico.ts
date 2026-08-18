@@ -3,10 +3,10 @@ import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/er
 import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
 import { PrioridadeOS } from '../entities/objetos-de-valor/prioridade-os.js'
-import type { RepositorioDeClientes } from '#modulos/clientes/use-cases/ports/repositorio-de-clientes'
-import type { RepositorioDeVeiculos } from '#modulos/veiculos/use-cases/ports/repositorio-de-veiculos'
-import type { RepositorioDeServicos } from '#modulos/servicos/use-cases/ports/repositorio-de-servicos'
-import type { RepositorioDePecas } from '#modulos/estoque/use-cases/ports/repositorio-de-pecas'
+import type { PortalDeClientes } from './ports/portal-de-clientes.js'
+import type { PortalDeVeiculos } from './ports/portal-de-veiculos.js'
+import type { PortalDeCatalogoDeServicos } from './ports/portal-de-catalogo-de-servicos.js'
+import type { PortalDeEstoque } from './ports/portal-de-estoque.js'
 import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
 import { OrdemServico } from '../entities/ordem-servico.js'
 import { paraDTO, type OrdemServicoDTO } from './dtos.js'
@@ -21,27 +21,28 @@ export interface EntradaCriarOrdemServico {
 
 /**
  * Abre uma nova Ordem de Serviço, compondo o orçamento com os serviços e peças
- * solicitados. A inclusão de peças **reserva** (bloqueia) o estoque de forma
+ * solicitados. O acesso aos contextos vizinhos acontece pelas portas ACL do
+ * próprio módulo. A inclusão de peças **reserva** (bloqueia) o estoque de forma
  * atômica (Unidade de Trabalho) junto da criação da OS; a baixa efetiva ocorre
  * na aprovação (Política `ordem-servico.aprovada → utilizar peças`).
  */
 export class CriarOrdemServico implements CasoDeUso<EntradaCriarOrdemServico, OrdemServicoDTO> {
   constructor(
     private readonly ordens: RepositorioDeOrdensServico,
-    private readonly clientes: RepositorioDeClientes,
-    private readonly veiculos: RepositorioDeVeiculos,
-    private readonly servicos: RepositorioDeServicos,
-    private readonly pecas: RepositorioDePecas,
+    private readonly clientes: PortalDeClientes,
+    private readonly veiculos: PortalDeVeiculos,
+    private readonly catalogo: PortalDeCatalogoDeServicos,
+    private readonly estoque: PortalDeEstoque,
     private readonly unidadeDeTrabalho: UnidadeDeTrabalho
   ) {}
 
   async executar(entrada: EntradaCriarOrdemServico): Promise<OrdemServicoDTO> {
-    const cliente = await this.clientes.buscarPorId(entrada.clienteId)
+    const cliente = await this.clientes.obterCliente(entrada.clienteId)
     if (!cliente) {
       throw new RecursoNaoEncontrado('Cliente', entrada.clienteId)
     }
 
-    const veiculo = await this.veiculos.buscarPorId(entrada.veiculoId)
+    const veiculo = await this.veiculos.obterVeiculo(entrada.veiculoId)
     if (!veiculo) {
       throw new RecursoNaoEncontrado('Veículo', entrada.veiculoId)
     }
@@ -70,7 +71,7 @@ export class CriarOrdemServico implements CasoDeUso<EntradaCriarOrdemServico, Or
     pedidos: { servicoId: string; quantidade: number }[]
   ): Promise<void> {
     if (pedidos.length === 0) return
-    const servicos = await this.servicos.buscarVarios(pedidos.map((p) => p.servicoId))
+    const servicos = await this.catalogo.obterServicos(pedidos.map((p) => p.servicoId))
     const porId = new Map(servicos.map((s) => [s.id, s]))
 
     for (const pedido of pedidos) {
@@ -95,7 +96,7 @@ export class CriarOrdemServico implements CasoDeUso<EntradaCriarOrdemServico, Or
     pedidos: { pecaId: string; quantidade: number }[]
   ): Promise<void> {
     if (pedidos.length === 0) return
-    const pecas = await this.pecas.buscarVarias(pedidos.map((p) => p.pecaId))
+    const pecas = await this.estoque.obterPecas(pedidos.map((p) => p.pecaId))
     const porId = new Map(pecas.map((p) => [p.id, p]))
 
     for (const pedido of pedidos) {
@@ -103,15 +104,13 @@ export class CriarOrdemServico implements CasoDeUso<EntradaCriarOrdemServico, Or
       if (!peca) {
         throw new RecursoNaoEncontrado('Peça', pedido.pecaId)
       }
-      peca.reservar(pedido.quantidade)
+      await this.estoque.reservar(peca.id, pedido.quantidade)
       ordem.adicionarPeca({
         pecaId: peca.id,
         descricao: peca.nome,
         precoUnitario: peca.preco,
         quantidade: pedido.quantidade,
       })
-      await this.pecas.salvar(peca)
-      await coletarEventosDe(peca)
     }
   }
 }

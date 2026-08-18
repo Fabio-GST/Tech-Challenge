@@ -1,9 +1,8 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/erros'
 import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
-import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeServicos } from '#modulos/servicos/use-cases/ports/repositorio-de-servicos'
-import type { RepositorioDePecas } from '#modulos/estoque/use-cases/ports/repositorio-de-pecas'
+import type { PortalDeCatalogoDeServicos } from './ports/portal-de-catalogo-de-servicos.js'
+import type { PortalDeEstoque } from './ports/portal-de-estoque.js'
 import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
 import { paraDTO, type OrdemServicoDTO } from './dtos.js'
 
@@ -20,7 +19,7 @@ export class AdicionarServicoNaOrdem implements CasoDeUso<
 > {
   constructor(
     private readonly ordens: RepositorioDeOrdensServico,
-    private readonly servicos: RepositorioDeServicos
+    private readonly catalogo: PortalDeCatalogoDeServicos
   ) {}
 
   async executar(entrada: EntradaAdicionarServico): Promise<OrdemServicoDTO> {
@@ -28,7 +27,7 @@ export class AdicionarServicoNaOrdem implements CasoDeUso<
     if (!ordem) {
       throw new RecursoNaoEncontrado('Ordem de Serviço', entrada.ordemId)
     }
-    const servico = await this.servicos.buscarPorId(entrada.servicoId)
+    const servico = await this.catalogo.obterServico(entrada.servicoId)
     if (!servico) {
       throw new RecursoNaoEncontrado('Serviço', entrada.servicoId)
     }
@@ -55,12 +54,13 @@ export interface EntradaAdicionarPeca {
 
 /**
  * Inclui uma peça em uma OS existente, **reservando** o estoque de forma atômica
- * com a atualização da OS. A baixa efetiva ocorre na aprovação da OS (Política).
+ * com a atualização da OS. A reserva delega ao caso de uso do Estoque via porta
+ * ACL. A baixa efetiva ocorre na aprovação da OS (Política).
  */
 export class AdicionarPecaNaOrdem implements CasoDeUso<EntradaAdicionarPeca, OrdemServicoDTO> {
   constructor(
     private readonly ordens: RepositorioDeOrdensServico,
-    private readonly pecas: RepositorioDePecas,
+    private readonly estoque: PortalDeEstoque,
     private readonly unidadeDeTrabalho: UnidadeDeTrabalho
   ) {}
 
@@ -70,12 +70,12 @@ export class AdicionarPecaNaOrdem implements CasoDeUso<EntradaAdicionarPeca, Ord
       if (!ordem) {
         throw new RecursoNaoEncontrado('Ordem de Serviço', entrada.ordemId)
       }
-      const peca = await this.pecas.buscarPorId(entrada.pecaId)
+      const peca = await this.estoque.obterPeca(entrada.pecaId)
       if (!peca) {
         throw new RecursoNaoEncontrado('Peça', entrada.pecaId)
       }
 
-      peca.reservar(entrada.quantidade)
+      await this.estoque.reservar(peca.id, entrada.quantidade)
       ordem.adicionarPeca({
         pecaId: peca.id,
         descricao: peca.nome,
@@ -83,9 +83,7 @@ export class AdicionarPecaNaOrdem implements CasoDeUso<EntradaAdicionarPeca, Ord
         quantidade: entrada.quantidade,
       })
 
-      await this.pecas.salvar(peca)
       await this.ordens.salvar(ordem)
-      await coletarEventosDe(peca)
       return paraDTO(ordem)
     })
   }
