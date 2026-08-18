@@ -3,7 +3,7 @@ import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
 import { gerarCpf } from '#tests/helpers/dados'
 import { ConflitoDeRecurso, RecursoNaoEncontrado } from '#shared/entities/erros'
-import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
+import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/infraestrutura/fabrica'
 
 test.group('Casos de uso de Veículos', (group) => {

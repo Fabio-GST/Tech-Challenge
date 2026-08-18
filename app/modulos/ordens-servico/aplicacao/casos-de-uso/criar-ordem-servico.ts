@@ -3,7 +3,7 @@ import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/er
 import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
 import { PrioridadeOS } from '../../dominio/objetos-de-valor/prioridade-os.js'
-import type { RepositorioDeClientes } from '#modulos/clientes/dominio/repositorios/repositorio-de-clientes'
+import type { RepositorioDeClientes } from '#modulos/clientes/use-cases/ports/repositorio-de-clientes'
 import type { RepositorioDeVeiculos } from '#modulos/veiculos/dominio/repositorios/repositorio-de-veiculos'
 import type { RepositorioDeServicos } from '#modulos/servicos/dominio/repositorios/repositorio-de-servicos'
 import type { RepositorioDePecas } from '#modulos/estoque/dominio/repositorios/repositorio-de-pecas'

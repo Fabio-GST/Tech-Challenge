@@ -1,7 +1,7 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { ConflitoDeRecurso, RecursoNaoEncontrado } from '#shared/entities/erros'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeClientes } from '#modulos/clientes/dominio/repositorios/repositorio-de-clientes'
+import type { RepositorioDeClientes } from '#modulos/clientes/use-cases/ports/repositorio-de-clientes'
 import type { RepositorioDeVeiculos } from '../../dominio/repositorios/repositorio-de-veiculos.js'
 import { Veiculo } from '../../dominio/entidades/veiculo.js'
 import { Placa } from '../../dominio/objetos-de-valor/placa.js'

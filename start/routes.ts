@@ -16,7 +16,7 @@ import swagger from '#config/swagger'
 const AutenticacaoController = () =>
   import('#modulos/autenticacao/infraestrutura/http/controllers/autenticacao_controller')
 const ClientesController = () =>
-  import('#modulos/clientes/infraestrutura/http/controllers/clientes_controller')
+  import('#modulos/clientes/interface-adapters/controllers/clientes_controller')
 const VeiculosController = () =>
   import('#modulos/veiculos/infraestrutura/http/controllers/veiculos_controller')
 const ServicosController = () =>

@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDeClientes } from '../../dominio/repositorios/repositorio-de-clientes.js'
+import type { RepositorioDeClientes } from './ports/repositorio-de-clientes.js'
 
 /** Remove um cliente pelo identificador. */
 export class RemoverCliente implements CasoDeUso<string, void> {

@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
+import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento'
 
 test.group('Documento (CPF/CNPJ)', () => {
   test('aceita um CPF válido e identifica o tipo', ({ assert }) => {

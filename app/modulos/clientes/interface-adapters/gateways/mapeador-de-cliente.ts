@@ -1,6 +1,6 @@
-import { Cliente } from '../../../dominio/entidades/cliente.js'
-import { Documento } from '../../../dominio/objetos-de-valor/documento.js'
-import type ClienteModel from '../models/cliente_model.js'
+import { Cliente } from '../../entities/cliente.js'
+import { Documento } from '../../entities/objetos-de-valor/documento.js'
+import type ClienteModel from '../../frameworks-drivers/models/cliente_model.js'
 
 export const MapeadorDeCliente = {
   paraDominio(model: ClienteModel): Cliente {

@@ -1,5 +1,5 @@
-import { Cliente } from '../entidades/cliente.js'
-import { Documento } from '../objetos-de-valor/documento.js'
+import { Cliente } from '../../entities/cliente.js'
+import { Documento } from '../../entities/objetos-de-valor/documento.js'
 
 export interface RepositorioDeClientes {
   salvar(cliente: Cliente): Promise<void>

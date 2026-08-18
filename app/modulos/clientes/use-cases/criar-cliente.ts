@@ -1,10 +1,10 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { ConflitoDeRecurso } from '#shared/entities/erros'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeClientes } from '../../dominio/repositorios/repositorio-de-clientes.js'
-import { Cliente } from '../../dominio/entidades/cliente.js'
-import { Documento } from '../../dominio/objetos-de-valor/documento.js'
-import { paraDTO, type ClienteDTO } from '../dtos.js'
+import type { RepositorioDeClientes } from './ports/repositorio-de-clientes.js'
+import { Cliente } from '../entities/cliente.js'
+import { Documento } from '../entities/objetos-de-valor/documento.js'
+import { paraDTO, type ClienteDTO } from './dtos.js'
 
 export interface EntradaCriarCliente {
   nome: string

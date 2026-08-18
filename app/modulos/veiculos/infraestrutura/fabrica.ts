@@ -1,4 +1,4 @@
-import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
+import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { RepositorioDeVeiculosLucid } from './persistencia/repositorios/repositorio-de-veiculos-lucid.js'
 import { CriarVeiculo } from '../aplicacao/casos-de-uso/criar-veiculo.js'
 import { AtualizarVeiculo } from '../aplicacao/casos-de-uso/atualizar-veiculo.js'

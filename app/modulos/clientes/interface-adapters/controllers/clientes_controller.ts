@@ -1,9 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaClientes } from '../../fabrica.js'
+import { fabricaClientes } from '../../frameworks-drivers/fabrica.js'
 import {
   criarClienteValidator,
   atualizarClienteValidator,
-} from '../validadores/cliente_validadores.js'
+} from '../../frameworks-drivers/validadores/cliente_validadores.js'
 
 export default class ClientesController {
   /**

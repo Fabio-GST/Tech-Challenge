@@ -1,5 +1,5 @@
 import { UnidadeDeTrabalhoLucid } from '#shared/frameworks-drivers/unidade-de-trabalho'
-import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
+import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/infraestrutura/fabrica'
 import { fabricaServicos } from '#modulos/servicos/infraestrutura/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'

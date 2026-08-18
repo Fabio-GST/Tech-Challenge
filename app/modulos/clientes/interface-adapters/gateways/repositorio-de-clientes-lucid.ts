@@ -1,9 +1,9 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDeClientes } from '../../../dominio/repositorios/repositorio-de-clientes.js'
-import type { Cliente } from '../../../dominio/entidades/cliente.js'
-import { Documento } from '../../../dominio/objetos-de-valor/documento.js'
-import ClienteModel from '../models/cliente_model.js'
-import { MapeadorDeCliente } from '../mapeadores/mapeador-de-cliente.js'
+import type { RepositorioDeClientes } from '../../use-cases/ports/repositorio-de-clientes.js'
+import type { Cliente } from '../../entities/cliente.js'
+import { Documento } from '../../entities/objetos-de-valor/documento.js'
+import ClienteModel from '../../frameworks-drivers/models/cliente_model.js'
+import { MapeadorDeCliente } from './mapeador-de-cliente.js'
 
 export class RepositorioDeClientesLucid implements RepositorioDeClientes {
   async salvar(cliente: Cliente): Promise<void> {

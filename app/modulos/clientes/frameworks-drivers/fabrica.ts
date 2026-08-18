@@ -1,10 +1,10 @@
-import { RepositorioDeClientesLucid } from './persistencia/repositorios/repositorio-de-clientes-lucid.js'
-import { CriarCliente } from '../aplicacao/casos-de-uso/criar-cliente.js'
-import { AtualizarCliente } from '../aplicacao/casos-de-uso/atualizar-cliente.js'
-import { BuscarClientePorDocumento } from '../aplicacao/casos-de-uso/buscar-cliente-por-documento.js'
-import { ObterCliente } from '../aplicacao/casos-de-uso/obter-cliente.js'
-import { ListarClientes } from '../aplicacao/casos-de-uso/listar-clientes.js'
-import { RemoverCliente } from '../aplicacao/casos-de-uso/remover-cliente.js'
+import { RepositorioDeClientesLucid } from '../interface-adapters/gateways/repositorio-de-clientes-lucid.js'
+import { CriarCliente } from '../use-cases/criar-cliente.js'
+import { AtualizarCliente } from '../use-cases/atualizar-cliente.js'
+import { BuscarClientePorDocumento } from '../use-cases/buscar-cliente-por-documento.js'
+import { ObterCliente } from '../use-cases/obter-cliente.js'
+import { ListarClientes } from '../use-cases/listar-clientes.js'
+import { RemoverCliente } from '../use-cases/remover-cliente.js'
 
 const repositorio = new RepositorioDeClientesLucid()
 

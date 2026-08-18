@@ -1,9 +1,9 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { publicarEventos } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeClientes } from '../../dominio/repositorios/repositorio-de-clientes.js'
-import { Documento } from '../../dominio/objetos-de-valor/documento.js'
-import { BuscaDeClienteRealizada } from '../../dominio/eventos/busca-de-cliente-realizada.js'
-import { paraDTO, type ClienteDTO } from '../dtos.js'
+import type { RepositorioDeClientes } from './ports/repositorio-de-clientes.js'
+import { Documento } from '../entities/objetos-de-valor/documento.js'
+import { BuscaDeClienteRealizada } from '../entities/eventos/busca-de-cliente-realizada.js'
+import { paraDTO, type ClienteDTO } from './dtos.js'
 
 /**
  * Identifica um cliente pelo documento (CPF/CNPJ). Publica

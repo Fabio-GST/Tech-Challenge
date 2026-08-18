@@ -1,6 +1,6 @@
 import { RaizAgregado } from '#shared/entities/raiz-agregado'
-import { Documento } from '../objetos-de-valor/documento.js'
-import { ClienteCadastrado } from '../eventos/cliente-cadastrado.js'
+import { Documento } from './objetos-de-valor/documento.js'
+import { ClienteCadastrado } from './eventos/cliente-cadastrado.js'
 
 interface PropsCliente {
   id?: string

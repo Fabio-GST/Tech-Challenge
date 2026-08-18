@@ -1,4 +1,4 @@
-import type { Cliente } from '../dominio/entidades/cliente.js'
+import type { Cliente } from '../entities/cliente.js'
 
 export interface ClienteDTO {
   id: string
