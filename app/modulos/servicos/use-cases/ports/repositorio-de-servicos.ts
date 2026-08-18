@@ -1,4 +1,4 @@
-import { Servico } from '../entidades/servico.js'
+import { Servico } from '../../entities/servico.js'
 
 export interface RepositorioDeServicos {
   salvar(servico: Servico): Promise<void>

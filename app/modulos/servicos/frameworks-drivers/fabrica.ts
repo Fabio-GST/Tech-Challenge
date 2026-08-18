@@ -1,12 +1,12 @@
-import { RepositorioDeServicosLucid } from './persistencia/repositorios/repositorio-de-servicos-lucid.js'
-import { CriarServico } from '../aplicacao/casos-de-uso/criar-servico.js'
-import { AtualizarServico } from '../aplicacao/casos-de-uso/atualizar-servico.js'
-import { InativarServico } from '../aplicacao/casos-de-uso/inativar-servico.js'
-import { ReativarServico } from '../aplicacao/casos-de-uso/reativar-servico.js'
-import { DefinirTempoEstimado } from '../aplicacao/casos-de-uso/definir-tempo-estimado.js'
-import { ObterServico } from '../aplicacao/casos-de-uso/obter-servico.js'
-import { ListarServicos } from '../aplicacao/casos-de-uso/listar-servicos.js'
-import { RemoverServico } from '../aplicacao/casos-de-uso/remover-servico.js'
+import { RepositorioDeServicosLucid } from '../interface-adapters/gateways/repositorio-de-servicos-lucid.js'
+import { CriarServico } from '../use-cases/criar-servico.js'
+import { AtualizarServico } from '../use-cases/atualizar-servico.js'
+import { InativarServico } from '../use-cases/inativar-servico.js'
+import { ReativarServico } from '../use-cases/reativar-servico.js'
+import { DefinirTempoEstimado } from '../use-cases/definir-tempo-estimado.js'
+import { ObterServico } from '../use-cases/obter-servico.js'
+import { ListarServicos } from '../use-cases/listar-servicos.js'
+import { RemoverServico } from '../use-cases/remover-servico.js'
 
 const repositorio = new RepositorioDeServicosLucid()
 

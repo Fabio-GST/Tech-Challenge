@@ -1,4 +1,4 @@
-import type { Servico } from '../dominio/entidades/servico.js'
+import type { Servico } from '../entities/servico.js'
 
 export interface ServicoDTO {
   id: string

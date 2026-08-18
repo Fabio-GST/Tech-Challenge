@@ -7,7 +7,7 @@ import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento
 import { Email } from '#modulos/autenticacao/dominio/objetos-de-valor/email'
 import { Veiculo } from '#modulos/veiculos/dominio/entidades/veiculo'
 import { Placa } from '#modulos/veiculos/dominio/objetos-de-valor/placa'
-import { Servico } from '#modulos/servicos/dominio/entidades/servico'
+import { Servico } from '#modulos/servicos/entities/servico'
 import { Peca } from '#modulos/estoque/dominio/entidades/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
 import { SaldoEstoque } from '#modulos/estoque/dominio/objetos-de-valor/saldo-estoque'

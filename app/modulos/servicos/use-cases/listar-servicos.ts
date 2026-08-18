@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
-import type { RepositorioDeServicos } from '../../dominio/repositorios/repositorio-de-servicos.js'
-import { paraDTO, type ServicoDTO } from '../dtos.js'
+import type { RepositorioDeServicos } from './ports/repositorio-de-servicos.js'
+import { paraDTO, type ServicoDTO } from './dtos.js'
 
 /** Lista todos os serviços cadastrados. */
 export class ListarServicos implements CasoDeUso<void, ServicoDTO[]> {

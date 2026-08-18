@@ -1,9 +1,9 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeServicos } from '../../dominio/repositorios/repositorio-de-servicos.js'
-import { Servico } from '../../dominio/entidades/servico.js'
-import { paraDTO, type ServicoDTO } from '../dtos.js'
+import type { RepositorioDeServicos } from './ports/repositorio-de-servicos.js'
+import { Servico } from '../entities/servico.js'
+import { paraDTO, type ServicoDTO } from './dtos.js'
 
 export interface EntradaCriarServico {
   nome: string

@@ -1,6 +1,6 @@
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Servico } from '../../../dominio/entidades/servico.js'
-import type ServicoModel from '../models/servico_model.js'
+import { Servico } from '../../entities/servico.js'
+import type ServicoModel from '../../frameworks-drivers/models/servico_model.js'
 
 export const MapeadorDeServico = {
   paraDominio(model: ServicoModel): Servico {

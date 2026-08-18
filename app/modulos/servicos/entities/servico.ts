@@ -1,9 +1,9 @@
 import { RaizAgregado } from '#shared/entities/raiz-agregado'
 import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/entities/erros'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { ServicoCadastrado } from '../eventos/servico-cadastrado.js'
-import { ServicoInativado } from '../eventos/servico-inativado.js'
-import { PrecoDeServicoAtualizado } from '../eventos/preco-de-servico-atualizado.js'
+import { ServicoCadastrado } from './eventos/servico-cadastrado.js'
+import { ServicoInativado } from './eventos/servico-inativado.js'
+import { PrecoDeServicoAtualizado } from './eventos/preco-de-servico-atualizado.js'
 
 interface PropsServico {
   id?: string

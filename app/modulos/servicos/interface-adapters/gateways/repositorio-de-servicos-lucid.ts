@@ -1,8 +1,8 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDeServicos } from '../../../dominio/repositorios/repositorio-de-servicos.js'
-import type { Servico } from '../../../dominio/entidades/servico.js'
-import ServicoModel from '../models/servico_model.js'
-import { MapeadorDeServico } from '../mapeadores/mapeador-de-servico.js'
+import type { RepositorioDeServicos } from '../../use-cases/ports/repositorio-de-servicos.js'
+import type { Servico } from '../../entities/servico.js'
+import ServicoModel from '../../frameworks-drivers/models/servico_model.js'
+import { MapeadorDeServico } from './mapeador-de-servico.js'
 
 export class RepositorioDeServicosLucid implements RepositorioDeServicos {
   async salvar(servico: Servico): Promise<void> {

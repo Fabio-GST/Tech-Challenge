@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Servico } from '#modulos/servicos/dominio/entidades/servico'
-import { RepositorioDeServicosLucid } from '#modulos/servicos/infraestrutura/persistencia/repositorios/repositorio-de-servicos-lucid'
+import { Servico } from '#modulos/servicos/entities/servico'
+import { RepositorioDeServicosLucid } from '#modulos/servicos/interface-adapters/gateways/repositorio-de-servicos-lucid'
 
 test.group('RepositorioDeServicosLucid', (group) => {
   prepararBanco(group)

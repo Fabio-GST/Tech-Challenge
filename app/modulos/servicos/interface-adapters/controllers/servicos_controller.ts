@@ -1,10 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaServicos } from '../../fabrica.js'
+import { fabricaServicos } from '../../frameworks-drivers/fabrica.js'
 import {
   criarServicoValidator,
   atualizarServicoValidator,
   definirTempoEstimadoValidator,
-} from '../validadores/servico_validadores.js'
+} from '../../frameworks-drivers/validadores/servico_validadores.js'
 
 export default class ServicosController {
   /**

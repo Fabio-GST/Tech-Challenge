@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDeServicos } from '../../dominio/repositorios/repositorio-de-servicos.js'
+import type { RepositorioDeServicos } from './ports/repositorio-de-servicos.js'
 
 /** Remove definitivamente um serviço do catálogo. */
 export class RemoverServico implements CasoDeUso<string, void> {
