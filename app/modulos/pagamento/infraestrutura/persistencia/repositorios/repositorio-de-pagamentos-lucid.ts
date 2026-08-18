@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDePagamentos } from '../../../dominio/repositorios/repositorio-de-pagamentos.js'
 import type { Pagamento } from '../../../dominio/entidades/pagamento.js'
 import PagamentoModel from '../models/pagamento_model.js'

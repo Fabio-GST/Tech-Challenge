@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando um novo serviço é cadastrado no catálogo. */
 export class ServicoCadastrado implements EventoDeDominio {

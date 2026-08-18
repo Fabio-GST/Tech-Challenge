@@ -2,7 +2,7 @@
  * Hierarquia de erros do domínio/aplicação.
  *
  * Cada erro carrega um `codigo` legível por máquina. A tradução para HTTP
- * acontece na borda (ver `app/shared/http/mapa-erro-http.ts` e o manipulador
+ * acontece na borda (ver `app/shared/interface-adapters/mapa-erro-http.ts` e o manipulador
  * global de exceções) — o domínio não conhece transporte.
  */
 export abstract class ErroDeDominio extends Error {

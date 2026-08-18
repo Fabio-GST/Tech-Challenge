@@ -1,6 +1,6 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import { RecursoNaoEncontrado } from '#shared/dominio/erros'
-import { coletarEventosDe } from '#shared/aplicacao/coletor-de-eventos'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import { RecursoNaoEncontrado } from '#shared/entities/erros'
+import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
 import type { RepositorioDePecas } from '../../dominio/repositorios/repositorio-de-pecas.js'
 import { paraDTO, type PecaDTO } from '../dtos.js'
 

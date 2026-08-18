@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDeUsuarios } from '../../../dominio/repositorios/repositorio-de-usuarios.js'
 import type { Usuario } from '../../../dominio/entidades/usuario.js'
 import { Email } from '../../../dominio/objetos-de-valor/email.js'

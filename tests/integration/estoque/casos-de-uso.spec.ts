@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
-import { RecursoNaoEncontrado } from '#shared/dominio/erros'
+import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import { StatusSolicitacao } from '#modulos/estoque/dominio/entidades/solicitacao-de-compra'
 import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
 

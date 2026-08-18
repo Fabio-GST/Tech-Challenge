@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /**
  * Despachante (publisher) de Eventos de Domínio.

@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDeClientes } from '../../../dominio/repositorios/repositorio-de-clientes.js'
 import type { Cliente } from '../../../dominio/entidades/cliente.js'
 import { Documento } from '../../../dominio/objetos-de-valor/documento.js'

@@ -1,13 +1,13 @@
 import { test } from '@japa/runner'
 import { capturarErro } from '#tests/helpers/erros'
-import { ErroDeValidacao, NaoAutenticado, RegraDeNegocioViolada } from '#shared/dominio/erros'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { ErroDeValidacao, NaoAutenticado, RegraDeNegocioViolada } from '#shared/entities/erros'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Email } from '#modulos/autenticacao/dominio/objetos-de-valor/email'
 import { Peca } from '#modulos/estoque/dominio/entidades/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
 import { Servico } from '#modulos/servicos/dominio/entidades/servico'
 import { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
-import { servicoJwt } from '#shared/infraestrutura/jwt/servico-jwt'
+import { servicoJwt } from '#shared/frameworks-drivers/jwt/servico-jwt'
 
 test.group('Branches extras', () => {
   test('Email.toString devolve o valor normalizado', ({ assert }) => {

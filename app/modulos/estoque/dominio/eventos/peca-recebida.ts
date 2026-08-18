@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando unidades de uma peça são recebidas e repostas no estoque. */
 export class PecaRecebida implements EventoDeDominio {

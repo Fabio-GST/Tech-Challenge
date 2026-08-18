@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import { servicoDeHash } from '#shared/infraestrutura/hash/servico-de-hash-adonis'
+import { servicoDeHash } from '#shared/frameworks-drivers/hash/servico-de-hash-adonis'
 import UsuarioModel from '#modulos/autenticacao/infraestrutura/persistencia/models/usuario_model'
 import ServicoModel from '#modulos/servicos/infraestrutura/persistencia/models/servico_model'
 import PecaModel from '#modulos/estoque/infraestrutura/persistencia/models/peca_model'

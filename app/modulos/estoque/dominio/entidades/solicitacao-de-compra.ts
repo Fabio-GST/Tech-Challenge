@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { RaizAgregado } from '#shared/dominio/raiz-agregado'
-import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/dominio/erros'
+import { RaizAgregado } from '#shared/entities/raiz-agregado'
+import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/entities/erros'
 import { CompraSolicitada } from '../eventos/compra-solicitada.js'
 
 export enum StatusSolicitacao {

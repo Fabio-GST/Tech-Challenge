@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDeSolicitacoesCompra } from '../../../dominio/repositorios/repositorio-de-solicitacoes-compra.js'
 import type { SolicitacaoDeCompra } from '../../../dominio/entidades/solicitacao-de-compra.js'
 import SolicitacaoCompraModel from '../models/solicitacao_compra_model.js'

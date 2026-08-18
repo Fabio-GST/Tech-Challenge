@@ -1,4 +1,4 @@
-import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
+import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
 import type { OrdemServicoAprovada } from '#modulos/ordens-servico/dominio/eventos/ordem-servico-aprovada'
 import type { OrdemServicoDTO } from '#modulos/ordens-servico/aplicacao/dtos'
 

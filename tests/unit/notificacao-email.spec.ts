@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
 import type { Transporter } from 'nodemailer'
-import { ServicoDeNotificacaoEmail } from '#shared/infraestrutura/notificacao/servico-de-notificacao-email'
+import { ServicoDeNotificacaoEmail } from '#shared/frameworks-drivers/notificacao/servico-de-notificacao-email'
 import { NotificarClienteSobreOS } from '#politicas/notificar-cliente-sobre-os'
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 interface EmailEnviado {
   from: string

@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando a Nota Fiscal de um pagamento é emitida. */
 export class NotaFiscalEmitida implements EventoDeDominio {

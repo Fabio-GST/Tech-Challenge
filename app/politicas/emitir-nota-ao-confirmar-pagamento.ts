@@ -1,4 +1,4 @@
-import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
+import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
 import type { PagamentoConfirmado } from '#modulos/pagamento/dominio/eventos/pagamento-confirmado'
 
 type EmitirNotaCmd = (pagamentoId: string) => Promise<unknown>

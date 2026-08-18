@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { gerarCpf } from '#tests/helpers/dados'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
 import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
 import { RepositorioDeClientesLucid } from '#modulos/clientes/infraestrutura/persistencia/repositorios/repositorio-de-clientes-lucid'

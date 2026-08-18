@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando unidades reservadas de uma peça são consumidas. */
 export class PecaUtilizada implements EventoDeDominio {

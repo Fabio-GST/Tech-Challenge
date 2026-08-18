@@ -68,7 +68,7 @@ Cada OS tem uma **prioridade** (`NORMAL`/`ALTA`) definida na abertura.
 ### Eventos de Domínio e Políticas
 
 Os contextos se comunicam por **Eventos de Domínio** publicados após o commit (barramento
-in-process; ver `app/shared/infraestrutura/eventos`). As **Políticas** (manipuladores em
+in-process; ver `app/shared/frameworks-drivers/eventos`). As **Políticas** (manipuladores em
 `app/politicas`) reagem a um evento de um contexto e disparam um comando em outro, sem
 acoplamento síncrono. Registro no boot: `start/eventos.ts`.
 

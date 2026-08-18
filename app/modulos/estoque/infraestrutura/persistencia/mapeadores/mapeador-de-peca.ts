@@ -1,4 +1,4 @@
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Peca } from '../../../dominio/entidades/peca.js'
 import { QuantidadeEstoque } from '../../../dominio/objetos-de-valor/quantidade-estoque.js'
 import type PecaModel from '../models/peca_model.js'

@@ -1,5 +1,5 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import { publicarEventos } from '#shared/aplicacao/coletor-de-eventos'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import { publicarEventos } from '#shared/use-cases/coletor-de-eventos'
 import type { RepositorioDeVeiculos } from '../../dominio/repositorios/repositorio-de-veiculos.js'
 import { Placa } from '../../dominio/objetos-de-valor/placa.js'
 import { BuscaDeVeiculoRealizada } from '../../dominio/eventos/busca-de-veiculo-realizada.js'

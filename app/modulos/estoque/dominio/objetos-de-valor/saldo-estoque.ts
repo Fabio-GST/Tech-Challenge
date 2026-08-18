@@ -1,5 +1,5 @@
-import { ObjetoDeValor } from '#shared/dominio/objeto-de-valor'
-import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/dominio/erros'
+import { ObjetoDeValor } from '#shared/entities/objeto-de-valor'
+import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/entities/erros'
 
 interface PropsSaldo {
   disponivel: number

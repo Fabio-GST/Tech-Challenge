@@ -1,5 +1,5 @@
-import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 import type { EstoqueAbaixoDoMinimo } from '#modulos/estoque/dominio/eventos/estoque-abaixo-do-minimo'
 
 type SolicitarCompraCmd = (entrada: { pecaId: string; quantidade: number }) => Promise<unknown>

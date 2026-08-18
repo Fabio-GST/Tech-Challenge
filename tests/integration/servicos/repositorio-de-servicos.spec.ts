@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Servico } from '#modulos/servicos/dominio/entidades/servico'
 import { RepositorioDeServicosLucid } from '#modulos/servicos/infraestrutura/persistencia/repositorios/repositorio-de-servicos-lucid'
 

@@ -1,6 +1,6 @@
 import db from '@adonisjs/lucid/services/db'
-import type { UnidadeDeTrabalho } from '#shared/aplicacao/unidade-de-trabalho'
-import { publicarAposCommit } from '#shared/aplicacao/coletor-de-eventos'
+import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
+import { publicarAposCommit } from '#shared/use-cases/coletor-de-eventos'
 import { contextoTransacional } from './contexto-transacional.js'
 
 /**

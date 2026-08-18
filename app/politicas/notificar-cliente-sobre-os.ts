@@ -1,6 +1,6 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
-import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
+import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 
 interface EventoComOrdem extends EventoDeDominio {
   ordemServicoId: string

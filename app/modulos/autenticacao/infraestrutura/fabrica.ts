@@ -1,5 +1,5 @@
-import { servicoDeHash } from '#shared/infraestrutura/hash/servico-de-hash-adonis'
-import { servicoJwt } from '#shared/infraestrutura/jwt/servico-jwt'
+import { servicoDeHash } from '#shared/frameworks-drivers/hash/servico-de-hash-adonis'
+import { servicoJwt } from '#shared/frameworks-drivers/jwt/servico-jwt'
 import { RepositorioDeUsuariosLucid } from './persistencia/repositorios/repositorio-de-usuarios-lucid.js'
 import { RegistrarAdministrador } from '../aplicacao/casos-de-uso/registrar-administrador.js'
 import { Autenticar } from '../aplicacao/casos-de-uso/autenticar.js'

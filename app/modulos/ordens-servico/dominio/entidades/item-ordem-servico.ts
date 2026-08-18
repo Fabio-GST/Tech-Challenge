@@ -1,6 +1,6 @@
-import { Entidade } from '#shared/dominio/entidade'
-import { ErroDeValidacao } from '#shared/dominio/erros'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Entidade } from '#shared/entities/entidade'
+import { ErroDeValidacao } from '#shared/entities/erros'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 
 export type TipoItem = 'SERVICO' | 'PECA'
 

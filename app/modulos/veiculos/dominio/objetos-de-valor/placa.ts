@@ -1,5 +1,5 @@
-import { ObjetoDeValor } from '#shared/dominio/objeto-de-valor'
-import { ErroDeValidacao } from '#shared/dominio/erros'
+import { ObjetoDeValor } from '#shared/entities/objeto-de-valor'
+import { ErroDeValidacao } from '#shared/entities/erros'
 
 // Formato antigo: AAA9999 | Formato Mercosul: AAA9A99
 const FORMATO_ANTIGO = /^[A-Z]{3}\d{4}$/

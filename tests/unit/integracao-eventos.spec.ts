@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import { barramentoDeEventos } from '#shared/infraestrutura/eventos/barramento-de-eventos'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
+import { barramentoDeEventos } from '#shared/frameworks-drivers/eventos/barramento-de-eventos'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 
 import { Peca } from '#modulos/estoque/dominio/entidades/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'

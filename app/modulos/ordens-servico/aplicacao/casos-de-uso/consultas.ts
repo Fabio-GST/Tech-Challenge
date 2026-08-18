@@ -1,5 +1,5 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import { RecursoNaoEncontrado } from '#shared/dominio/erros'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import type { RepositorioDeOrdensServico } from '../../dominio/repositorios/repositorio-de-ordens-servico.js'
 import { paraDTO, paraAndamentoDTO, type OrdemServicoDTO, type AndamentoDTO } from '../dtos.js'
 

@@ -1,4 +1,4 @@
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Pagamento, StatusPagamento } from '../../../dominio/entidades/pagamento.js'
 import type PagamentoModel from '../models/pagamento_model.js'
 

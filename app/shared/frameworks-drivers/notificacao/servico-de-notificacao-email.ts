@@ -3,7 +3,7 @@ import type { Transporter } from 'nodemailer'
 import type {
   ContextoNotificacao,
   ServicoDeNotificacao,
-} from '#shared/aplicacao/servico-de-notificacao'
+} from '#shared/use-cases/servico-de-notificacao'
 
 export interface OpcoesDeEmail {
   /** Endereço usado no campo "from" das mensagens. */

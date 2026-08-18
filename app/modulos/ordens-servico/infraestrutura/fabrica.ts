@@ -1,4 +1,4 @@
-import { UnidadeDeTrabalhoLucid } from '#shared/infraestrutura/unidade-de-trabalho'
+import { UnidadeDeTrabalhoLucid } from '#shared/frameworks-drivers/unidade-de-trabalho'
 import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/infraestrutura/fabrica'
 import { fabricaServicos } from '#modulos/servicos/infraestrutura/fabrica'

@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando a execução da OS é finalizada. */
 export class OrdemServicoFinalizada implements EventoDeDominio {

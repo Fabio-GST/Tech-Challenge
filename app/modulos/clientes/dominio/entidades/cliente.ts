@@ -1,4 +1,4 @@
-import { RaizAgregado } from '#shared/dominio/raiz-agregado'
+import { RaizAgregado } from '#shared/entities/raiz-agregado'
 import { Documento } from '../objetos-de-valor/documento.js'
 import { ClienteCadastrado } from '../eventos/cliente-cadastrado.js'
 

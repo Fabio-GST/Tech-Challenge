@@ -1,4 +1,4 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import type { RepositorioDeClientes } from '../../dominio/repositorios/repositorio-de-clientes.js'
 import { paraDTO, type ClienteDTO } from '../dtos.js'
 

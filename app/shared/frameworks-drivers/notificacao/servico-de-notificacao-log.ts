@@ -1,5 +1,5 @@
 import logger from '@adonisjs/core/services/logger'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 
 /**
  * Implementação stub do serviço de notificação: apenas registra em log. Serve de

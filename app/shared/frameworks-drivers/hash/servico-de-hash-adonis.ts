@@ -1,5 +1,5 @@
 import hash from '@adonisjs/core/services/hash'
-import type { ServicoDeHash } from '#shared/aplicacao/servico-de-hash'
+import type { ServicoDeHash } from '#shared/use-cases/servico-de-hash'
 
 /**
  * Implementação de {@link ServicoDeHash} sobre o serviço de hash do AdonisJS

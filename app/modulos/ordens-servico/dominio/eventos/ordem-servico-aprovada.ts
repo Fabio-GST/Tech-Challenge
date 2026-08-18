@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando o cliente aprova o orçamento da Ordem de Serviço. */
 export class OrdemServicoAprovada implements EventoDeDominio {

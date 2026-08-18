@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import env from '#start/env'
-import { NaoAutenticado } from '#shared/dominio/erros'
-import type { ConteudoAutenticado, EmissorDeToken } from '#shared/aplicacao/emissor-de-token'
+import { NaoAutenticado } from '#shared/entities/erros'
+import type { ConteudoAutenticado, EmissorDeToken } from '#shared/use-cases/emissor-de-token'
 
 /**
  * Serviço de emissão e verificação de JSON Web Tokens (JWT) usado pela

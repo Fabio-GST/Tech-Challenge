@@ -18,8 +18,8 @@
 |
 */
 
-import { barramentoDeEventos } from '#shared/infraestrutura/eventos/barramento-de-eventos'
-import { servicoDeNotificacao } from '#shared/infraestrutura/notificacao/fabrica'
+import { barramentoDeEventos } from '#shared/frameworks-drivers/eventos/barramento-de-eventos'
+import { servicoDeNotificacao } from '#shared/frameworks-drivers/notificacao/fabrica'
 import { fabricaOrdensServico } from '#modulos/ordens-servico/infraestrutura/fabrica'
 import { fabricaClientes } from '#modulos/clientes/infraestrutura/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'

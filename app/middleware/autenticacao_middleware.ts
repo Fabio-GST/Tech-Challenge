@@ -1,8 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
-import { servicoJwt } from '#shared/infraestrutura/jwt/servico-jwt'
-import type { ConteudoAutenticado } from '#shared/aplicacao/emissor-de-token'
-import { NaoAutenticado } from '#shared/dominio/erros'
+import { servicoJwt } from '#shared/frameworks-drivers/jwt/servico-jwt'
+import type { ConteudoAutenticado } from '#shared/use-cases/emissor-de-token'
+import { NaoAutenticado } from '#shared/entities/erros'
 
 /**
  * Protege rotas administrativas exigindo um JWT válido no header

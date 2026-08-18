@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
-import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/dominio/erros'
+import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/erros'
 import { StatusPagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
 import { fabricaPagamento } from '#modulos/pagamento/infraestrutura/fabrica'
 

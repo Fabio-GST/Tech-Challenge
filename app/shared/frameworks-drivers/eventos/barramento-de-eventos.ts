@@ -1,8 +1,8 @@
 import logger from '@adonisjs/core/services/logger'
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
-import type { DespachanteDeEventos } from '#shared/aplicacao/despachante-de-eventos'
-import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
-import { configurarDespachanteDeEventos } from '#shared/aplicacao/coletor-de-eventos'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
+import type { DespachanteDeEventos } from '#shared/use-cases/despachante-de-eventos'
+import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
+import { configurarDespachanteDeEventos } from '#shared/use-cases/coletor-de-eventos'
 
 /**
  * Barramento de Eventos de Domínio em memória (in-process).

@@ -1,4 +1,4 @@
-import type { ErroDeDominio } from '#shared/dominio/erros'
+import type { ErroDeDominio } from '#shared/entities/erros'
 
 /**
  * Mapeia o `codigo` de um erro de domínio para o status HTTP correspondente.

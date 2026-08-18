@@ -1,5 +1,5 @@
-import { ObjetoDeValor } from '#shared/dominio/objeto-de-valor'
-import { ErroDeValidacao } from '#shared/dominio/erros'
+import { ObjetoDeValor } from '#shared/entities/objeto-de-valor'
+import { ErroDeValidacao } from '#shared/entities/erros'
 
 // Quantificadores limitados (RFC 5321) evitam backtracking super-linear (ReDoS).
 const FORMATO_EMAIL = /^[^\s@]{1,64}@[^\s@]{1,253}\.[^\s@]{2,63}$/

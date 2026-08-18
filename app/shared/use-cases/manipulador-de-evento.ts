@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /**
  * Manipulador (handler) de um Evento de Domínio: reage a algo que aconteceu,

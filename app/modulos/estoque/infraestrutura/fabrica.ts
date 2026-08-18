@@ -1,4 +1,4 @@
-import { UnidadeDeTrabalhoLucid } from '#shared/infraestrutura/unidade-de-trabalho'
+import { UnidadeDeTrabalhoLucid } from '#shared/frameworks-drivers/unidade-de-trabalho'
 import { RepositorioDePecasLucid } from './persistencia/repositorios/repositorio-de-pecas-lucid.js'
 import { RepositorioDeSolicitacoesCompraLucid } from './persistencia/repositorios/repositorio-de-solicitacoes-compra-lucid.js'
 import { CriarPeca } from '../aplicacao/casos-de-uso/criar-peca.js'

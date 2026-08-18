@@ -1,6 +1,6 @@
 import { AsyncLocalStorage } from 'node:async_hooks'
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
-import type { RaizAgregado } from '#shared/dominio/raiz-agregado'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
+import type { RaizAgregado } from '#shared/entities/raiz-agregado'
 import type { DespachanteDeEventos } from './despachante-de-eventos.js'
 
 /**

@@ -4,7 +4,7 @@ import {
   contextoTransacional,
   transacaoAtual,
   opcoesDeCliente,
-} from '#shared/infraestrutura/contexto-transacional'
+} from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDeOrdensServico } from '../../../dominio/repositorios/repositorio-de-ordens-servico.js'
 import type { OrdemServico } from '../../../dominio/entidades/ordem-servico.js'
 import OrdemServicoModel from '../models/ordem_servico_model.js'

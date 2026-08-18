@@ -1,4 +1,4 @@
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Servico } from '../../../dominio/entidades/servico.js'
 import type ServicoModel from '../models/servico_model.js'
 

@@ -1,5 +1,5 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import { RecursoNaoEncontrado } from '#shared/dominio/erros'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import type { RepositorioDeServicos } from '../../dominio/repositorios/repositorio-de-servicos.js'
 
 /** Remove definitivamente um serviço do catálogo. */

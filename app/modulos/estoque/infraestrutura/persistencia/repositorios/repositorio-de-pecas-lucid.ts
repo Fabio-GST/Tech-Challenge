@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDePecas } from '../../../dominio/repositorios/repositorio-de-pecas.js'
 import type { Peca } from '../../../dominio/entidades/peca.js'
 import PecaModel from '../models/peca_model.js'

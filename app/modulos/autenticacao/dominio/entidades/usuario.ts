@@ -1,4 +1,4 @@
-import { RaizAgregado } from '#shared/dominio/raiz-agregado'
+import { RaizAgregado } from '#shared/entities/raiz-agregado'
 import { Email } from '../objetos-de-valor/email.js'
 
 interface PropsUsuario {

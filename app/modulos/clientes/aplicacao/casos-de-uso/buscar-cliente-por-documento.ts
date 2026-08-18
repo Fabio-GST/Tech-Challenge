@@ -1,5 +1,5 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import { publicarEventos } from '#shared/aplicacao/coletor-de-eventos'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import { publicarEventos } from '#shared/use-cases/coletor-de-eventos'
 import type { RepositorioDeClientes } from '../../dominio/repositorios/repositorio-de-clientes.js'
 import { Documento } from '../../dominio/objetos-de-valor/documento.js'
 import { BuscaDeClienteRealizada } from '../../dominio/eventos/busca-de-cliente-realizada.js'

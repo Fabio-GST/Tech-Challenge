@@ -1,4 +1,4 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import type { RepositorioDePecas } from '../../dominio/repositorios/repositorio-de-pecas.js'
 import { paraDTO, type PecaDTO } from '../dtos.js'
 

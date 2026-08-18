@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import env from '#start/env'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 import { ServicoDeNotificacaoLog } from './servico-de-notificacao-log.js'
 import { ServicoDeNotificacaoEmail } from './servico-de-notificacao-email.js'
 

@@ -1,5 +1,5 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import { RecursoNaoEncontrado } from '#shared/dominio/erros'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import type { RepositorioDeServicos } from '../../dominio/repositorios/repositorio-de-servicos.js'
 import { paraDTO, type ServicoDTO } from '../dtos.js'
 

@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDeVeiculos } from '../../../dominio/repositorios/repositorio-de-veiculos.js'
 import type { Veiculo } from '../../../dominio/entidades/veiculo.js'
 import { Placa } from '../../../dominio/objetos-de-valor/placa.js'

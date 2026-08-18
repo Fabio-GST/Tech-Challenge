@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 import env from '#start/env'
-import { NaoAutenticado } from '#shared/dominio/erros'
+import { NaoAutenticado } from '#shared/entities/erros'
 
 /**
  * Protege endpoints de webhook (notificações de sistemas externos) exigindo o

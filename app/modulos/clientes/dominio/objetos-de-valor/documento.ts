@@ -1,5 +1,5 @@
-import { ObjetoDeValor } from '#shared/dominio/objeto-de-valor'
-import { ErroDeValidacao } from '#shared/dominio/erros'
+import { ObjetoDeValor } from '#shared/entities/objeto-de-valor'
+import { ErroDeValidacao } from '#shared/entities/erros'
 
 export type TipoDocumento = 'CPF' | 'CNPJ'
 

@@ -1,4 +1,4 @@
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { OrdemServico } from '../../../dominio/entidades/ordem-servico.js'
 import { ItemOrdemServico, type TipoItem } from '../../../dominio/entidades/item-ordem-servico.js'
 import {

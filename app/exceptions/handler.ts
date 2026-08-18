@@ -1,7 +1,7 @@
 import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
-import { ErroDeDominio } from '#shared/dominio/erros'
-import { statusHttpDoErro } from '#shared/http/mapa-erro-http'
+import { ErroDeDominio } from '#shared/entities/erros'
+import { statusHttpDoErro } from '#shared/interface-adapters/mapa-erro-http'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**

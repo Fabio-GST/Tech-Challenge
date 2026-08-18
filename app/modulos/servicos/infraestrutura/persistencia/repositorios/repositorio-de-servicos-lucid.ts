@@ -1,4 +1,4 @@
-import { opcoesDeCliente } from '#shared/infraestrutura/contexto-transacional'
+import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
 import type { RepositorioDeServicos } from '../../../dominio/repositorios/repositorio-de-servicos.js'
 import type { Servico } from '../../../dominio/entidades/servico.js'
 import ServicoModel from '../models/servico_model.js'

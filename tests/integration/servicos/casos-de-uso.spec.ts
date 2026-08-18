@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
-import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/dominio/erros'
+import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/erros'
 import { fabricaServicos } from '#modulos/servicos/infraestrutura/fabrica'
 
 test.group('Casos de uso de Serviços', (group) => {

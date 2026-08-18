@@ -1,7 +1,7 @@
-import type { CasoDeUso } from '#shared/aplicacao/caso-de-uso'
-import type { ServicoDeHash } from '#shared/aplicacao/servico-de-hash'
-import type { EmissorDeToken } from '#shared/aplicacao/emissor-de-token'
-import { NaoAutenticado } from '#shared/dominio/erros'
+import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
+import type { ServicoDeHash } from '#shared/use-cases/servico-de-hash'
+import type { EmissorDeToken } from '#shared/use-cases/emissor-de-token'
+import { NaoAutenticado } from '#shared/entities/erros'
 import type { RepositorioDeUsuarios } from '../../dominio/repositorios/repositorio-de-usuarios.js'
 import { Email } from '../../dominio/objetos-de-valor/email.js'
 

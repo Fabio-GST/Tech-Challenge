@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { Servico } from '#modulos/servicos/dominio/entidades/servico'
 
 function novoServico() {

@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando uma compra de peça é solicitada ao fornecedor. */
 export class CompraSolicitada implements EventoDeDominio {

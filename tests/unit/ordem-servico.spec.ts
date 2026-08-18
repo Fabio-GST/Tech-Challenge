@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
 import { StatusOS } from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
 

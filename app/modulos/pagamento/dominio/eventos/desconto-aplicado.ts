@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando um desconto é aplicado a uma cobrança. */
 export class DescontoAplicado implements EventoDeDominio {

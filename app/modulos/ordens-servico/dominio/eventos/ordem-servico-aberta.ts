@@ -1,4 +1,4 @@
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
 
 /** Disparado quando uma nova Ordem de Serviço é aberta. */
 export class OrdemServicoAberta implements EventoDeDominio {
