@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import {
   StatusOrdemServico,
   StatusOS,
-} from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
+} from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
 
 test.group('StatusOrdemServico (máquina de estados)', () => {
   test('o status inicial é RECEBIDA', ({ assert }) => {

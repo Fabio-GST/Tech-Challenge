@@ -7,8 +7,8 @@ import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/er
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/frameworks-drivers/fabrica'
 import { fabricaServicos } from '#modulos/servicos/frameworks-drivers/fabrica'
-import { fabricaOrdensServico } from '#modulos/ordens-servico/infraestrutura/fabrica'
-import { StatusOS } from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
+import { fabricaOrdensServico } from '#modulos/ordens-servico/frameworks-drivers/fabrica'
+import { StatusOS } from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
 
 test.group('Casos de uso de OS — branches de erro', (group) => {
   prepararBanco(group)

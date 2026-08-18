@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
-import { StatusOS } from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
+import { StatusOS } from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
 
 function novaOrdem() {
   return OrdemServico.criar({ clienteId: 'cliente-1', veiculoId: 'veiculo-1' })

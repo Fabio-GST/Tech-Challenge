@@ -1,7 +1,7 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDeOrdensServico } from '../../dominio/repositorios/repositorio-de-ordens-servico.js'
-import { paraDTO, paraAndamentoDTO, type OrdemServicoDTO, type AndamentoDTO } from '../dtos.js'
+import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
+import { paraDTO, paraAndamentoDTO, type OrdemServicoDTO, type AndamentoDTO } from './dtos.js'
 
 /** Detalha uma OS (uso administrativo). */
 export class DetalharOrdem implements CasoDeUso<string, OrdemServicoDTO> {

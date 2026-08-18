@@ -1,6 +1,6 @@
 import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
-import type { OrdemServicoAprovada } from '#modulos/ordens-servico/dominio/eventos/ordem-servico-aprovada'
-import type { OrdemServicoDTO } from '#modulos/ordens-servico/aplicacao/dtos'
+import type { OrdemServicoAprovada } from '#modulos/ordens-servico/entities/eventos/ordem-servico-aprovada'
+import type { OrdemServicoDTO } from '#modulos/ordens-servico/use-cases/dtos'
 
 type ObterOrdem = (ordemId: string) => Promise<OrdemServicoDTO>
 type UtilizarPecaCmd = (entrada: { id: string; quantidade: number }) => Promise<unknown>

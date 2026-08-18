@@ -1,12 +1,12 @@
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { OrdemServico } from '../../../dominio/entidades/ordem-servico.js'
-import { ItemOrdemServico, type TipoItem } from '../../../dominio/entidades/item-ordem-servico.js'
+import { OrdemServico } from '../../entities/ordem-servico.js'
+import { ItemOrdemServico, type TipoItem } from '../../entities/item-ordem-servico.js'
 import {
   StatusOrdemServico,
   StatusOS,
-} from '../../../dominio/objetos-de-valor/status-ordem-servico.js'
-import { PrioridadeOS } from '../../../dominio/objetos-de-valor/prioridade-os.js'
-import type OrdemServicoModel from '../models/ordem_servico_model.js'
+} from '../../entities/objetos-de-valor/status-ordem-servico.js'
+import { PrioridadeOS } from '../../entities/objetos-de-valor/prioridade-os.js'
+import type OrdemServicoModel from '../../frameworks-drivers/models/ordem_servico_model.js'
 
 export const MapeadorDeOrdemServico = {
   paraDominio(model: OrdemServicoModel): OrdemServico {

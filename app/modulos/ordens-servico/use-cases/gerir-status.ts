@@ -1,10 +1,10 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeOrdensServico } from '../../dominio/repositorios/repositorio-de-ordens-servico.js'
-import type { OrdemServico } from '../../dominio/entidades/ordem-servico.js'
-import { StatusOS } from '../../dominio/objetos-de-valor/status-ordem-servico.js'
-import { paraDTO, type OrdemServicoDTO } from '../dtos.js'
+import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
+import type { OrdemServico } from '../entities/ordem-servico.js'
+import { StatusOS } from '../entities/objetos-de-valor/status-ordem-servico.js'
+import { paraDTO, type OrdemServicoDTO } from './dtos.js'
 
 export interface EntradaAlterarStatus {
   ordemId: string

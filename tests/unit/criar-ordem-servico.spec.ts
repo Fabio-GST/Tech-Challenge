@@ -8,8 +8,8 @@ import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
 import { Servico } from '#modulos/servicos/entities/servico'
 import { Peca } from '#modulos/estoque/entities/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
-import { CriarOrdemServico } from '#modulos/ordens-servico/aplicacao/casos-de-uso/criar-ordem-servico'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
+import { CriarOrdemServico } from '#modulos/ordens-servico/use-cases/criar-ordem-servico'
 
 /** Unidade de trabalho fake: executa a operação sem transação real. */
 const unidadeFake = { executar: <T>(op: () => Promise<T>) => op() } as UnidadeDeTrabalho

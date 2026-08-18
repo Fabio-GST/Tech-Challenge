@@ -11,12 +11,12 @@ import { Servico } from '#modulos/servicos/entities/servico'
 import { Peca } from '#modulos/estoque/entities/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
 import { SaldoEstoque } from '#modulos/estoque/entities/objetos-de-valor/saldo-estoque'
-import { ItemOrdemServico } from '#modulos/ordens-servico/dominio/entidades/item-ordem-servico'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
+import { ItemOrdemServico } from '#modulos/ordens-servico/entities/item-ordem-servico'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
 import {
   StatusOrdemServico,
   StatusOS,
-} from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
+} from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
 import { Pagamento } from '#modulos/pagamento/entities/pagamento'
 
 test.group('Branches de domínio — igualdade (Entidade / ObjetoDeValor)', () => {

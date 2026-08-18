@@ -1,7 +1,4 @@
-import {
-  SolicitacaoDeCompra,
-  StatusSolicitacao,
-} from '../../entities/solicitacao-de-compra.js'
+import { SolicitacaoDeCompra, StatusSolicitacao } from '../../entities/solicitacao-de-compra.js'
 import type SolicitacaoCompraModel from '../../frameworks-drivers/models/solicitacao_compra_model.js'
 
 export const MapeadorDeSolicitacaoCompra = {

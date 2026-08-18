@@ -1,6 +1,6 @@
 import vine from '@vinejs/vine'
-import { StatusOS } from '../../../dominio/objetos-de-valor/status-ordem-servico.js'
-import { PrioridadeOS } from '../../../dominio/objetos-de-valor/prioridade-os.js'
+import { StatusOS } from '../../entities/objetos-de-valor/status-ordem-servico.js'
+import { PrioridadeOS } from '../../entities/objetos-de-valor/prioridade-os.js'
 
 export const criarOrdemServicoValidator = vine.compile(
   vine.object({

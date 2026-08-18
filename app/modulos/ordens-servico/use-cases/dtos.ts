@@ -1,4 +1,4 @@
-import { OrdemServico } from '../dominio/entidades/ordem-servico.js'
+import { OrdemServico } from '../entities/ordem-servico.js'
 
 export interface ItemDTO {
   id: string

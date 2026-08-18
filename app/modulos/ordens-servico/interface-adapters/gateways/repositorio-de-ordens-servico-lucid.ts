@@ -5,12 +5,12 @@ import {
   transacaoAtual,
   opcoesDeCliente,
 } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDeOrdensServico } from '../../../dominio/repositorios/repositorio-de-ordens-servico.js'
-import type { OrdemServico } from '../../../dominio/entidades/ordem-servico.js'
-import OrdemServicoModel from '../models/ordem_servico_model.js'
-import ItemOrdemServicoModel from '../models/item_ordem_servico_model.js'
-import HistoricoStatusModel from '../models/historico_status_model.js'
-import { MapeadorDeOrdemServico } from '../mapeadores/mapeador-de-ordem-servico.js'
+import type { RepositorioDeOrdensServico } from '../../use-cases/ports/repositorio-de-ordens-servico.js'
+import type { OrdemServico } from '../../entities/ordem-servico.js'
+import OrdemServicoModel from '../../frameworks-drivers/models/ordem_servico_model.js'
+import ItemOrdemServicoModel from '../../frameworks-drivers/models/item_ordem_servico_model.js'
+import HistoricoStatusModel from '../../frameworks-drivers/models/historico_status_model.js'
+import { MapeadorDeOrdemServico } from './mapeador-de-ordem-servico.js'
 
 export class RepositorioDeOrdensServicoLucid implements RepositorioDeOrdensServico {
   /**

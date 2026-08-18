@@ -1,5 +1,5 @@
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { ItemOrdemServico } from '../entidades/item-ordem-servico.js'
+import { ItemOrdemServico } from '../item-ordem-servico.js'
 
 /**
  * Domain Service que calcula o orçamento de uma Ordem de Serviço somando os

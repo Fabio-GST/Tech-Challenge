@@ -3,13 +3,10 @@ import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/frameworks-drivers/fabrica'
 import { fabricaServicos } from '#modulos/servicos/frameworks-drivers/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
-import { RepositorioDeOrdensServicoLucid } from './persistencia/repositorios/repositorio-de-ordens-servico-lucid.js'
-import { CriarOrdemServico } from '../aplicacao/casos-de-uso/criar-ordem-servico.js'
-import { ProcessarDecisaoOrcamento } from '../aplicacao/casos-de-uso/processar-decisao-orcamento.js'
-import {
-  AdicionarServicoNaOrdem,
-  AdicionarPecaNaOrdem,
-} from '../aplicacao/casos-de-uso/gerir-itens.js'
+import { RepositorioDeOrdensServicoLucid } from '../interface-adapters/gateways/repositorio-de-ordens-servico-lucid.js'
+import { CriarOrdemServico } from '../use-cases/criar-ordem-servico.js'
+import { ProcessarDecisaoOrcamento } from '../use-cases/processar-decisao-orcamento.js'
+import { AdicionarServicoNaOrdem, AdicionarPecaNaOrdem } from '../use-cases/gerir-itens.js'
 import {
   AlterarStatusDaOrdem,
   AprovarOrdemServico,
@@ -19,13 +16,13 @@ import {
   RenegociarOrdemServico,
   FinalizarOrdemServico,
   EntregarVeiculo,
-} from '../aplicacao/casos-de-uso/gerir-status.js'
+} from '../use-cases/gerir-status.js'
 import {
   DetalharOrdem,
   ListarOrdens,
   ConsultarAndamento,
   CalcularTempoMedioExecucao,
-} from '../aplicacao/casos-de-uso/consultas.js'
+} from '../use-cases/consultas.js'
 
 const ordens = new RepositorioDeOrdensServicoLucid()
 const unidadeDeTrabalho = new UnidadeDeTrabalhoLucid()

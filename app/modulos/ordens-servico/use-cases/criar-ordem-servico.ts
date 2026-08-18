@@ -2,14 +2,14 @@ import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/erros'
 import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import { PrioridadeOS } from '../../dominio/objetos-de-valor/prioridade-os.js'
+import { PrioridadeOS } from '../entities/objetos-de-valor/prioridade-os.js'
 import type { RepositorioDeClientes } from '#modulos/clientes/use-cases/ports/repositorio-de-clientes'
 import type { RepositorioDeVeiculos } from '#modulos/veiculos/use-cases/ports/repositorio-de-veiculos'
 import type { RepositorioDeServicos } from '#modulos/servicos/use-cases/ports/repositorio-de-servicos'
 import type { RepositorioDePecas } from '#modulos/estoque/use-cases/ports/repositorio-de-pecas'
-import type { RepositorioDeOrdensServico } from '../../dominio/repositorios/repositorio-de-ordens-servico.js'
-import { OrdemServico } from '../../dominio/entidades/ordem-servico.js'
-import { paraDTO, type OrdemServicoDTO } from '../dtos.js'
+import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
+import { OrdemServico } from '../entities/ordem-servico.js'
+import { paraDTO, type OrdemServicoDTO } from './dtos.js'
 
 export interface EntradaCriarOrdemServico {
   clienteId: string

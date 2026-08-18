@@ -1,4 +1,4 @@
-import { OrdemServico } from '../entidades/ordem-servico.js'
+import { OrdemServico } from '../../entities/ordem-servico.js'
 
 export interface RepositorioDeOrdensServico {
   salvar(ordem: OrdemServico): Promise<void>

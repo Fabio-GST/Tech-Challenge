@@ -8,9 +8,9 @@ import { RepositorioDeClientesLucid } from '#modulos/clientes/interface-adapters
 import { Veiculo } from '#modulos/veiculos/entities/veiculo'
 import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
 import { RepositorioDeVeiculosLucid } from '#modulos/veiculos/interface-adapters/gateways/repositorio-de-veiculos-lucid'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
-import { StatusOS } from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
-import { RepositorioDeOrdensServicoLucid } from '#modulos/ordens-servico/infraestrutura/persistencia/repositorios/repositorio-de-ordens-servico-lucid'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
+import { StatusOS } from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
+import { RepositorioDeOrdensServicoLucid } from '#modulos/ordens-servico/interface-adapters/gateways/repositorio-de-ordens-servico-lucid'
 
 test.group('RepositorioDeOrdensServicoLucid', (group) => {
   prepararBanco(group)

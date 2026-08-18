@@ -4,8 +4,8 @@ import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
 import type { RepositorioDeServicos } from '#modulos/servicos/use-cases/ports/repositorio-de-servicos'
 import type { RepositorioDePecas } from '#modulos/estoque/use-cases/ports/repositorio-de-pecas'
-import type { RepositorioDeOrdensServico } from '../../dominio/repositorios/repositorio-de-ordens-servico.js'
-import { paraDTO, type OrdemServicoDTO } from '../dtos.js'
+import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
+import { paraDTO, type OrdemServicoDTO } from './dtos.js'
 
 export interface EntradaAdicionarServico {
   ordemId: string

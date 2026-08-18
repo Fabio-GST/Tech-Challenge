@@ -1,6 +1,6 @@
 import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
-import type { OrdemServicoRecusada } from '#modulos/ordens-servico/dominio/eventos/ordem-servico-recusada'
-import type { OrdemServicoDTO } from '#modulos/ordens-servico/aplicacao/dtos'
+import type { OrdemServicoRecusada } from '#modulos/ordens-servico/entities/eventos/ordem-servico-recusada'
+import type { OrdemServicoDTO } from '#modulos/ordens-servico/use-cases/dtos'
 
 type ObterOrdem = (ordemId: string) => Promise<OrdemServicoDTO>
 type LiberarReservaCmd = (entrada: { id: string; quantidade: number }) => Promise<unknown>

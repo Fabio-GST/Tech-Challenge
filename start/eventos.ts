@@ -20,7 +20,7 @@
 
 import { barramentoDeEventos } from '#shared/frameworks-drivers/eventos/barramento-de-eventos'
 import { servicoDeNotificacao } from '#shared/frameworks-drivers/notificacao/fabrica'
-import { fabricaOrdensServico } from '#modulos/ordens-servico/infraestrutura/fabrica'
+import { fabricaOrdensServico } from '#modulos/ordens-servico/frameworks-drivers/fabrica'
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
 import { fabricaPagamento } from '#modulos/pagamento/frameworks-drivers/fabrica'
