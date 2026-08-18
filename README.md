@@ -24,8 +24,9 @@ Desenvolvido com **AdonisJS v6 + TypeScript**, banco **MySQL** (via Lucid) e arq
 
 ## Arquitetura
 
-Monólito **modular em camadas**, organizado por **bounded contexts** (contextos de negócio).
-Cada módulo isola domínio, aplicação e infraestrutura:
+Monólito **modular em camadas**, organizado por **bounded contexts** (contextos de negócio),
+com as camadas nomeadas segundo o Clean Architecture (entities, use cases, interface adapters,
+frameworks & drivers):
 
 ```
 app/
@@ -44,14 +45,16 @@ Cada módulo segue:
 
 ```
 <contexto>/
-  dominio/            # entidades, objetos-de-valor, repositorios (interfaces), servicos, eventos
-  aplicacao/          # casos-de-uso (orquestração) + DTOs
-  infraestrutura/     # persistencia (Lucid models, mapeadores, repositorios), http (controllers, validadores), fabrica
+  entities/            # entidades, objetos-de-valor, eventos, servicos de dominio
+  use-cases/           # casos de uso (orquestração) + DTOs + ports/ (interfaces de repositório)
+  interface-adapters/  # controllers, gateways (repositórios Lucid + mapeadores)
+  frameworks-drivers/  # models Lucid, validadores VineJS, fabrica (composition root)
 ```
 
 **DDD desacoplado:** as entidades e Objetos de Valor são puros (sem dependência do ORM). As
-interfaces de repositório vivem no domínio; as implementações Lucid ficam na infraestrutura e
-são conectadas aos casos de uso por uma _composition root_ (`infraestrutura/fabrica.ts`).
+interfaces de repositório (ports) pertencem ao anel dos casos de uso; as implementações Lucid
+ficam nos gateways e são conectadas aos casos de uso por uma _composition root_
+(`frameworks-drivers/fabrica.ts`).
 
 ### Conceitos da Linguagem Ubíqua
 

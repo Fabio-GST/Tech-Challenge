@@ -74,7 +74,7 @@
   },
   "hotHook": {
     "boundaries": [
-      "./app/modulos/**/infraestrutura/http/controllers/**/*.ts",
+      "./app/modulos/**/interface-adapters/controllers/**/*.ts",
       "./app/middleware/*.ts"
     ]
   },
