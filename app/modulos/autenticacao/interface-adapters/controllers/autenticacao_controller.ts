@@ -1,9 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaAutenticacao } from '../../fabrica.js'
+import { fabricaAutenticacao } from '../../frameworks-drivers/fabrica.js'
 import {
   registrarAdministradorValidator,
   autenticarValidator,
-} from '../validadores/autenticacao_validadores.js'
+} from '../../frameworks-drivers/validadores/autenticacao_validadores.js'
 
 export default class AutenticacaoController {
   /**

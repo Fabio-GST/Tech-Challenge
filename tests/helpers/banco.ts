@@ -3,7 +3,7 @@ import type { Group } from '@japa/runner/core'
 import type { ApiClient } from '@japa/api-client'
 import testUtils from '@adonisjs/core/services/test_utils'
 import { servicoDeHash } from '#shared/frameworks-drivers/hash/servico-de-hash-adonis'
-import UsuarioModel from '#modulos/autenticacao/infraestrutura/persistencia/models/usuario_model'
+import UsuarioModel from '#modulos/autenticacao/frameworks-drivers/models/usuario_model'
 
 /** Credenciais do admin semeado nos testes que precisam de autenticação. */
 export const ADMIN = { email: 'admin@oficina.test', senha: 'admin12345' }

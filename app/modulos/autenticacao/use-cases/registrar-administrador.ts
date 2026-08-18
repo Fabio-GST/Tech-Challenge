@@ -1,9 +1,9 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import type { ServicoDeHash } from '#shared/use-cases/servico-de-hash'
 import { ConflitoDeRecurso } from '#shared/entities/erros'
-import type { RepositorioDeUsuarios } from '../../dominio/repositorios/repositorio-de-usuarios.js'
-import { Usuario } from '../../dominio/entidades/usuario.js'
-import { Email } from '../../dominio/objetos-de-valor/email.js'
+import type { RepositorioDeUsuarios } from './ports/repositorio-de-usuarios.js'
+import { Usuario } from '../entities/usuario.js'
+import { Email } from '../entities/objetos-de-valor/email.js'
 
 export interface EntradaRegistrarAdministrador {
   nome: string

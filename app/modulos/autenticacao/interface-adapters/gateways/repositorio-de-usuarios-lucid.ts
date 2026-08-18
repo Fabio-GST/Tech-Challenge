@@ -1,9 +1,9 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDeUsuarios } from '../../../dominio/repositorios/repositorio-de-usuarios.js'
-import type { Usuario } from '../../../dominio/entidades/usuario.js'
-import { Email } from '../../../dominio/objetos-de-valor/email.js'
-import UsuarioModel from '../models/usuario_model.js'
-import { MapeadorDeUsuario } from '../mapeadores/mapeador-de-usuario.js'
+import type { RepositorioDeUsuarios } from '../../use-cases/ports/repositorio-de-usuarios.js'
+import type { Usuario } from '../../entities/usuario.js'
+import { Email } from '../../entities/objetos-de-valor/email.js'
+import UsuarioModel from '../../frameworks-drivers/models/usuario_model.js'
+import { MapeadorDeUsuario } from './mapeador-de-usuario.js'
 
 export class RepositorioDeUsuariosLucid implements RepositorioDeUsuarios {
   async salvar(usuario: Usuario): Promise<void> {

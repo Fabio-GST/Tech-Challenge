@@ -1,5 +1,5 @@
-import { Usuario } from '../entidades/usuario.js'
-import { Email } from '../objetos-de-valor/email.js'
+import { Usuario } from '../../entities/usuario.js'
+import { Email } from '../../entities/objetos-de-valor/email.js'
 
 /**
  * Contrato de persistência para usuários administrativos. A implementação

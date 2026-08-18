@@ -1,5 +1,5 @@
 import { RaizAgregado } from '#shared/entities/raiz-agregado'
-import { Email } from '../objetos-de-valor/email.js'
+import { Email } from './objetos-de-valor/email.js'
 
 interface PropsUsuario {
   id?: string

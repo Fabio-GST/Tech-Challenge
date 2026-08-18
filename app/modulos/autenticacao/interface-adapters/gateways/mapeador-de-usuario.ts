@@ -1,6 +1,6 @@
-import { Usuario } from '../../../dominio/entidades/usuario.js'
-import { Email } from '../../../dominio/objetos-de-valor/email.js'
-import type UsuarioModel from '../models/usuario_model.js'
+import { Usuario } from '../../entities/usuario.js'
+import { Email } from '../../entities/objetos-de-valor/email.js'
+import type UsuarioModel from '../../frameworks-drivers/models/usuario_model.js'
 
 /** Converte entre o agregado de domínio `Usuario` e o model Lucid. */
 export const MapeadorDeUsuario = {
