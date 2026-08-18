@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { SaldoEstoque } from '#modulos/estoque/dominio/objetos-de-valor/saldo-estoque'
+import { SaldoEstoque } from '#modulos/estoque/entities/objetos-de-valor/saldo-estoque'
 
 test.group('SaldoEstoque (VO)', () => {
   test('reservar move do disponível para reservado', ({ assert }) => {

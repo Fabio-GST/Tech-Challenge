@@ -1,4 +1,4 @@
-import { Peca } from '../entidades/peca.js'
+import { Peca } from '../../entities/peca.js'
 
 export interface RepositorioDePecas {
   salvar(peca: Peca): Promise<void>

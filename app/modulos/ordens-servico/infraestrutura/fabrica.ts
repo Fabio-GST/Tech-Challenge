@@ -2,7 +2,7 @@ import { UnidadeDeTrabalhoLucid } from '#shared/frameworks-drivers/unidade-de-tr
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/frameworks-drivers/fabrica'
 import { fabricaServicos } from '#modulos/servicos/frameworks-drivers/fabrica'
-import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
+import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
 import { RepositorioDeOrdensServicoLucid } from './persistencia/repositorios/repositorio-de-ordens-servico-lucid.js'
 import { CriarOrdemServico } from '../aplicacao/casos-de-uso/criar-ordem-servico.js'
 import { ProcessarDecisaoOrcamento } from '../aplicacao/casos-de-uso/processar-decisao-orcamento.js'

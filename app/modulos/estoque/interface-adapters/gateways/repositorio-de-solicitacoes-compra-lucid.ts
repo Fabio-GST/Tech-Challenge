@@ -1,8 +1,8 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDeSolicitacoesCompra } from '../../../dominio/repositorios/repositorio-de-solicitacoes-compra.js'
-import type { SolicitacaoDeCompra } from '../../../dominio/entidades/solicitacao-de-compra.js'
-import SolicitacaoCompraModel from '../models/solicitacao_compra_model.js'
-import { MapeadorDeSolicitacaoCompra } from '../mapeadores/mapeador-de-solicitacao-compra.js'
+import type { RepositorioDeSolicitacoesCompra } from '../../use-cases/ports/repositorio-de-solicitacoes-compra.js'
+import type { SolicitacaoDeCompra } from '../../entities/solicitacao-de-compra.js'
+import SolicitacaoCompraModel from '../../frameworks-drivers/models/solicitacao_compra_model.js'
+import { MapeadorDeSolicitacaoCompra } from './mapeador-de-solicitacao-compra.js'
 
 export class RepositorioDeSolicitacoesCompraLucid implements RepositorioDeSolicitacoesCompra {
   async salvar(solicitacao: SolicitacaoDeCompra): Promise<void> {

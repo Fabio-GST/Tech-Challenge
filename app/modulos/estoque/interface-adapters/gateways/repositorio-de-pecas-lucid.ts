@@ -1,8 +1,8 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDePecas } from '../../../dominio/repositorios/repositorio-de-pecas.js'
-import type { Peca } from '../../../dominio/entidades/peca.js'
-import PecaModel from '../models/peca_model.js'
-import { MapeadorDePeca } from '../mapeadores/mapeador-de-peca.js'
+import type { RepositorioDePecas } from '../../use-cases/ports/repositorio-de-pecas.js'
+import type { Peca } from '../../entities/peca.js'
+import PecaModel from '../../frameworks-drivers/models/peca_model.js'
+import { MapeadorDePeca } from './mapeador-de-peca.js'
 
 export class RepositorioDePecasLucid implements RepositorioDePecas {
   async salvar(peca: Peca): Promise<void> {

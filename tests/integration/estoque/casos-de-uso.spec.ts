@@ -2,8 +2,8 @@ import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import { StatusSolicitacao } from '#modulos/estoque/dominio/entidades/solicitacao-de-compra'
-import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
+import { StatusSolicitacao } from '#modulos/estoque/entities/solicitacao-de-compra'
+import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
 
 test.group('Casos de uso de Estoque', (group) => {
   prepararBanco(group)

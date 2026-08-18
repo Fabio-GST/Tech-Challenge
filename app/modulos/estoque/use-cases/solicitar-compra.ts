@@ -1,10 +1,10 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDePecas } from '../../dominio/repositorios/repositorio-de-pecas.js'
-import type { RepositorioDeSolicitacoesCompra } from '../../dominio/repositorios/repositorio-de-solicitacoes-compra.js'
-import { SolicitacaoDeCompra } from '../../dominio/entidades/solicitacao-de-compra.js'
-import { solicitacaoParaDTO, type SolicitacaoCompraDTO } from '../dtos.js'
+import type { RepositorioDePecas } from './ports/repositorio-de-pecas.js'
+import type { RepositorioDeSolicitacoesCompra } from './ports/repositorio-de-solicitacoes-compra.js'
+import { SolicitacaoDeCompra } from '../entities/solicitacao-de-compra.js'
+import { solicitacaoParaDTO, type SolicitacaoCompraDTO } from './dtos.js'
 
 export interface EntradaSolicitarCompra {
   pecaId: string

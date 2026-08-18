@@ -1,7 +1,7 @@
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Peca } from '../../../dominio/entidades/peca.js'
-import { QuantidadeEstoque } from '../../../dominio/objetos-de-valor/quantidade-estoque.js'
-import type PecaModel from '../models/peca_model.js'
+import { Peca } from '../../entities/peca.js'
+import { QuantidadeEstoque } from '../../entities/objetos-de-valor/quantidade-estoque.js'
+import type PecaModel from '../../frameworks-drivers/models/peca_model.js'
 
 export const MapeadorDePeca = {
   paraDominio(model: PecaModel): Peca {

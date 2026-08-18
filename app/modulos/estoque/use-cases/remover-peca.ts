@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDePecas } from '../../dominio/repositorios/repositorio-de-pecas.js'
+import type { RepositorioDePecas } from './ports/repositorio-de-pecas.js'
 
 /** Remove uma peça do estoque pelo identificador. */
 export class RemoverPeca implements CasoDeUso<string, void> {

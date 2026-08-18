@@ -22,7 +22,7 @@ import { barramentoDeEventos } from '#shared/frameworks-drivers/eventos/barramen
 import { servicoDeNotificacao } from '#shared/frameworks-drivers/notificacao/fabrica'
 import { fabricaOrdensServico } from '#modulos/ordens-servico/infraestrutura/fabrica'
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
-import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
+import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
 import { fabricaPagamento } from '#modulos/pagamento/infraestrutura/fabrica'
 import { UtilizarPecasAoAprovar } from '#politicas/utilizar-pecas-ao-aprovar'
 import { LiberarReservaAoRecusar } from '#politicas/liberar-reserva-ao-recusar'

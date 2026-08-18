@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Peca } from '#modulos/estoque/dominio/entidades/peca'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
+import { Peca } from '#modulos/estoque/entities/peca'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
 
 function novaPeca(estoque = 10, estoqueMinimo = 0) {
   return Peca.criar({

@@ -3,7 +3,7 @@ import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import { servicoDeHash } from '#shared/frameworks-drivers/hash/servico-de-hash-adonis'
 import UsuarioModel from '#modulos/autenticacao/infraestrutura/persistencia/models/usuario_model'
 import ServicoModel from '#modulos/servicos/frameworks-drivers/models/servico_model'
-import PecaModel from '#modulos/estoque/infraestrutura/persistencia/models/peca_model'
+import PecaModel from '#modulos/estoque/frameworks-drivers/models/peca_model'
 
 export default class extends BaseSeeder {
   async run() {

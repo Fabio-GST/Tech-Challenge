@@ -1,13 +1,13 @@
 import { RaizAgregado } from '#shared/entities/raiz-agregado'
 import { ErroDeValidacao } from '#shared/entities/erros'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { QuantidadeEstoque } from '../objetos-de-valor/quantidade-estoque.js'
-import { SaldoEstoque } from '../objetos-de-valor/saldo-estoque.js'
-import { PecaCadastrada } from '../eventos/peca-cadastrada.js'
-import { PecaReservada } from '../eventos/peca-reservada.js'
-import { PecaUtilizada } from '../eventos/peca-utilizada.js'
-import { PecaRecebida } from '../eventos/peca-recebida.js'
-import { EstoqueAbaixoDoMinimo } from '../eventos/estoque-abaixo-do-minimo.js'
+import { QuantidadeEstoque } from './objetos-de-valor/quantidade-estoque.js'
+import { SaldoEstoque } from './objetos-de-valor/saldo-estoque.js'
+import { PecaCadastrada } from './eventos/peca-cadastrada.js'
+import { PecaReservada } from './eventos/peca-reservada.js'
+import { PecaUtilizada } from './eventos/peca-utilizada.js'
+import { PecaRecebida } from './eventos/peca-recebida.js'
+import { EstoqueAbaixoDoMinimo } from './eventos/estoque-abaixo-do-minimo.js'
 
 interface PropsPeca {
   id?: string

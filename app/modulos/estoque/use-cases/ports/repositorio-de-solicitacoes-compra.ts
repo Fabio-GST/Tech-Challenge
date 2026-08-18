@@ -1,4 +1,4 @@
-import { SolicitacaoDeCompra } from '../entidades/solicitacao-de-compra.js'
+import { SolicitacaoDeCompra } from '../../entities/solicitacao-de-compra.js'
 
 export interface RepositorioDeSolicitacoesCompra {
   salvar(solicitacao: SolicitacaoDeCompra): Promise<void>

@@ -1,8 +1,8 @@
 import {
   SolicitacaoDeCompra,
   StatusSolicitacao,
-} from '../../../dominio/entidades/solicitacao-de-compra.js'
-import type SolicitacaoCompraModel from '../models/solicitacao_compra_model.js'
+} from '../../entities/solicitacao-de-compra.js'
+import type SolicitacaoCompraModel from '../../frameworks-drivers/models/solicitacao_compra_model.js'
 
 export const MapeadorDeSolicitacaoCompra = {
   paraDominio(model: SolicitacaoCompraModel): SolicitacaoDeCompra {

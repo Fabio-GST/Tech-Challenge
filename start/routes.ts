@@ -22,7 +22,7 @@ const VeiculosController = () =>
 const ServicosController = () =>
   import('#modulos/servicos/interface-adapters/controllers/servicos_controller')
 const PecasController = () =>
-  import('#modulos/estoque/infraestrutura/http/controllers/pecas_controller')
+  import('#modulos/estoque/interface-adapters/controllers/pecas_controller')
 const OrdensServicoController = () =>
   import('#modulos/ordens-servico/infraestrutura/http/controllers/ordens_servico_controller')
 const PagamentosController = () =>

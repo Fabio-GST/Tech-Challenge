@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
-import type { RepositorioDePecas } from '../../dominio/repositorios/repositorio-de-pecas.js'
-import { paraDTO, type PecaDTO } from '../dtos.js'
+import type { RepositorioDePecas } from './ports/repositorio-de-pecas.js'
+import { paraDTO, type PecaDTO } from './dtos.js'
 
 /** Lista todas as peças do estoque. */
 export class ListarPecas implements CasoDeUso<void, PecaDTO[]> {

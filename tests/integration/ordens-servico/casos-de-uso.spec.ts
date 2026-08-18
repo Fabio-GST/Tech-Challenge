@@ -6,7 +6,7 @@ import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/er
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaVeiculos } from '#modulos/veiculos/frameworks-drivers/fabrica'
 import { fabricaServicos } from '#modulos/servicos/frameworks-drivers/fabrica'
-import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
+import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
 import { fabricaOrdensServico } from '#modulos/ordens-servico/infraestrutura/fabrica'
 import { StatusOS } from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
 

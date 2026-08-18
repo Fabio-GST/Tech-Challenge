@@ -1,8 +1,8 @@
-import type { Peca } from '../dominio/entidades/peca.js'
+import type { Peca } from '../entities/peca.js'
 import type {
   SolicitacaoDeCompra,
   StatusSolicitacao,
-} from '../dominio/entidades/solicitacao-de-compra.js'
+} from '../entities/solicitacao-de-compra.js'
 
 export interface PecaDTO {
   id: string

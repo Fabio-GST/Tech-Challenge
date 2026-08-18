@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaEstoque } from '../../fabrica.js'
+import { fabricaEstoque } from '../../frameworks-drivers/fabrica.js'
 import {
   criarPecaValidator,
   atualizarPecaValidator,
@@ -7,7 +7,7 @@ import {
   movimentarEstoqueValidator,
   definirEstoqueMinimoValidator,
   solicitarCompraValidator,
-} from '../validadores/peca_validadores.js'
+} from '../../frameworks-drivers/validadores/peca_validadores.js'
 
 export default class PecasController {
   /**

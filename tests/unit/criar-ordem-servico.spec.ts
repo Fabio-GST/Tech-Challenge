@@ -6,8 +6,8 @@ import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento
 import { Veiculo } from '#modulos/veiculos/entities/veiculo'
 import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
 import { Servico } from '#modulos/servicos/entities/servico'
-import { Peca } from '#modulos/estoque/dominio/entidades/peca'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
+import { Peca } from '#modulos/estoque/entities/peca'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
 import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
 import { CriarOrdemServico } from '#modulos/ordens-servico/aplicacao/casos-de-uso/criar-ordem-servico'
 
