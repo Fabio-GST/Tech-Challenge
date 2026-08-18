@@ -1,7 +1,7 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeClientes } from '#modulos/clientes/use-cases/ports/repositorio-de-clientes'
+import type { PortalDeClientes } from './ports/portal-de-clientes.js'
 import type { RepositorioDeVeiculos } from './ports/repositorio-de-veiculos.js'
 import { paraDTO, type VeiculoDTO } from './dtos.js'
 
@@ -14,7 +14,7 @@ export interface EntradaVincularCliente {
 export class VincularClienteAoVeiculo implements CasoDeUso<EntradaVincularCliente, VeiculoDTO> {
   constructor(
     private readonly repositorio: RepositorioDeVeiculos,
-    private readonly repositorioClientes: RepositorioDeClientes
+    private readonly clientes: PortalDeClientes
   ) {}
 
   async executar(entrada: EntradaVincularCliente): Promise<VeiculoDTO> {
@@ -22,8 +22,7 @@ export class VincularClienteAoVeiculo implements CasoDeUso<EntradaVincularClient
     if (!veiculo) {
       throw new RecursoNaoEncontrado('Veículo', entrada.id)
     }
-    const cliente = await this.repositorioClientes.buscarPorId(entrada.clienteId)
-    if (!cliente) {
+    if (!(await this.clientes.clienteExiste(entrada.clienteId))) {
       throw new RecursoNaoEncontrado('Cliente', entrada.clienteId)
     }
     veiculo.vincularCliente(entrada.clienteId)

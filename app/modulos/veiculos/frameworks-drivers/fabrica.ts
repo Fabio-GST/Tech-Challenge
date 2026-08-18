@@ -1,6 +1,7 @@
 import type { ApplicationService } from '@adonisjs/core/types'
 import { RepositorioDeClientesLucid } from '#modulos/clientes/interface-adapters/gateways/repositorio-de-clientes-lucid'
 import { RepositorioDeVeiculosLucid } from '../interface-adapters/gateways/repositorio-de-veiculos-lucid.js'
+import { PortalDeClientesAdapter } from '../interface-adapters/gateways/acl/portal-de-clientes-adapter.js'
 import { CriarVeiculo } from '../use-cases/criar-veiculo.js'
 import { AtualizarVeiculo } from '../use-cases/atualizar-veiculo.js'
 import { VincularClienteAoVeiculo } from '../use-cases/vincular-cliente-ao-veiculo.js'
@@ -13,13 +14,17 @@ import { RemoverVeiculo } from '../use-cases/remover-veiculo.js'
 export function registrarVeiculos(app: ApplicationService) {
   const c = app.container
   c.singleton(RepositorioDeVeiculosLucid, () => new RepositorioDeVeiculosLucid())
+  c.singleton(
+    PortalDeClientesAdapter,
+    async (r) => new PortalDeClientesAdapter(await r.make(RepositorioDeClientesLucid))
+  )
 
   c.bind(
     CriarVeiculo,
     async (r) =>
       new CriarVeiculo(
         await r.make(RepositorioDeVeiculosLucid),
-        await r.make(RepositorioDeClientesLucid)
+        await r.make(PortalDeClientesAdapter)
       )
   )
   c.bind(
@@ -31,7 +36,7 @@ export function registrarVeiculos(app: ApplicationService) {
     async (r) =>
       new VincularClienteAoVeiculo(
         await r.make(RepositorioDeVeiculosLucid),
-        await r.make(RepositorioDeClientesLucid)
+        await r.make(PortalDeClientesAdapter)
       )
   )
   c.bind(

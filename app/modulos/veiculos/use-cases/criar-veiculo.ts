@@ -1,7 +1,7 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { ConflitoDeRecurso, RecursoNaoEncontrado } from '#shared/entities/erros'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeClientes } from '#modulos/clientes/use-cases/ports/repositorio-de-clientes'
+import type { PortalDeClientes } from './ports/portal-de-clientes.js'
 import type { RepositorioDeVeiculos } from './ports/repositorio-de-veiculos.js'
 import { Veiculo } from '../entities/veiculo.js'
 import { Placa } from '../entities/objetos-de-valor/placa.js'
@@ -19,12 +19,11 @@ export interface EntradaCriarVeiculo {
 export class CriarVeiculo implements CasoDeUso<EntradaCriarVeiculo, VeiculoDTO> {
   constructor(
     private readonly repositorio: RepositorioDeVeiculos,
-    private readonly repositorioClientes: RepositorioDeClientes
+    private readonly clientes: PortalDeClientes
   ) {}
 
   async executar(entrada: EntradaCriarVeiculo): Promise<VeiculoDTO> {
-    const cliente = await this.repositorioClientes.buscarPorId(entrada.clienteId)
-    if (!cliente) {
+    if (!(await this.clientes.clienteExiste(entrada.clienteId))) {
       throw new RecursoNaoEncontrado('Cliente', entrada.clienteId)
     }
 
