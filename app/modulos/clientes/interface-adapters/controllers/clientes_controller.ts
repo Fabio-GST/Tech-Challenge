@@ -1,11 +1,27 @@
+import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaClientes } from '../../frameworks-drivers/fabrica.js'
 import {
   criarClienteValidator,
   atualizarClienteValidator,
 } from '../../frameworks-drivers/validadores/cliente_validadores.js'
+import { CriarCliente } from '../../use-cases/criar-cliente.js'
+import { AtualizarCliente } from '../../use-cases/atualizar-cliente.js'
+import { BuscarClientePorDocumento } from '../../use-cases/buscar-cliente-por-documento.js'
+import { ObterCliente } from '../../use-cases/obter-cliente.js'
+import { ListarClientes } from '../../use-cases/listar-clientes.js'
+import { RemoverCliente } from '../../use-cases/remover-cliente.js'
 
+@inject()
 export default class ClientesController {
+  constructor(
+    private criarCliente: CriarCliente,
+    private atualizarCliente: AtualizarCliente,
+    private buscarClientePorDocumento: BuscarClientePorDocumento,
+    private obterCliente: ObterCliente,
+    private listarClientes: ListarClientes,
+    private removerCliente: RemoverCliente
+  ) {}
+
   /**
    * @index
    * @tag Clientes
@@ -13,7 +29,7 @@ export default class ClientesController {
    * @responseBody 200 - [{"id":"uuid","nome":"Maria Silva","documento":"11144477735","tipoDocumento":"CPF","telefone":"11999998888","email":"maria@exemplo.com"}] - Lista de clientes
    */
   async index() {
-    return fabricaClientes.listar().executar()
+    return this.listarClientes.executar()
   }
 
   /**
@@ -25,7 +41,7 @@ export default class ClientesController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Cliente não encontrado."}} - Cliente inexistente
    */
   async show({ params }: HttpContext) {
-    return fabricaClientes.obter().executar(params.id)
+    return this.obterCliente.executar(params.id)
   }
 
   /**
@@ -37,7 +53,7 @@ export default class ClientesController {
    * @responseBody 404 - {"mensagem":"Cliente não encontrado para o documento informado."} - Documento não cadastrado
    */
   async porDocumento({ params, response }: HttpContext) {
-    const cliente = await fabricaClientes.buscarPorDocumento().executar(params.documento)
+    const cliente = await this.buscarClientePorDocumento.executar(params.documento)
     if (!cliente) {
       return response.notFound({ mensagem: 'Cliente não encontrado para o documento informado.' })
     }
@@ -55,7 +71,7 @@ export default class ClientesController {
    */
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarClienteValidator)
-    const cliente = await fabricaClientes.criar().executar(dados)
+    const cliente = await this.criarCliente.executar(dados)
     return response.created(cliente)
   }
 
@@ -70,7 +86,7 @@ export default class ClientesController {
    */
   async update({ params, request }: HttpContext) {
     const dados = await request.validateUsing(atualizarClienteValidator)
-    return fabricaClientes.atualizar().executar({ id: params.id, ...dados })
+    return this.atualizarCliente.executar({ id: params.id, ...dados })
   }
 
   /**
@@ -82,7 +98,7 @@ export default class ClientesController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Cliente não encontrado."}} - Cliente inexistente
    */
   async destroy({ params, response }: HttpContext) {
-    await fabricaClientes.remover().executar(params.id)
+    await this.removerCliente.executar(params.id)
     return response.noContent()
   }
 }
