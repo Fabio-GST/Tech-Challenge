@@ -1,6 +1,7 @@
 import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 import { ErroDeDominio } from '#shared/dominio/erros'
+import { statusHttpDoErro } from '#shared/http/mapa-erro-http'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -19,7 +20,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
      * expondo um `codigo` legível por máquina e a mensagem do negócio.
      */
     if (error instanceof ErroDeDominio) {
-      return ctx.response.status(error.status).send({
+      return ctx.response.status(statusHttpDoErro(error)).send({
         erro: {
           codigo: error.codigo,
           mensagem: error.message,
