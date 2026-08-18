@@ -18,7 +18,7 @@ const AutenticacaoController = () =>
 const ClientesController = () =>
   import('#modulos/clientes/interface-adapters/controllers/clientes_controller')
 const VeiculosController = () =>
-  import('#modulos/veiculos/infraestrutura/http/controllers/veiculos_controller')
+  import('#modulos/veiculos/interface-adapters/controllers/veiculos_controller')
 const ServicosController = () =>
   import('#modulos/servicos/interface-adapters/controllers/servicos_controller')
 const PecasController = () =>

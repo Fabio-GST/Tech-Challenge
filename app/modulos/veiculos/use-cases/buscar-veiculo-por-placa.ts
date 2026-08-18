@@ -1,9 +1,9 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { publicarEventos } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDeVeiculos } from '../../dominio/repositorios/repositorio-de-veiculos.js'
-import { Placa } from '../../dominio/objetos-de-valor/placa.js'
-import { BuscaDeVeiculoRealizada } from '../../dominio/eventos/busca-de-veiculo-realizada.js'
-import { paraDTO, type VeiculoDTO } from '../dtos.js'
+import type { RepositorioDeVeiculos } from './ports/repositorio-de-veiculos.js'
+import { Placa } from '../entities/objetos-de-valor/placa.js'
+import { BuscaDeVeiculoRealizada } from '../entities/eventos/busca-de-veiculo-realizada.js'
+import { paraDTO, type VeiculoDTO } from './dtos.js'
 
 /**
  * Busca um veículo pela placa. Publica `veiculos.busca-realizada` indicando se

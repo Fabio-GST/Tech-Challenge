@@ -1,6 +1,6 @@
 import { UnidadeDeTrabalhoLucid } from '#shared/frameworks-drivers/unidade-de-trabalho'
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
-import { fabricaVeiculos } from '#modulos/veiculos/infraestrutura/fabrica'
+import { fabricaVeiculos } from '#modulos/veiculos/frameworks-drivers/fabrica'
 import { fabricaServicos } from '#modulos/servicos/frameworks-drivers/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/infraestrutura/fabrica'
 import { RepositorioDeOrdensServicoLucid } from './persistencia/repositorios/repositorio-de-ordens-servico-lucid.js'

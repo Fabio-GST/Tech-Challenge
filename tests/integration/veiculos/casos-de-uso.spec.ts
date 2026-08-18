@@ -4,7 +4,7 @@ import { capturarErro } from '#tests/helpers/erros'
 import { gerarCpf } from '#tests/helpers/dados'
 import { ConflitoDeRecurso, RecursoNaoEncontrado } from '#shared/entities/erros'
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
-import { fabricaVeiculos } from '#modulos/veiculos/infraestrutura/fabrica'
+import { fabricaVeiculos } from '#modulos/veiculos/frameworks-drivers/fabrica'
 
 test.group('Casos de uso de Veículos', (group) => {
   prepararBanco(group)

@@ -1,10 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaVeiculos } from '../../fabrica.js'
+import { fabricaVeiculos } from '../../frameworks-drivers/fabrica.js'
 import {
   criarVeiculoValidator,
   atualizarVeiculoValidator,
   vincularClienteValidator,
-} from '../validadores/veiculo_validadores.js'
+} from '../../frameworks-drivers/validadores/veiculo_validadores.js'
 
 export default class VeiculosController {
   /**

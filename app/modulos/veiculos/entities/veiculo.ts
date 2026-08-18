@@ -1,8 +1,8 @@
 import { RaizAgregado } from '#shared/entities/raiz-agregado'
 import { ErroDeValidacao } from '#shared/entities/erros'
-import { Placa } from '../objetos-de-valor/placa.js'
-import { VeiculoCadastrado } from '../eventos/veiculo-cadastrado.js'
-import { VeiculoVinculadoAoCliente } from '../eventos/veiculo-vinculado-ao-cliente.js'
+import { Placa } from './objetos-de-valor/placa.js'
+import { VeiculoCadastrado } from './eventos/veiculo-cadastrado.js'
+import { VeiculoVinculadoAoCliente } from './eventos/veiculo-vinculado-ao-cliente.js'
 
 interface PropsVeiculo {
   id?: string

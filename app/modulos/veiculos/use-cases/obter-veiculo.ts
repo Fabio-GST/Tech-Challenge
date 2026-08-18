@@ -1,7 +1,7 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDeVeiculos } from '../../dominio/repositorios/repositorio-de-veiculos.js'
-import { paraDTO, type VeiculoDTO } from '../dtos.js'
+import type { RepositorioDeVeiculos } from './ports/repositorio-de-veiculos.js'
+import { paraDTO, type VeiculoDTO } from './dtos.js'
 
 /** Obtém um veículo pelo identificador. */
 export class ObterVeiculo implements CasoDeUso<string, VeiculoDTO> {

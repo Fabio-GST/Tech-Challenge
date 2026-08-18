@@ -1,9 +1,9 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDeVeiculos } from '../../../dominio/repositorios/repositorio-de-veiculos.js'
-import type { Veiculo } from '../../../dominio/entidades/veiculo.js'
-import { Placa } from '../../../dominio/objetos-de-valor/placa.js'
-import VeiculoModel from '../models/veiculo_model.js'
-import { MapeadorDeVeiculo } from '../mapeadores/mapeador-de-veiculo.js'
+import type { RepositorioDeVeiculos } from '../../use-cases/ports/repositorio-de-veiculos.js'
+import type { Veiculo } from '../../entities/veiculo.js'
+import { Placa } from '../../entities/objetos-de-valor/placa.js'
+import VeiculoModel from '../../frameworks-drivers/models/veiculo_model.js'
+import { MapeadorDeVeiculo } from './mapeador-de-veiculo.js'
 
 export class RepositorioDeVeiculosLucid implements RepositorioDeVeiculos {
   async salvar(veiculo: Veiculo): Promise<void> {

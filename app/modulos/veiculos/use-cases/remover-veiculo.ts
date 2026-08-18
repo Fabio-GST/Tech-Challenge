@@ -1,6 +1,6 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDeVeiculos } from '../../dominio/repositorios/repositorio-de-veiculos.js'
+import type { RepositorioDeVeiculos } from './ports/repositorio-de-veiculos.js'
 
 /** Remove um veículo pelo identificador. */
 export class RemoverVeiculo implements CasoDeUso<string, void> {

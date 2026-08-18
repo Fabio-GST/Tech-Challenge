@@ -1,5 +1,5 @@
-import { Veiculo } from '../entidades/veiculo.js'
-import { Placa } from '../objetos-de-valor/placa.js'
+import { Veiculo } from '../../entities/veiculo.js'
+import { Placa } from '../../entities/objetos-de-valor/placa.js'
 
 export interface RepositorioDeVeiculos {
   salvar(veiculo: Veiculo): Promise<void>

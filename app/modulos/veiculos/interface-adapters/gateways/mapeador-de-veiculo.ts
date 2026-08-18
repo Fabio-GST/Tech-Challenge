@@ -1,6 +1,6 @@
-import { Veiculo } from '../../../dominio/entidades/veiculo.js'
-import { Placa } from '../../../dominio/objetos-de-valor/placa.js'
-import type VeiculoModel from '../models/veiculo_model.js'
+import { Veiculo } from '../../entities/veiculo.js'
+import { Placa } from '../../entities/objetos-de-valor/placa.js'
+import type VeiculoModel from '../../frameworks-drivers/models/veiculo_model.js'
 
 export const MapeadorDeVeiculo = {
   paraDominio(model: VeiculoModel): Veiculo {

@@ -1,12 +1,12 @@
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
-import { RepositorioDeVeiculosLucid } from './persistencia/repositorios/repositorio-de-veiculos-lucid.js'
-import { CriarVeiculo } from '../aplicacao/casos-de-uso/criar-veiculo.js'
-import { AtualizarVeiculo } from '../aplicacao/casos-de-uso/atualizar-veiculo.js'
-import { VincularClienteAoVeiculo } from '../aplicacao/casos-de-uso/vincular-cliente-ao-veiculo.js'
-import { BuscarVeiculoPorPlaca } from '../aplicacao/casos-de-uso/buscar-veiculo-por-placa.js'
-import { ObterVeiculo } from '../aplicacao/casos-de-uso/obter-veiculo.js'
-import { ListarVeiculos } from '../aplicacao/casos-de-uso/listar-veiculos.js'
-import { RemoverVeiculo } from '../aplicacao/casos-de-uso/remover-veiculo.js'
+import { RepositorioDeVeiculosLucid } from '../interface-adapters/gateways/repositorio-de-veiculos-lucid.js'
+import { CriarVeiculo } from '../use-cases/criar-veiculo.js'
+import { AtualizarVeiculo } from '../use-cases/atualizar-veiculo.js'
+import { VincularClienteAoVeiculo } from '../use-cases/vincular-cliente-ao-veiculo.js'
+import { BuscarVeiculoPorPlaca } from '../use-cases/buscar-veiculo-por-placa.js'
+import { ObterVeiculo } from '../use-cases/obter-veiculo.js'
+import { ListarVeiculos } from '../use-cases/listar-veiculos.js'
+import { RemoverVeiculo } from '../use-cases/remover-veiculo.js'
 
 const repositorio = new RepositorioDeVeiculosLucid()
 

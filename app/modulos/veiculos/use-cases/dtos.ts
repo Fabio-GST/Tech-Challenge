@@ -1,4 +1,4 @@
-import type { Veiculo } from '../dominio/entidades/veiculo.js'
+import type { Veiculo } from '../entities/veiculo.js'
 
 export interface VeiculoDTO {
   id: string
