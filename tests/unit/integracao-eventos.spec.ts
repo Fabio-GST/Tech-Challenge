@@ -11,11 +11,11 @@ import type { RepositorioDePecas } from '#modulos/estoque/use-cases/ports/reposi
 import type { RepositorioDeSolicitacoesCompra } from '#modulos/estoque/use-cases/ports/repositorio-de-solicitacoes-compra'
 import type { SolicitacaoDeCompra } from '#modulos/estoque/entities/solicitacao-de-compra'
 
-import { GerarCobranca } from '#modulos/pagamento/aplicacao/casos-de-uso/gerar-cobranca'
-import { RegistrarPagamento } from '#modulos/pagamento/aplicacao/casos-de-uso/registrar-pagamento'
-import { EmitirNotaFiscal } from '#modulos/pagamento/aplicacao/casos-de-uso/emitir-nota-fiscal'
-import type { RepositorioDePagamentos } from '#modulos/pagamento/dominio/repositorios/repositorio-de-pagamentos'
-import type { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
+import { GerarCobranca } from '#modulos/pagamento/use-cases/gerar-cobranca'
+import { RegistrarPagamento } from '#modulos/pagamento/use-cases/registrar-pagamento'
+import { EmitirNotaFiscal } from '#modulos/pagamento/use-cases/emitir-nota-fiscal'
+import type { RepositorioDePagamentos } from '#modulos/pagamento/use-cases/ports/repositorio-de-pagamentos'
+import type { Pagamento } from '#modulos/pagamento/entities/pagamento'
 
 import { SolicitarCompraAoAtingirMinimo } from '#politicas/solicitar-compra-ao-atingir-minimo'
 import { EmitirNotaAoConfirmarPagamento } from '#politicas/emitir-nota-ao-confirmar-pagamento'

@@ -2,8 +2,8 @@ import { randomUUID } from 'node:crypto'
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Pagamento, StatusPagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
-import { RepositorioDePagamentosLucid } from '#modulos/pagamento/infraestrutura/persistencia/repositorios/repositorio-de-pagamentos-lucid'
+import { Pagamento, StatusPagamento } from '#modulos/pagamento/entities/pagamento'
+import { RepositorioDePagamentosLucid } from '#modulos/pagamento/interface-adapters/gateways/repositorio-de-pagamentos-lucid'
 
 test.group('RepositorioDePagamentosLucid', (group) => {
   prepararBanco(group)

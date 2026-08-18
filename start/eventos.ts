@@ -23,7 +23,7 @@ import { servicoDeNotificacao } from '#shared/frameworks-drivers/notificacao/fab
 import { fabricaOrdensServico } from '#modulos/ordens-servico/infraestrutura/fabrica'
 import { fabricaClientes } from '#modulos/clientes/frameworks-drivers/fabrica'
 import { fabricaEstoque } from '#modulos/estoque/frameworks-drivers/fabrica'
-import { fabricaPagamento } from '#modulos/pagamento/infraestrutura/fabrica'
+import { fabricaPagamento } from '#modulos/pagamento/frameworks-drivers/fabrica'
 import { UtilizarPecasAoAprovar } from '#politicas/utilizar-pecas-ao-aprovar'
 import { LiberarReservaAoRecusar } from '#politicas/liberar-reserva-ao-recusar'
 import { GerarCobrancaAoFinalizar } from '#politicas/gerar-cobranca-ao-finalizar'

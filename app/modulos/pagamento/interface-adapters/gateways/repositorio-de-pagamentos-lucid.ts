@@ -1,8 +1,8 @@
 import { opcoesDeCliente } from '#shared/frameworks-drivers/contexto-transacional'
-import type { RepositorioDePagamentos } from '../../../dominio/repositorios/repositorio-de-pagamentos.js'
-import type { Pagamento } from '../../../dominio/entidades/pagamento.js'
-import PagamentoModel from '../models/pagamento_model.js'
-import { MapeadorDePagamento } from '../mapeadores/mapeador-de-pagamento.js'
+import type { RepositorioDePagamentos } from '../../use-cases/ports/repositorio-de-pagamentos.js'
+import type { Pagamento } from '../../entities/pagamento.js'
+import PagamentoModel from '../../frameworks-drivers/models/pagamento_model.js'
+import { MapeadorDePagamento } from './mapeador-de-pagamento.js'
 
 export class RepositorioDePagamentosLucid implements RepositorioDePagamentos {
   async salvar(pagamento: Pagamento): Promise<void> {

@@ -2,9 +2,9 @@ import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 import { coletarEventosDe } from '#shared/use-cases/coletor-de-eventos'
-import type { RepositorioDePagamentos } from '../../dominio/repositorios/repositorio-de-pagamentos.js'
-import type { Pagamento } from '../../dominio/entidades/pagamento.js'
-import { paraDTO, type PagamentoDTO } from '../dtos.js'
+import type { RepositorioDePagamentos } from './ports/repositorio-de-pagamentos.js'
+import type { Pagamento } from '../entities/pagamento.js'
+import { paraDTO, type PagamentoDTO } from './dtos.js'
 
 export interface EntradaAplicarDesconto {
   id: string

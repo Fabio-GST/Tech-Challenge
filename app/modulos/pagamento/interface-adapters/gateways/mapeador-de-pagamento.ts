@@ -1,6 +1,6 @@
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Pagamento, StatusPagamento } from '../../../dominio/entidades/pagamento.js'
-import type PagamentoModel from '../models/pagamento_model.js'
+import { Pagamento, StatusPagamento } from '../../entities/pagamento.js'
+import type PagamentoModel from '../../frameworks-drivers/models/pagamento_model.js'
 
 export const MapeadorDePagamento = {
   paraDominio(model: PagamentoModel): Pagamento {

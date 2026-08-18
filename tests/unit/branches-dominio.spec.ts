@@ -17,7 +17,7 @@ import {
   StatusOrdemServico,
   StatusOS,
 } from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
-import { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
+import { Pagamento } from '#modulos/pagamento/entities/pagamento'
 
 test.group('Branches de domínio — igualdade (Entidade / ObjetoDeValor)', () => {
   test('Entidade.iguala compara por identidade', ({ assert }) => {

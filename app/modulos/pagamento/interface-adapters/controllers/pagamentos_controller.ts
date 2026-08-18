@@ -1,10 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaPagamento } from '../../fabrica.js'
+import { fabricaPagamento } from '../../frameworks-drivers/fabrica.js'
 import {
   gerarCobrancaValidator,
   aplicarDescontoValidator,
   registrarPagamentoValidator,
-} from '../validadores/pagamento_validadores.js'
+} from '../../frameworks-drivers/validadores/pagamento_validadores.js'
 
 export default class PagamentosController {
   /**

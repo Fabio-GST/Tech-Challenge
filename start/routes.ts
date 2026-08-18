@@ -26,7 +26,7 @@ const PecasController = () =>
 const OrdensServicoController = () =>
   import('#modulos/ordens-servico/infraestrutura/http/controllers/ordens_servico_controller')
 const PagamentosController = () =>
-  import('#modulos/pagamento/infraestrutura/http/controllers/pagamentos_controller')
+  import('#modulos/pagamento/interface-adapters/controllers/pagamentos_controller')
 
 router.get('/', async () => ({ servico: 'API Oficina Mecânica', documentacao: '/docs' }))
 router.get('/health', async () => ({ status: 'ok' }))

@@ -1,4 +1,4 @@
-import { Pagamento } from '../entidades/pagamento.js'
+import { Pagamento } from '../../entities/pagamento.js'
 
 export interface RepositorioDePagamentos {
   salvar(pagamento: Pagamento): Promise<void>

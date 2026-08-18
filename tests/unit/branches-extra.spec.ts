@@ -6,7 +6,7 @@ import { Email } from '#modulos/autenticacao/entities/objetos-de-valor/email'
 import { Peca } from '#modulos/estoque/entities/peca'
 import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
 import { Servico } from '#modulos/servicos/entities/servico'
-import { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
+import { Pagamento } from '#modulos/pagamento/entities/pagamento'
 import { servicoJwt } from '#shared/frameworks-drivers/jwt/servico-jwt'
 
 test.group('Branches extras', () => {

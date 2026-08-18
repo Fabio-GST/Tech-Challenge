@@ -3,8 +3,8 @@ import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { capturarErro } from '#tests/helpers/erros'
 import { RecursoNaoEncontrado, RegraDeNegocioViolada } from '#shared/entities/erros'
-import { StatusPagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
-import { fabricaPagamento } from '#modulos/pagamento/infraestrutura/fabrica'
+import { StatusPagamento } from '#modulos/pagamento/entities/pagamento'
+import { fabricaPagamento } from '#modulos/pagamento/frameworks-drivers/fabrica'
 
 test.group('Casos de uso de Pagamento', (group) => {
   prepararBanco(group)

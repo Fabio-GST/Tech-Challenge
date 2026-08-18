@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { Pagamento, StatusPagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
+import { Pagamento, StatusPagamento } from '#modulos/pagamento/entities/pagamento'
 
 function novaCobranca(total = 200) {
   return Pagamento.gerarCobranca({ ordemId: 'os-1', total: Dinheiro.deReais(total) })

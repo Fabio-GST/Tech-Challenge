@@ -1,10 +1,10 @@
 import { RaizAgregado } from '#shared/entities/raiz-agregado'
 import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/entities/erros'
 import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
-import { CobrancaGerada } from '../eventos/cobranca-gerada.js'
-import { DescontoAplicado } from '../eventos/desconto-aplicado.js'
-import { PagamentoConfirmado } from '../eventos/pagamento-confirmado.js'
-import { NotaFiscalEmitida } from '../eventos/nota-fiscal-emitida.js'
+import { CobrancaGerada } from './eventos/cobranca-gerada.js'
+import { DescontoAplicado } from './eventos/desconto-aplicado.js'
+import { PagamentoConfirmado } from './eventos/pagamento-confirmado.js'
+import { NotaFiscalEmitida } from './eventos/nota-fiscal-emitida.js'
 
 export enum StatusPagamento {
   PENDENTE = 'PENDENTE',

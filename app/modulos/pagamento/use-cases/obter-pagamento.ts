@@ -1,7 +1,7 @@
 import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
-import type { RepositorioDePagamentos } from '../../dominio/repositorios/repositorio-de-pagamentos.js'
-import { paraDTO, type PagamentoDTO } from '../dtos.js'
+import type { RepositorioDePagamentos } from './ports/repositorio-de-pagamentos.js'
+import { paraDTO, type PagamentoDTO } from './dtos.js'
 
 /** Obtém um pagamento pelo identificador. */
 export class ObterPagamento implements CasoDeUso<string, PagamentoDTO> {

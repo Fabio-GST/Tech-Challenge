@@ -1,4 +1,4 @@
-import type { Pagamento, StatusPagamento } from '../dominio/entidades/pagamento.js'
+import type { Pagamento, StatusPagamento } from '../entities/pagamento.js'
 
 export interface PagamentoDTO {
   id: string
