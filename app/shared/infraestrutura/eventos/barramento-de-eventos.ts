@@ -1,3 +1,4 @@
+import logger from '@adonisjs/core/services/logger'
 import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
 import type { DespachanteDeEventos } from '#shared/aplicacao/despachante-de-eventos'
 import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
@@ -35,9 +36,9 @@ export class BarramentoDeEventos implements DespachanteDeEventos {
           await manipulador.manipular(evento)
         } catch (erro) {
           // Política isolada: registra e segue. O evento de origem já foi gravado.
-          console.error(
-            `[eventos] Falha ao manipular "${evento.nome}" em ${manipulador.constructor.name}:`,
-            erro
+          logger.error(
+            { err: erro },
+            `[eventos] Falha ao manipular "${evento.nome}" em ${manipulador.constructor.name}`
           )
         }
       }
