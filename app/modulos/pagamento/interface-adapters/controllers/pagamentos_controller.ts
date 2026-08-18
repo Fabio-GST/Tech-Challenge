@@ -1,12 +1,25 @@
+import { inject } from '@adonisjs/core'
+import { GerarCobranca } from '../../use-cases/gerar-cobranca.js'
+import { AplicarDesconto } from '../../use-cases/aplicar-desconto.js'
+import { RegistrarPagamento } from '../../use-cases/registrar-pagamento.js'
+import { EmitirNotaFiscal } from '../../use-cases/emitir-nota-fiscal.js'
+import { ObterPagamento } from '../../use-cases/obter-pagamento.js'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaPagamento } from '../../frameworks-drivers/fabrica.js'
 import {
   gerarCobrancaValidator,
   aplicarDescontoValidator,
   registrarPagamentoValidator,
 } from '../../frameworks-drivers/validadores/pagamento_validadores.js'
 
+@inject()
 export default class PagamentosController {
+  constructor(
+    private gerarCobrancaUseCase: GerarCobranca,
+    private aplicarDescontoUseCase: AplicarDesconto,
+    private registrarPagamentoUseCase: RegistrarPagamento,
+    private emitirNotaFiscalUseCase: EmitirNotaFiscal,
+    private obterPagamento: ObterPagamento
+  ) {}
   /**
    * @show
    * @tag Pagamentos
@@ -16,7 +29,7 @@ export default class PagamentosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Pagamento não encontrado."}} - Pagamento inexistente
    */
   async show({ params }: HttpContext) {
-    return fabricaPagamento.obter().executar(params.id)
+    return this.obterPagamento.executar(params.id)
   }
 
   /**
@@ -31,7 +44,7 @@ export default class PagamentosController {
    */
   async gerarCobranca({ params, request, response }: HttpContext) {
     const { total } = await request.validateUsing(gerarCobrancaValidator)
-    const pagamento = await fabricaPagamento.gerarCobranca().executar({ ordemId: params.id, total })
+    const pagamento = await this.gerarCobrancaUseCase.executar({ ordemId: params.id, total })
     return response.created(pagamento)
   }
 
@@ -47,7 +60,7 @@ export default class PagamentosController {
    */
   async aplicarDesconto({ params, request }: HttpContext) {
     const { desconto } = await request.validateUsing(aplicarDescontoValidator)
-    return fabricaPagamento.aplicarDesconto().executar({ id: params.id, desconto })
+    return this.aplicarDescontoUseCase.executar({ id: params.id, desconto })
   }
 
   /**
@@ -63,7 +76,7 @@ export default class PagamentosController {
    */
   async registrarPagamento({ params, request }: HttpContext) {
     const { valor } = await request.validateUsing(registrarPagamentoValidator)
-    return fabricaPagamento.registrarPagamento().executar({ id: params.id, valor })
+    return this.registrarPagamentoUseCase.executar({ id: params.id, valor })
   }
 
   /**
@@ -77,6 +90,6 @@ export default class PagamentosController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A Nota Fiscal só pode ser emitida após a quitação."}} - Pagamento não quitado
    */
   async emitirNotaFiscal({ params }: HttpContext) {
-    return fabricaPagamento.emitirNotaFiscal().executar(params.id)
+    return this.emitirNotaFiscalUseCase.executar(params.id)
   }
 }

@@ -1,5 +1,24 @@
+import { inject } from '@adonisjs/core'
+import { CriarOrdemServico } from '../../use-cases/criar-ordem-servico.js'
+import { AdicionarServicoNaOrdem, AdicionarPecaNaOrdem } from '../../use-cases/gerir-itens.js'
+import {
+  AlterarStatusDaOrdem,
+  AprovarOrdemServico,
+  IniciarDiagnostico,
+  GerarOrcamento,
+  RecusarOrdemServico,
+  RenegociarOrdemServico,
+  FinalizarOrdemServico,
+  EntregarVeiculo,
+} from '../../use-cases/gerir-status.js'
+import { ProcessarDecisaoOrcamento } from '../../use-cases/processar-decisao-orcamento.js'
+import {
+  DetalharOrdem,
+  ListarOrdens,
+  ConsultarAndamento,
+  CalcularTempoMedioExecucao,
+} from '../../use-cases/consultas.js'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaOrdensServico } from '../../frameworks-drivers/fabrica.js'
 import {
   criarOrdemServicoValidator,
   adicionarServicoValidator,
@@ -8,7 +27,26 @@ import {
   decisaoOrcamentoValidator,
 } from '../../frameworks-drivers/validadores/ordem_servico_validadores.js'
 
+@inject()
 export default class OrdensServicoController {
+  constructor(
+    private criarOrdemServico: CriarOrdemServico,
+    private adicionarServicoNaOrdem: AdicionarServicoNaOrdem,
+    private adicionarPecaNaOrdem: AdicionarPecaNaOrdem,
+    private alterarStatusDaOrdem: AlterarStatusDaOrdem,
+    private aprovarOrdemServico: AprovarOrdemServico,
+    private processarDecisaoOrcamento: ProcessarDecisaoOrcamento,
+    private iniciarDiagnosticoUseCase: IniciarDiagnostico,
+    private gerarOrcamentoUseCase: GerarOrcamento,
+    private recusarOrdemServico: RecusarOrdemServico,
+    private renegociarOrdemServico: RenegociarOrdemServico,
+    private finalizarOrdemServico: FinalizarOrdemServico,
+    private entregarVeiculo: EntregarVeiculo,
+    private detalharOrdem: DetalharOrdem,
+    private listarOrdens: ListarOrdens,
+    private consultarAndamento: ConsultarAndamento,
+    private calcularTempoMedioExecucao: CalcularTempoMedioExecucao
+  ) {}
   /**
    * @index
    * @tag Ordens de Serviço
@@ -16,7 +54,7 @@ export default class OrdensServicoController {
    * @responseBody 200 - [{"id":"uuid","clienteId":"uuid","veiculoId":"uuid","status":"RECEBIDA","prioridade":"NORMAL","orcamento":210,"itens":[],"historico":[],"criadaEm":"2026-01-01T10:00:00.000Z"}] - Lista de OS
    */
   async index() {
-    return fabricaOrdensServico.listar().executar()
+    return this.listarOrdens.executar()
   }
 
   /**
@@ -28,7 +66,7 @@ export default class OrdensServicoController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Ordem de Serviço não encontrada."}} - OS inexistente
    */
   async show({ params }: HttpContext) {
-    return fabricaOrdensServico.detalhar().executar(params.id)
+    return this.detalharOrdem.executar(params.id)
   }
 
   /**
@@ -43,7 +81,7 @@ export default class OrdensServicoController {
    */
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarOrdemServicoValidator)
-    const ordem = await fabricaOrdensServico.criar().executar(dados)
+    const ordem = await this.criarOrdemServico.executar(dados)
     return response.created(ordem)
   }
 
@@ -59,7 +97,7 @@ export default class OrdensServicoController {
    */
   async adicionarServico({ params, request }: HttpContext) {
     const dados = await request.validateUsing(adicionarServicoValidator)
-    return fabricaOrdensServico.adicionarServico().executar({ ordemId: params.id, ...dados })
+    return this.adicionarServicoNaOrdem.executar({ ordemId: params.id, ...dados })
   }
 
   /**
@@ -75,7 +113,7 @@ export default class OrdensServicoController {
    */
   async adicionarPeca({ params, request }: HttpContext) {
     const dados = await request.validateUsing(adicionarPecaValidator)
-    return fabricaOrdensServico.adicionarPeca().executar({ ordemId: params.id, ...dados })
+    return this.adicionarPecaNaOrdem.executar({ ordemId: params.id, ...dados })
   }
 
   /**
@@ -90,7 +128,7 @@ export default class OrdensServicoController {
    */
   async alterarStatus({ params, request }: HttpContext) {
     const { status } = await request.validateUsing(alterarStatusValidator)
-    return fabricaOrdensServico.alterarStatus().executar({ ordemId: params.id, novoStatus: status })
+    return this.alterarStatusDaOrdem.executar({ ordemId: params.id, novoStatus: status })
   }
 
   /**
@@ -107,9 +145,7 @@ export default class OrdensServicoController {
    */
   async decisaoOrcamento({ params, request }: HttpContext) {
     const { decisao } = await request.validateUsing(decisaoOrcamentoValidator)
-    return fabricaOrdensServico
-      .processarDecisaoOrcamento()
-      .executar({ ordemId: params.id, decisao })
+    return this.processarDecisaoOrcamento.executar({ ordemId: params.id, decisao })
   }
 
   /**
@@ -122,7 +158,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS só pode ser aprovada quando estiver aguardando aprovação."}} - Estado inválido
    */
   async aprovar({ params }: HttpContext) {
-    return fabricaOrdensServico.aprovar().executar(params.id)
+    return this.aprovarOrdemServico.executar(params.id)
   }
 
   /**
@@ -134,7 +170,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Transição de status inválida."}} - Estado inválido
    */
   async iniciarDiagnostico({ params }: HttpContext) {
-    return fabricaOrdensServico.iniciarDiagnostico().executar(params.id)
+    return this.iniciarDiagnosticoUseCase.executar(params.id)
   }
 
   /**
@@ -146,7 +182,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Não é possível gerar orçamento de uma OS sem itens."}} - OS sem itens
    */
   async gerarOrcamento({ params }: HttpContext) {
-    return fabricaOrdensServico.gerarOrcamento().executar(params.id)
+    return this.gerarOrcamentoUseCase.executar(params.id)
   }
 
   /**
@@ -159,7 +195,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS só pode ser recusada quando estiver aguardando aprovação."}} - Estado inválido
    */
   async recusar({ params }: HttpContext) {
-    return fabricaOrdensServico.recusar().executar(params.id)
+    return this.recusarOrdemServico.executar(params.id)
   }
 
   /**
@@ -171,7 +207,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"A OS só pode ser renegociada quando estiver aguardando aprovação."}} - Estado inválido
    */
   async renegociar({ params }: HttpContext) {
-    return fabricaOrdensServico.renegociar().executar(params.id)
+    return this.renegociarOrdemServico.executar(params.id)
   }
 
   /**
@@ -184,7 +220,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Transição de status inválida."}} - Estado inválido
    */
   async finalizar({ params }: HttpContext) {
-    return fabricaOrdensServico.finalizar().executar(params.id)
+    return this.finalizarOrdemServico.executar(params.id)
   }
 
   /**
@@ -196,7 +232,7 @@ export default class OrdensServicoController {
    * @responseBody 422 - {"erro":{"codigo":"REGRA_DE_NEGOCIO_VIOLADA","mensagem":"Transição de status inválida."}} - Estado inválido
    */
   async entregar({ params }: HttpContext) {
-    return fabricaOrdensServico.entregar().executar(params.id)
+    return this.entregarVeiculo.executar(params.id)
   }
 
   /**
@@ -208,7 +244,7 @@ export default class OrdensServicoController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Ordem de Serviço não encontrada."}} - OS inexistente
    */
   async andamento({ params }: HttpContext) {
-    return fabricaOrdensServico.consultarAndamento().executar(params.id)
+    return this.consultarAndamento.executar(params.id)
   }
 
   /**
@@ -218,6 +254,6 @@ export default class OrdensServicoController {
    * @responseBody 200 - {"tempoMedioMinutos":42,"ordensConsideradas":7} - Métrica calculada
    */
   async tempoMedioExecucao() {
-    return fabricaOrdensServico.tempoMedioExecucao().executar()
+    return this.calcularTempoMedioExecucao.executar()
   }
 }

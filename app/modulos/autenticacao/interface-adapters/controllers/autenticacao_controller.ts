@@ -1,11 +1,18 @@
+import { inject } from '@adonisjs/core'
+import { RegistrarAdministrador } from '../../use-cases/registrar-administrador.js'
+import { Autenticar } from '../../use-cases/autenticar.js'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaAutenticacao } from '../../frameworks-drivers/fabrica.js'
 import {
   registrarAdministradorValidator,
   autenticarValidator,
 } from '../../frameworks-drivers/validadores/autenticacao_validadores.js'
 
+@inject()
 export default class AutenticacaoController {
+  constructor(
+    private registrarAdministrador: RegistrarAdministrador,
+    private autenticar: Autenticar
+  ) {}
   /**
    * @register
    * @tag Autenticação
@@ -17,7 +24,7 @@ export default class AutenticacaoController {
    */
   async register({ request, response }: HttpContext) {
     const dados = await request.validateUsing(registrarAdministradorValidator)
-    const saida = await fabricaAutenticacao.registrarAdministrador().executar(dados)
+    const saida = await this.registrarAdministrador.executar(dados)
     return response.created(saida)
   }
 
@@ -33,7 +40,7 @@ export default class AutenticacaoController {
    */
   async login({ request }: HttpContext) {
     const dados = await request.validateUsing(autenticarValidator)
-    return fabricaAutenticacao.autenticar().executar(dados)
+    return this.autenticar.executar(dados)
   }
 
   /**

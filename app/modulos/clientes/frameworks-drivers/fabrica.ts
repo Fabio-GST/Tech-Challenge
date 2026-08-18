@@ -13,17 +13,6 @@ import { RemoverCliente } from '../use-cases/remover-cliente.js'
  * cada caso de uso é registrado com uma fábrica explícita que resolve o
  * adaptador concreto.
  */
-/**
- * @deprecated Shim transitório para consumidores ainda não migrados ao
- * container IoC (removido quando todos os módulos registrarem bindings).
- */
-const repositorioTransitorio = new RepositorioDeClientesLucid()
-export const fabricaClientes = {
-  repositorio: () => repositorioTransitorio,
-  criar: () => new CriarCliente(repositorioTransitorio),
-  obter: () => new ObterCliente(repositorioTransitorio),
-}
-
 export function registrarClientes(app: ApplicationService) {
   app.container.singleton(RepositorioDeClientesLucid, () => new RepositorioDeClientesLucid())
 

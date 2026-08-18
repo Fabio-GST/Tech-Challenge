@@ -1,5 +1,16 @@
+import { inject } from '@adonisjs/core'
+import { CriarPeca } from '../../use-cases/criar-peca.js'
+import { AtualizarPeca } from '../../use-cases/atualizar-peca.js'
+import { AjustarEstoque } from '../../use-cases/ajustar-estoque.js'
+import { ReservarPeca } from '../../use-cases/reservar-peca.js'
+import { UtilizarPeca } from '../../use-cases/utilizar-peca.js'
+import { DefinirEstoqueMinimo } from '../../use-cases/definir-estoque-minimo.js'
+import { SolicitarCompra } from '../../use-cases/solicitar-compra.js'
+import { ReceberCompra } from '../../use-cases/receber-compra.js'
+import { ObterPeca } from '../../use-cases/obter-peca.js'
+import { ListarPecas } from '../../use-cases/listar-pecas.js'
+import { RemoverPeca } from '../../use-cases/remover-peca.js'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaEstoque } from '../../frameworks-drivers/fabrica.js'
 import {
   criarPecaValidator,
   atualizarPecaValidator,
@@ -9,7 +20,21 @@ import {
   solicitarCompraValidator,
 } from '../../frameworks-drivers/validadores/peca_validadores.js'
 
+@inject()
 export default class PecasController {
+  constructor(
+    private criarPeca: CriarPeca,
+    private atualizarPeca: AtualizarPeca,
+    private ajustarEstoqueUseCase: AjustarEstoque,
+    private reservarPeca: ReservarPeca,
+    private utilizarPeca: UtilizarPeca,
+    private definirEstoqueMinimoUseCase: DefinirEstoqueMinimo,
+    private solicitarCompraUseCase: SolicitarCompra,
+    private receberCompraUseCase: ReceberCompra,
+    private obterPeca: ObterPeca,
+    private listarPecas: ListarPecas,
+    private removerPeca: RemoverPeca
+  ) {}
   /**
    * @index
    * @tag Estoque
@@ -17,7 +42,7 @@ export default class PecasController {
    * @responseBody 200 - [{"id":"uuid","nome":"Óleo 5W30","descricao":"Sintético","preco":45,"quantidadeEstoque":10,"quantidadeReservada":0,"estoqueMinimo":2}] - Lista de peças
    */
   async index() {
-    return fabricaEstoque.listar().executar()
+    return this.listarPecas.executar()
   }
 
   /**
@@ -29,7 +54,7 @@ export default class PecasController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Peça não encontrada."}} - Peça inexistente
    */
   async show({ params }: HttpContext) {
-    return fabricaEstoque.obter().executar(params.id)
+    return this.obterPeca.executar(params.id)
   }
 
   /**
@@ -42,7 +67,7 @@ export default class PecasController {
    */
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarPecaValidator)
-    const peca = await fabricaEstoque.criar().executar(dados)
+    const peca = await this.criarPeca.executar(dados)
     return response.created(peca)
   }
 
@@ -57,7 +82,7 @@ export default class PecasController {
    */
   async update({ params, request }: HttpContext) {
     const dados = await request.validateUsing(atualizarPecaValidator)
-    return fabricaEstoque.atualizar().executar({ id: params.id, ...dados })
+    return this.atualizarPeca.executar({ id: params.id, ...dados })
   }
 
   /**
@@ -71,7 +96,7 @@ export default class PecasController {
    */
   async ajustarEstoque({ params, request }: HttpContext) {
     const { quantidade } = await request.validateUsing(ajustarEstoqueValidator)
-    return fabricaEstoque.ajustarEstoque().executar({ id: params.id, quantidade })
+    return this.ajustarEstoqueUseCase.executar({ id: params.id, quantidade })
   }
 
   /**
@@ -87,7 +112,7 @@ export default class PecasController {
    */
   async reservar({ params, request }: HttpContext) {
     const { quantidade } = await request.validateUsing(movimentarEstoqueValidator)
-    return fabricaEstoque.reservar().executar({ id: params.id, quantidade })
+    return this.reservarPeca.executar({ id: params.id, quantidade })
   }
 
   /**
@@ -103,7 +128,7 @@ export default class PecasController {
    */
   async utilizar({ params, request }: HttpContext) {
     const { quantidade } = await request.validateUsing(movimentarEstoqueValidator)
-    return fabricaEstoque.utilizar().executar({ id: params.id, quantidade })
+    return this.utilizarPeca.executar({ id: params.id, quantidade })
   }
 
   /**
@@ -117,7 +142,7 @@ export default class PecasController {
    */
   async definirEstoqueMinimo({ params, request }: HttpContext) {
     const { estoqueMinimo } = await request.validateUsing(definirEstoqueMinimoValidator)
-    return fabricaEstoque.definirEstoqueMinimo().executar({ id: params.id, estoqueMinimo })
+    return this.definirEstoqueMinimoUseCase.executar({ id: params.id, estoqueMinimo })
   }
 
   /**
@@ -132,9 +157,10 @@ export default class PecasController {
    */
   async solicitarCompra({ params, request, response }: HttpContext) {
     const { quantidade } = await request.validateUsing(solicitarCompraValidator)
-    const solicitacao = await fabricaEstoque
-      .solicitarCompra()
-      .executar({ pecaId: params.id, quantidade })
+    const solicitacao = await this.solicitarCompraUseCase.executar({
+      pecaId: params.id,
+      quantidade,
+    })
     return response.created(solicitacao)
   }
 
@@ -147,7 +173,7 @@ export default class PecasController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Solicitação de compra não encontrada."}} - Solicitação inexistente
    */
   async receberCompra({ params }: HttpContext) {
-    return fabricaEstoque.receberCompra().executar(params.id)
+    return this.receberCompraUseCase.executar(params.id)
   }
 
   /**
@@ -159,7 +185,7 @@ export default class PecasController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Peça não encontrada."}} - Peça inexistente
    */
   async destroy({ params, response }: HttpContext) {
-    await fabricaEstoque.remover().executar(params.id)
+    await this.removerPeca.executar(params.id)
     return response.noContent()
   }
 }

@@ -1,12 +1,31 @@
+import { inject } from '@adonisjs/core'
+import { CriarServico } from '../../use-cases/criar-servico.js'
+import { AtualizarServico } from '../../use-cases/atualizar-servico.js'
+import { InativarServico } from '../../use-cases/inativar-servico.js'
+import { ReativarServico } from '../../use-cases/reativar-servico.js'
+import { DefinirTempoEstimado } from '../../use-cases/definir-tempo-estimado.js'
+import { ObterServico } from '../../use-cases/obter-servico.js'
+import { ListarServicos } from '../../use-cases/listar-servicos.js'
+import { RemoverServico } from '../../use-cases/remover-servico.js'
 import type { HttpContext } from '@adonisjs/core/http'
-import { fabricaServicos } from '../../frameworks-drivers/fabrica.js'
 import {
   criarServicoValidator,
   atualizarServicoValidator,
   definirTempoEstimadoValidator,
 } from '../../frameworks-drivers/validadores/servico_validadores.js'
 
+@inject()
 export default class ServicosController {
+  constructor(
+    private criarServico: CriarServico,
+    private atualizarServico: AtualizarServico,
+    private inativarServico: InativarServico,
+    private reativarServico: ReativarServico,
+    private definirTempoEstimadoUseCase: DefinirTempoEstimado,
+    private obterServico: ObterServico,
+    private listarServicos: ListarServicos,
+    private removerServico: RemoverServico
+  ) {}
   /**
    * @index
    * @tag Serviços
@@ -14,7 +33,7 @@ export default class ServicosController {
    * @responseBody 200 - [{"id":"uuid","nome":"Troca de óleo","descricao":"Inclui filtro","preco":120,"ativo":true,"tempoEstimadoMinutos":30}] - Lista de serviços
    */
   async index() {
-    return fabricaServicos.listar().executar()
+    return this.listarServicos.executar()
   }
 
   /**
@@ -26,7 +45,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async show({ params }: HttpContext) {
-    return fabricaServicos.obter().executar(params.id)
+    return this.obterServico.executar(params.id)
   }
 
   /**
@@ -39,7 +58,7 @@ export default class ServicosController {
    */
   async store({ request, response }: HttpContext) {
     const dados = await request.validateUsing(criarServicoValidator)
-    const servico = await fabricaServicos.criar().executar(dados)
+    const servico = await this.criarServico.executar(dados)
     return response.created(servico)
   }
 
@@ -55,7 +74,7 @@ export default class ServicosController {
    */
   async update({ params, request }: HttpContext) {
     const dados = await request.validateUsing(atualizarServicoValidator)
-    return fabricaServicos.atualizar().executar({ id: params.id, ...dados })
+    return this.atualizarServico.executar({ id: params.id, ...dados })
   }
 
   /**
@@ -67,7 +86,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async inativar({ params }: HttpContext) {
-    return fabricaServicos.inativar().executar(params.id)
+    return this.inativarServico.executar(params.id)
   }
 
   /**
@@ -79,7 +98,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async reativar({ params }: HttpContext) {
-    return fabricaServicos.reativar().executar(params.id)
+    return this.reativarServico.executar(params.id)
   }
 
   /**
@@ -93,7 +112,7 @@ export default class ServicosController {
    */
   async definirTempoEstimado({ params, request }: HttpContext) {
     const dados = await request.validateUsing(definirTempoEstimadoValidator)
-    return fabricaServicos.definirTempoEstimado().executar({ id: params.id, ...dados })
+    return this.definirTempoEstimadoUseCase.executar({ id: params.id, ...dados })
   }
 
   /**
@@ -105,7 +124,7 @@ export default class ServicosController {
    * @responseBody 404 - {"erro":{"codigo":"RECURSO_NAO_ENCONTRADO","mensagem":"Serviço não encontrado."}} - Serviço inexistente
    */
   async destroy({ params, response }: HttpContext) {
-    await fabricaServicos.remover().executar(params.id)
+    await this.removerServico.executar(params.id)
     return response.noContent()
   }
 }
