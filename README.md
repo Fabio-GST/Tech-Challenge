@@ -12,13 +12,17 @@ Desenvolvido com **AdonisJS v6 + TypeScript**, banco **MySQL** (via Lucid) e arq
 ## Sumário
 
 - [Fase 2 — Objetivos](#fase-2--objetivos)
+- [Arquitetura da solução (Fase 2)](#arquitetura-da-solução-fase-2)
 - [Documentação](#documentação)
+- [Collection das APIs](#collection-das-apis)
 - [Arquitetura](#arquitetura)
 - [Por que MySQL](#por-que-mysql)
 - [Como executar com Docker](#como-executar-com-docker-recomendado)
 - [Como executar localmente](#como-executar-localmente)
 - [Autenticação](#autenticação)
 - [Endpoints](#endpoints)
+- [Deploy em Kubernetes](#deploy-em-kubernetes)
+- [Provisionamento com Terraform (IaC)](#provisionamento-com-terraform-iac)
 - [Testes e cobertura](#testes-e-cobertura)
 - [Segurança](#segurança)
 
@@ -48,6 +52,55 @@ O enunciado completo da fase está em
 
 ---
 
+## Arquitetura da solução (Fase 2)
+
+Componentes da aplicação, infraestrutura provisionada e fluxo de deploy:
+
+```mermaid
+flowchart LR
+  subgraph Consumidores
+    U[Cliente / Atendente<br/>HTTP + JWT]
+    W[Sistema externo<br/>webhook de orçamento]
+  end
+
+  subgraph GH["GitHub"]
+    PR[Push / PR na main] --> CI["CI (Actions)<br/>lint · typecheck · testes · build"]
+    PR --> CD["CD (Actions)"]
+    CD --> IMG["Build da imagem Docker<br/>push no GHCR"]
+    IMG --> APPLY["kubectl apply<br/>manifestos /k8s"]
+  end
+
+  subgraph TF["Terraform (/infra)"]
+    T[terraform apply] --> KC["Cluster kind<br/>(Kubernetes local)"]
+    T --> NS["Namespace oficina<br/>+ Secret"]
+    T --> DB[("MySQL 8<br/>StatefulSet + PVC")]
+  end
+
+  subgraph K8S["Cluster Kubernetes (namespace oficina)"]
+    SVC[Service] --> DEP["Deployment API<br/>AdonisJS + TypeScript"]
+    HPA["HPA<br/>CPU/memória"] -. escala .-> DEP
+    CM[ConfigMap] --> DEP
+    SEC[Secret] --> DEP
+    JOB["Job de migração<br/>migration:run + db:seed"] --> DB
+    DEP --> DB
+  end
+
+  U --> SVC
+  W --> SVC
+  APPLY --> K8S
+  DEP --> SMTP["Servidor SMTP<br/>notificação de status por e-mail"]
+```
+
+- **Componentes:** API monolítica modular (Clean Architecture, bounded contexts), MySQL 8 e
+  notificação por e-mail (SMTP via nodemailer).
+- **Infraestrutura provisionada (Terraform):** cluster kind, namespace, Secret e MySQL — ver
+  [`infra/README.md`](./infra/README.md).
+- **Fluxo de deploy:** push na `main` dispara o CI (qualidade) e o CD, que publica a imagem no
+  GHCR e aplica os manifestos de [`/k8s`](./k8s) no cluster (Deployment, Service, ConfigMap,
+  Secret, HPA e Job de migração).
+
+---
+
 ## Documentação
 
 | Documento | Conteúdo |
@@ -56,6 +109,18 @@ O enunciado completo da fase está em
 | [Enunciado da Fase 2](./docs/tech-challenge-fase-2.md) | Requisitos obrigatórios e entregáveis da Fase 2 |
 | [ADR 0001 — Arquitetura Orientada a Eventos](./docs/adr/0001-arquitetura-orientada-a-eventos.md) | Decisão de arquitetura de eventos de domínio |
 | [Mapa de Contexto](./docs/diagrama-de-contexto.md) | Eventos entre os bounded contexts |
+
+---
+
+## Collection das APIs
+
+- **Especificação OpenAPI 3 completa:** [`docs/openapi.json`](./docs/openapi.json) — importável
+  no Postman/Insomnia (File → Import) para gerar a collection com todas as rotas.
+- **Swagger UI interativo:** `http://localhost:3333/docs` com a aplicação em execução (spec
+  bruta em `/swagger`).
+
+Para regerar a spec após mudar rotas: suba a aplicação e salve a resposta de `/swagger` em
+`docs/openapi.json`.
 
 ---
 
@@ -240,6 +305,41 @@ curl -X POST http://localhost:3333/auth/login \
 | POST   | `/payments/:id/invoice`           | JWT  | Emite a Nota Fiscal (após quitação)   |
 | GET    | `/work-orders/:id/tracking`       | —    | Acompanhamento público da OS          |
 | GET    | `/metrics/average-execution-time` | JWT  | Tempo médio de execução das OS        |
+
+---
+
+## Deploy em Kubernetes
+
+Os manifestos estão em [`/k8s`](./k8s) (namespace, ConfigMap, Secret modelo, Deployment,
+Service, HPA, MySQL e Job de migração). Resumo — o passo a passo completo, incluindo o
+metrics-server exigido pelo HPA, está em [`k8s/README.md`](./k8s/README.md):
+
+```bash
+kubectl apply -f k8s/namespace.yaml -f k8s/configmap.yaml
+cp k8s/secret.example.yaml k8s/secret.yaml   # troque os valores
+kubectl apply -f k8s/secret.yaml
+kubectl apply -f k8s/mysql.yaml              # pule se o MySQL veio do Terraform
+kubectl apply -f k8s/migration-job.yaml -f k8s/deployment.yaml -f k8s/service.yaml -f k8s/hpa.yaml
+```
+
+No pipeline de **CD** (`.github/workflows/cd.yml`), esses mesmos manifestos são aplicados
+automaticamente após o push da imagem no GHCR.
+
+---
+
+## Provisionamento com Terraform (IaC)
+
+Os scripts estão em [`/infra`](./infra) e provisionam o cluster **kind** local, o namespace
+`oficina`, o Secret da aplicação e o **MySQL 8** (StatefulSet com volume persistente). Recursos
+criados e detalhes em [`infra/README.md`](./infra/README.md):
+
+```bash
+cd infra
+cp terraform.tfvars.example terraform.tfvars   # troque os valores
+terraform init
+terraform plan
+terraform apply
+```
 
 ---
 
