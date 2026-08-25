@@ -1,4 +1,4 @@
-# API - Oficina Mecânica (Tech Challenge - Fase 1)
+# API - Oficina Mecânica (Tech Challenge - Fases 1 e 2)
 
 MVP do back-end de um **Sistema Integrado de Atendimento e Execução de Serviços** para uma
 oficina mecânica. Permite gerir **Ordens de Serviço (OS)**, clientes, veículos, serviços e
@@ -11,6 +11,8 @@ Desenvolvido com **AdonisJS v6 + TypeScript**, banco **MySQL** (via Lucid) e arq
 
 ## Sumário
 
+- [Fase 2 — Objetivos](#fase-2--objetivos)
+- [Documentação](#documentação)
 - [Arquitetura](#arquitetura)
 - [Por que MySQL](#por-que-mysql)
 - [Como executar com Docker](#como-executar-com-docker-recomendado)
@@ -19,6 +21,41 @@ Desenvolvido com **AdonisJS v6 + TypeScript**, banco **MySQL** (via Lucid) e arq
 - [Endpoints](#endpoints)
 - [Testes e cobertura](#testes-e-cobertura)
 - [Segurança](#segurança)
+
+---
+
+## Fase 2 — Objetivos
+
+Com o aumento da demanda, a expansão para novas unidades e a necessidade de alta
+disponibilidade, a Fase 2 evolui a aplicação da Fase 1 para garantir **qualidade, resiliência e
+escalabilidade**, incorporando práticas modernas de infraestrutura e automação:
+
+- **Refatoração** aplicando Clean Code e Clean Architecture, com testes automatizados cobrindo
+  os fluxos críticos;
+- **APIs**: abertura de OS, consulta de status, aprovação/recusa de orçamento (notificação
+  externa), listagem ordenada por status (Em Execução > Aguardando Aprovação > Diagnóstico >
+  Recebida, mais antigas primeiro, sem finalizadas/entregues) e atualização de status via
+  e-mail;
+- **Conteinerização**: `Dockerfile` e `docker-compose` revisados;
+- **Kubernetes** (`/k8s`): Deployments, Services, ConfigMaps/Secrets e HPA (escala por
+  CPU/memória);
+- **Terraform** (`/infra`): provisionamento do cluster Kubernetes e do banco de dados;
+- **CI/CD**: pipeline com build, testes, build da imagem Docker e deploy (aplicação, banco e
+  manifestos) no cluster.
+
+O enunciado completo da fase está em
+[`docs/tech-challenge-fase-2.md`](./docs/tech-challenge-fase-2.md).
+
+---
+
+## Documentação
+
+| Documento | Conteúdo |
+| --- | --- |
+| [Documentação da Fase 1](./docs/documentacao-fase-1.md) | Documento de entrega: visão geral, Linguagem Ubíqua, fluxos DDD por contexto e relatório SonarQube |
+| [Enunciado da Fase 2](./docs/tech-challenge-fase-2.md) | Requisitos obrigatórios e entregáveis da Fase 2 |
+| [ADR 0001 — Arquitetura Orientada a Eventos](./docs/adr/0001-arquitetura-orientada-a-eventos.md) | Decisão de arquitetura de eventos de domínio |
+| [Mapa de Contexto](./docs/diagrama-de-contexto.md) | Eventos entre os bounded contexts |
 
 ---
 
