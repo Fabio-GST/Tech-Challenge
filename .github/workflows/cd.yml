@@ -67,7 +67,7 @@ jobs:
 
       - name: Apontar manifestos para a imagem publicada
         run: |
-          sed -i "s|ghcr.io/SEU-USUARIO/oficina-api:latest|${IMAGEM}:${{ github.sha }}|" \
+          sed -i "s|ghcr.io/fabio-gst/oficina-api:latest|${IMAGEM}:${{ github.sha }}|" \
             k8s/deployment.yaml k8s/migration-job.yaml
 
       - name: Namespace e configuração

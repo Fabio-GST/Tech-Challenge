@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
         - name: api
-          image: ghcr.io/SEU-USUARIO/oficina-api:latest
-          imagePullPolicy: Always
+          image: ghcr.io/fabio-gst/oficina-api:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3333
           envFrom:
@@ -52,4 +52,5 @@ spec:
               memory: 512Mi
           securityContext:
             runAsNonRoot: true
+            runAsUser: 1000 # usuário "node" da imagem base (UID numérico p/ o kubelet validar)
             allowPrivilegeEscalation: false

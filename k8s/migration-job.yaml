@@ -16,7 +16,8 @@ spec:
       restartPolicy: Never
       containers:
         - name: migracao
-          image: ghcr.io/SEU-USUARIO/oficina-api:latest
+          image: ghcr.io/fabio-gst/oficina-api:latest
+          imagePullPolicy: IfNotPresent
           command: ['sh', '-c', 'node ace migration:run --force && node ace db:seed']
           envFrom:
             - configMapRef:
