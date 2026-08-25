@@ -124,6 +124,13 @@ Para regerar a spec após mudar rotas: suba a aplicação e salve a resposta de 
 
 ---
 
+## Vídeo demonstrativo
+
+Vídeo (até 15 min) com o deploy, a execução do CI/CD, o consumo das APIs e a escalabilidade
+automática: **link em breve**.
+
+---
+
 ## Arquitetura
 
 Monólito **modular em camadas**, organizado por **bounded contexts** (contextos de negócio),
