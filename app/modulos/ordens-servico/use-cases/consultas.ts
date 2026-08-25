@@ -2,6 +2,7 @@ import type { CasoDeUso } from '#shared/use-cases/caso-de-uso'
 import { RecursoNaoEncontrado } from '#shared/entities/erros'
 import type { RepositorioDeOrdensServico } from './ports/repositorio-de-ordens-servico.js'
 import { paraDTO, paraAndamentoDTO, type OrdemServicoDTO, type AndamentoDTO } from './dtos.js'
+import { StatusOrdemServico } from '../entities/objetos-de-valor/status-ordem-servico.js'
 
 /** Detalha uma OS (uso administrativo). */
 export class DetalharOrdem implements CasoDeUso<string, OrdemServicoDTO> {
@@ -16,13 +17,28 @@ export class DetalharOrdem implements CasoDeUso<string, OrdemServicoDTO> {
   }
 }
 
-/** Lista todas as OS (uso administrativo). */
+/**
+ * Lista a fila de OS da oficina (uso administrativo): exclui (exclusão lógica)
+ * as ordens em estado terminal e ordena por prioridade de status
+ * (Em Execução > Aguardando Aprovação > Diagnóstico > Recebida), com as mais
+ * antigas primeiro dentro de cada status.
+ */
 export class ListarOrdens implements CasoDeUso<void, OrdemServicoDTO[]> {
   constructor(private readonly ordens: RepositorioDeOrdensServico) {}
 
   async executar(): Promise<OrdemServicoDTO[]> {
     const ordens = await this.ordens.listar()
-    return ordens.map(paraDTO)
+    return ordens
+      .filter((ordem) => StatusOrdemServico.prioridadeNaFila(ordem.status.valor) !== null)
+      .sort((a, b) => {
+        const prioridadeA = StatusOrdemServico.prioridadeNaFila(a.status.valor)!
+        const prioridadeB = StatusOrdemServico.prioridadeNaFila(b.status.valor)!
+        if (prioridadeA !== prioridadeB) {
+          return prioridadeA - prioridadeB
+        }
+        return a.criadaEm.toMillis() - b.criadaEm.toMillis()
+      })
+      .map(paraDTO)
   }
 }
 

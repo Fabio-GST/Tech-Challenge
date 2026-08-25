@@ -163,7 +163,47 @@ test.group('Casos de uso de Ordens de Serviço', (group) => {
     const metrica = await executar(CalcularTempoMedioExecucao)
     assert.isAtLeast(metrica.ordensConsideradas, 1)
 
-    assert.lengthOf(await executar(ListarOrdens), 1)
+    // A OS entregue sai (exclusão lógica) da fila de listagem.
+    assert.lengthOf(await executar(ListarOrdens), 0)
+  })
+
+  test('lista a fila por prioridade de status, mais antigas primeiro, sem terminais', async ({
+    assert,
+  }) => {
+    const c = await cenario()
+    const abrir = () =>
+      executar(CriarOrdemServico, {
+        clienteId: c.clienteId,
+        veiculoId: c.veiculoId,
+        servicos: [{ servicoId: c.servicoId, quantidade: 1 }],
+      })
+
+    const recebida = await abrir()
+
+    const emDiagnostico = await abrir()
+    await executar(IniciarDiagnostico, emDiagnostico.id)
+
+    const aguardando = await abrir()
+    await executar(IniciarDiagnostico, aguardando.id)
+    await executar(GerarOrcamento, aguardando.id)
+
+    const emExecucao = await abrir()
+    await executar(IniciarDiagnostico, emExecucao.id)
+    await executar(GerarOrcamento, emExecucao.id)
+    await executar(AprovarOrdemServico, emExecucao.id)
+
+    const entregue = await abrir()
+    await executar(IniciarDiagnostico, entregue.id)
+    await executar(GerarOrcamento, entregue.id)
+    await executar(AprovarOrdemServico, entregue.id)
+    await executar(FinalizarOrdemServico, entregue.id)
+    await executar(EntregarVeiculo, entregue.id)
+
+    const fila = await executar(ListarOrdens)
+    assert.deepEqual(
+      fila.map((os) => os.id),
+      [emExecucao.id, aguardando.id, emDiagnostico.id, recebida.id]
+    )
   })
 
   test('recusa uma OS em aguardando aprovação', async ({ assert }) => {

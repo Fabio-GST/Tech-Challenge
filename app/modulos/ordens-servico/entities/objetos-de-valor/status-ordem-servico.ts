@@ -31,6 +31,18 @@ const TRANSICOES: Record<StatusOS, StatusOS[]> = {
   [StatusOS.RECUSADA]: [],
 }
 
+/**
+ * Prioridade de exibição na fila da oficina (menor = mais urgente):
+ * Em Execução > Aguardando Aprovação > Diagnóstico > Recebida. Estados
+ * terminais (Finalizada, Entregue, Recusada) ficam fora da fila.
+ */
+const PRIORIDADE_NA_FILA: Partial<Record<StatusOS, number>> = {
+  [StatusOS.EM_EXECUCAO]: 0,
+  [StatusOS.AGUARDANDO_APROVACAO]: 1,
+  [StatusOS.EM_DIAGNOSTICO]: 2,
+  [StatusOS.RECEBIDA]: 3,
+}
+
 interface PropsStatus {
   valor: StatusOS
 }
@@ -57,6 +69,11 @@ export class StatusOrdemServico extends ObjetoDeValor<PropsStatus> {
 
   get valor(): StatusOS {
     return this.props.valor
+  }
+
+  /** Posição do status na fila da oficina, ou `null` se está fora dela. */
+  static prioridadeNaFila(valor: StatusOS): number | null {
+    return PRIORIDADE_NA_FILA[valor] ?? null
   }
 
   podeTransitarPara(novo: StatusOS): boolean {
