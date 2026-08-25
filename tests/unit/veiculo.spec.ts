@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
-import { Veiculo } from '#modulos/veiculos/dominio/entidades/veiculo'
-import { Placa } from '#modulos/veiculos/dominio/objetos-de-valor/placa'
+import { Veiculo } from '#modulos/veiculos/entities/veiculo'
+import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
 
 function novoVeiculo(clienteId = 'cliente-1') {
   return Veiculo.criar({

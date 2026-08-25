@@ -14,28 +14,87 @@ import { middleware } from '#start/kernel'
 import swagger from '#config/swagger'
 
 const AutenticacaoController = () =>
-  import('#modulos/autenticacao/infraestrutura/http/controllers/autenticacao_controller')
+  import('#modulos/autenticacao/interface-adapters/controllers/autenticacao_controller')
 const ClientesController = () =>
-  import('#modulos/clientes/infraestrutura/http/controllers/clientes_controller')
+  import('#modulos/clientes/interface-adapters/controllers/clientes_controller')
 const VeiculosController = () =>
-  import('#modulos/veiculos/infraestrutura/http/controllers/veiculos_controller')
+  import('#modulos/veiculos/interface-adapters/controllers/veiculos_controller')
 const ServicosController = () =>
-  import('#modulos/servicos/infraestrutura/http/controllers/servicos_controller')
+  import('#modulos/servicos/interface-adapters/controllers/servicos_controller')
 const PecasController = () =>
-  import('#modulos/estoque/infraestrutura/http/controllers/pecas_controller')
+  import('#modulos/estoque/interface-adapters/controllers/pecas_controller')
 const OrdensServicoController = () =>
-  import('#modulos/ordens-servico/infraestrutura/http/controllers/ordens_servico_controller')
+  import('#modulos/ordens-servico/interface-adapters/controllers/ordens_servico_controller')
 const PagamentosController = () =>
-  import('#modulos/pagamento/infraestrutura/http/controllers/pagamentos_controller')
+  import('#modulos/pagamento/interface-adapters/controllers/pagamentos_controller')
 
 router.get('/', async () => ({ servico: 'API Oficina Mecânica', documentacao: '/docs' }))
 router.get('/health', async () => ({ status: 'ok' }))
 
 /*
 | Documentação OpenAPI / Swagger UI
+|
+| A especificação é gerada pelo adonis-autoswagger a partir das rotas e das
+| anotações dos controllers e, em seguida, pós-processada para deixar TODA a
+| documentação em português (Linguagem Ubíqua): descrições das seções por
+| domínio, ordem dos domínios e tradução das respostas genéricas do pacote.
 */
+
+/** Descrição de cada seção por domínio (bounded context). Chaves em MAIÚSCULAS
+ *  porque o autoswagger normaliza os nomes das tags. */
+const DESCRICOES_POR_DOMINIO: Record<string, string> = {
+  'AUTENTICAÇÃO': 'Emissão de token JWT e cadastro de usuários administrativos.',
+  'CLIENTES': 'Cadastro e consulta de clientes, identificados por CPF ou CNPJ.',
+  'VEÍCULOS': 'Cadastro de veículos e vínculo com o cliente proprietário.',
+  'SERVIÇOS': 'Catálogo de serviços da oficina: preço, tempo estimado e ativação.',
+  'ESTOQUE': 'Peças, saldo (disponível/reservado), estoque mínimo e compras.',
+  'ORDENS DE SERVIÇO':
+    'Ciclo de vida da OS: abertura, orçamento, aprovação, execução, finalização e entrega.',
+  'PAGAMENTOS': 'Cobrança da OS, descontos, registro de pagamentos e Nota Fiscal.',
+}
+
+const ORDEM_DOS_DOMINIOS = Object.keys(DESCRICOES_POR_DOMINIO)
+
 router.get('/swagger', async () => {
-  return AutoSwagger.default.docs(router.toJSON(), swagger)
+  const doc = (await AutoSwagger.default.json(router.toJSON(), swagger)) as any
+
+  // Deduplica as tags (o autoswagger cria uma por operação), aplica as
+  // descrições em PT e ordena as seções por domínio.
+  if (Array.isArray(doc.tags)) {
+    const vistas = new Set<string>()
+    doc.tags = doc.tags.filter((t: { name: string }) => {
+      if (vistas.has(t.name)) return false
+      vistas.add(t.name)
+      return true
+    })
+    for (const tag of doc.tags) {
+      if (DESCRICOES_POR_DOMINIO[tag.name]) {
+        tag.description = DESCRICOES_POR_DOMINIO[tag.name]
+      }
+    }
+    const posicao = (nome: string) => {
+      const i = ORDEM_DOS_DOMINIOS.indexOf(nome)
+      return i === -1 ? Number.MAX_SAFE_INTEGER : i
+    }
+    doc.tags.sort((a: { name: string }, b: { name: string }) => posicao(a.name) - posicao(b.name))
+  }
+
+  // Respostas genéricas do pacote (fixas em inglês) traduzidas para PT.
+  const respostas = doc.components?.responses
+  if (respostas) {
+    const traducoes: Record<string, string> = {
+      Forbidden: 'Token de acesso ausente ou inválido',
+      Accepted: 'Requisição aceita',
+      Created: 'Recurso criado',
+      NotFound: 'Recurso não encontrado',
+      NotAcceptable: 'Requisição não aceitável',
+    }
+    for (const [chave, descricao] of Object.entries(traducoes)) {
+      if (respostas[chave]) respostas[chave].description = descricao
+    }
+  }
+
+  return doc
 })
 router.get('/docs', async () => {
   return AutoSwagger.default.ui('/swagger', swagger)
@@ -46,6 +105,13 @@ router.get('/docs', async () => {
 */
 router.post('/auth/login', [AutenticacaoController, 'login'])
 router.get('/work-orders/:id/tracking', [OrdensServicoController, 'andamento'])
+
+/*
+| Webhooks (sistemas externos, protegidos por segredo compartilhado)
+*/
+router
+  .post('/work-orders/:id/budget-decision', [OrdensServicoController, 'decisaoOrcamento'])
+  .use(middleware.webhook())
 
 /*
 | Rotas administrativas protegidas por JWT

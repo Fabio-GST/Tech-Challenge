@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { Placa } from '#modulos/veiculos/dominio/objetos-de-valor/placa'
+import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
 
 test.group('Placa', () => {
   test('aceita placa no formato antigo e normaliza', ({ assert }) => {

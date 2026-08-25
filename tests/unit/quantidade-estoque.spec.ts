@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
 
 test.group('QuantidadeEstoque', () => {
   test('dá baixa reduzindo a quantidade', ({ assert }) => {

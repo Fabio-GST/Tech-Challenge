@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import {
   SolicitacaoDeCompra,
   StatusSolicitacao,
-} from '#modulos/estoque/dominio/entidades/solicitacao-de-compra'
+} from '#modulos/estoque/entities/solicitacao-de-compra'
 
 test.group('SolicitacaoDeCompra (agregado)', () => {
   test('nasce SOLICITADA e registra estoque.compra-solicitada', ({ assert }) => {

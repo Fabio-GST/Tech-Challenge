@@ -1,12 +1,12 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
 import { gerarCpf } from '#tests/helpers/dados'
-import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
-import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
-import { RepositorioDeClientesLucid } from '#modulos/clientes/infraestrutura/persistencia/repositorios/repositorio-de-clientes-lucid'
-import { Veiculo } from '#modulos/veiculos/dominio/entidades/veiculo'
-import { Placa } from '#modulos/veiculos/dominio/objetos-de-valor/placa'
-import { RepositorioDeVeiculosLucid } from '#modulos/veiculos/infraestrutura/persistencia/repositorios/repositorio-de-veiculos-lucid'
+import { Cliente } from '#modulos/clientes/entities/cliente'
+import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento'
+import { RepositorioDeClientesLucid } from '#modulos/clientes/interface-adapters/gateways/repositorio-de-clientes-lucid'
+import { Veiculo } from '#modulos/veiculos/entities/veiculo'
+import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
+import { RepositorioDeVeiculosLucid } from '#modulos/veiculos/interface-adapters/gateways/repositorio-de-veiculos-lucid'
 
 test.group('RepositorioDeVeiculosLucid', (group) => {
   prepararBanco(group)

@@ -1,13 +1,13 @@
 import { test } from '@japa/runner'
 import { DateTime } from 'luxon'
-import { CalcularTempoMedioExecucao } from '#modulos/ordens-servico/aplicacao/casos-de-uso/consultas'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
+import { CalcularTempoMedioExecucao } from '#modulos/ordens-servico/use-cases/consultas'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
 import {
   StatusOrdemServico,
   StatusOS,
-} from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
-import { PrioridadeOS } from '#modulos/ordens-servico/dominio/objetos-de-valor/prioridade-os'
-import type { RepositorioDeOrdensServico } from '#modulos/ordens-servico/dominio/repositorios/repositorio-de-ordens-servico'
+} from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
+import { PrioridadeOS } from '#modulos/ordens-servico/entities/objetos-de-valor/prioridade-os'
+import type { RepositorioDeOrdensServico } from '#modulos/ordens-servico/use-cases/ports/repositorio-de-ordens-servico'
 
 class OrdensMemoria implements RepositorioDeOrdensServico {
   constructor(private readonly itens: OrdemServico[]) {}

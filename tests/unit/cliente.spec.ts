@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
-import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
-import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
-import { ClienteCadastrado } from '#modulos/clientes/dominio/eventos/cliente-cadastrado'
+import { Cliente } from '#modulos/clientes/entities/cliente'
+import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento'
+import { ClienteCadastrado } from '#modulos/clientes/entities/eventos/cliente-cadastrado'
 
 function novoCliente() {
   return Cliente.criar({ nome: 'Maria', documento: Documento.criar('111.444.777-35') })

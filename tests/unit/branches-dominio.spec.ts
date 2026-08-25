@@ -1,23 +1,23 @@
 import { test } from '@japa/runner'
 import { capturarErro } from '#tests/helpers/erros'
-import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/dominio/erros'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
-import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
-import { Email } from '#modulos/autenticacao/dominio/objetos-de-valor/email'
-import { Veiculo } from '#modulos/veiculos/dominio/entidades/veiculo'
-import { Placa } from '#modulos/veiculos/dominio/objetos-de-valor/placa'
-import { Servico } from '#modulos/servicos/dominio/entidades/servico'
-import { Peca } from '#modulos/estoque/dominio/entidades/peca'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
-import { SaldoEstoque } from '#modulos/estoque/dominio/objetos-de-valor/saldo-estoque'
-import { ItemOrdemServico } from '#modulos/ordens-servico/dominio/entidades/item-ordem-servico'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
+import { ErroDeValidacao, RegraDeNegocioViolada } from '#shared/entities/erros'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
+import { Cliente } from '#modulos/clientes/entities/cliente'
+import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento'
+import { Email } from '#modulos/autenticacao/entities/objetos-de-valor/email'
+import { Veiculo } from '#modulos/veiculos/entities/veiculo'
+import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
+import { Servico } from '#modulos/servicos/entities/servico'
+import { Peca } from '#modulos/estoque/entities/peca'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
+import { SaldoEstoque } from '#modulos/estoque/entities/objetos-de-valor/saldo-estoque'
+import { ItemOrdemServico } from '#modulos/ordens-servico/entities/item-ordem-servico'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
 import {
   StatusOrdemServico,
   StatusOS,
-} from '#modulos/ordens-servico/dominio/objetos-de-valor/status-ordem-servico'
-import { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
+} from '#modulos/ordens-servico/entities/objetos-de-valor/status-ordem-servico'
+import { Pagamento } from '#modulos/pagamento/entities/pagamento'
 
 test.group('Branches de domínio — igualdade (Entidade / ObjetoDeValor)', () => {
   test('Entidade.iguala compara por identidade', ({ assert }) => {

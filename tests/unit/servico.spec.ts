@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import { Servico } from '#modulos/servicos/dominio/entidades/servico'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
+import { Servico } from '#modulos/servicos/entities/servico'
 
 function novoServico() {
   return Servico.criar({ nome: 'Troca de óleo', preco: Dinheiro.deReais(120) })

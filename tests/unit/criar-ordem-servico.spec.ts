@@ -1,15 +1,20 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import type { UnidadeDeTrabalho } from '#shared/infraestrutura/unidade-de-trabalho'
-import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
-import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
-import { Veiculo } from '#modulos/veiculos/dominio/entidades/veiculo'
-import { Placa } from '#modulos/veiculos/dominio/objetos-de-valor/placa'
-import { Servico } from '#modulos/servicos/dominio/entidades/servico'
-import { Peca } from '#modulos/estoque/dominio/entidades/peca'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
-import { OrdemServico } from '#modulos/ordens-servico/dominio/entidades/ordem-servico'
-import { CriarOrdemServico } from '#modulos/ordens-servico/aplicacao/casos-de-uso/criar-ordem-servico'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
+import type { UnidadeDeTrabalho } from '#shared/use-cases/unidade-de-trabalho'
+import { Cliente } from '#modulos/clientes/entities/cliente'
+import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento'
+import { Veiculo } from '#modulos/veiculos/entities/veiculo'
+import { Placa } from '#modulos/veiculos/entities/objetos-de-valor/placa'
+import { Servico } from '#modulos/servicos/entities/servico'
+import { Peca } from '#modulos/estoque/entities/peca'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
+import { OrdemServico } from '#modulos/ordens-servico/entities/ordem-servico'
+import { CriarOrdemServico } from '#modulos/ordens-servico/use-cases/criar-ordem-servico'
+import type { PortalDeClientes } from '#modulos/ordens-servico/use-cases/ports/portal-de-clientes'
+import type { PortalDeVeiculos } from '#modulos/ordens-servico/use-cases/ports/portal-de-veiculos'
+import type { PortalDeCatalogoDeServicos } from '#modulos/ordens-servico/use-cases/ports/portal-de-catalogo-de-servicos'
+import type { PortalDeEstoque } from '#modulos/ordens-servico/use-cases/ports/portal-de-estoque'
+import type { RepositorioDeOrdensServico } from '#modulos/ordens-servico/use-cases/ports/repositorio-de-ordens-servico'
 
 /** Unidade de trabalho fake: executa a operação sem transação real. */
 const unidadeFake = { executar: <T>(op: () => Promise<T>) => op() } as UnidadeDeTrabalho
@@ -31,7 +36,7 @@ function montarCenario() {
   })
 
   const ordensSalvas: OrdemServico[] = []
-  const pecasSalvas: Peca[] = []
+  const reservas: { pecaId: string; quantidade: number }[] = []
 
   const ordens = {
     salvar: async (o: OrdemServico) => {
@@ -39,20 +44,33 @@ function montarCenario() {
     },
     buscarPorId: async () => null,
     listar: async () => [],
+  } as unknown as RepositorioDeOrdensServico
+
+  const clientes: PortalDeClientes = {
+    obterCliente: async (id) => (id === cliente.id ? { id: cliente.id } : null),
   }
-  const clientes = {
-    buscarPorId: async (id: string) => (id === cliente.id ? cliente : null),
-  } as any
-  const veiculos = {
-    buscarPorId: async (id: string) => (id === veiculo.id ? veiculo : null),
-  } as any
-  const servicos = { buscarVarios: async () => [servico] } as any
-  const pecas = {
-    buscarVarias: async () => [peca],
-    salvar: async (p: Peca) => {
-      pecasSalvas.push(p)
+  const veiculos: PortalDeVeiculos = {
+    obterVeiculo: async (id) =>
+      id === veiculo.id ? { id: veiculo.id, clienteId: veiculo.clienteId } : null,
+  }
+  const catalogo: PortalDeCatalogoDeServicos = {
+    obterServico: async (id) =>
+      id === servico.id
+        ? { id: servico.id, nome: servico.nome, preco: servico.preco, ativo: servico.ativo }
+        : null,
+    obterServicos: async () => [
+      { id: servico.id, nome: servico.nome, preco: servico.preco, ativo: servico.ativo },
+    ],
+  }
+  const estoque: PortalDeEstoque = {
+    obterPeca: async (id) =>
+      id === peca.id ? { id: peca.id, nome: peca.nome, preco: peca.preco } : null,
+    obterPecas: async () => [{ id: peca.id, nome: peca.nome, preco: peca.preco }],
+    reservar: async (pecaId, quantidade) => {
+      peca.reservar(quantidade)
+      reservas.push({ pecaId, quantidade })
     },
-  } as any
+  }
 
   return {
     cliente,
@@ -62,9 +80,9 @@ function montarCenario() {
     ordens,
     clientes,
     veiculos,
-    servicos,
-    pecas,
-    pecasSalvas,
+    catalogo,
+    estoque,
+    reservas,
   }
 }
 
@@ -72,11 +90,11 @@ test.group('CriarOrdemServico (caso de uso)', () => {
   test('cria a OS, compõe o orçamento e dá baixa no estoque', async ({ assert }) => {
     const c = montarCenario()
     const caso = new CriarOrdemServico(
-      c.ordens as any,
+      c.ordens,
       c.clientes,
       c.veiculos,
-      c.servicos,
-      c.pecas,
+      c.catalogo,
+      c.estoque,
       unidadeFake
     )
 
@@ -93,7 +111,7 @@ test.group('CriarOrdemServico (caso de uso)', () => {
     assert.equal(dto.status, 'RECEBIDA')
     // Estoque reduzido de 10 para 8.
     assert.equal(c.peca.quantidadeEstoque.valor, 8)
-    assert.lengthOf(c.pecasSalvas, 1)
+    assert.deepEqual(c.reservas, [{ pecaId: c.peca.id, quantidade: 2 }])
   })
 
   test('falha quando o veículo não pertence ao cliente', async ({ assert }) => {
@@ -105,14 +123,16 @@ test.group('CriarOrdemServico (caso de uso)', () => {
       modelo: 'Gol',
       ano: 2019,
     })
-    const veiculos = { buscarPorId: async () => outroVeiculo } as any
+    const veiculos: PortalDeVeiculos = {
+      obterVeiculo: async () => ({ id: outroVeiculo.id, clienteId: outroVeiculo.clienteId }),
+    }
 
     const caso = new CriarOrdemServico(
-      c.ordens as any,
+      c.ordens,
       c.clientes,
       veiculos,
-      c.servicos,
-      c.pecas,
+      c.catalogo,
+      c.estoque,
       unidadeFake
     )
 

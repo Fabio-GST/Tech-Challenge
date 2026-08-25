@@ -37,4 +37,24 @@ export default await Env.create(new URL('../', import.meta.url), {
   */
   JWT_SECRET: Env.schema.string(),
   JWT_EXPIRES_IN: Env.schema.string.optional(),
+
+  /*
+  |----------------------------------------------------------
+  | Segredo dos webhooks (notificações de sistemas externos)
+  |----------------------------------------------------------
+  */
+  WEBHOOK_SECRET: Env.schema.string.optional(),
+
+  /*
+  |----------------------------------------------------------
+  | Notificação ao cliente (log em dev/test; e-mail via SMTP)
+  |----------------------------------------------------------
+  */
+  NOTIFICACAO_DRIVER: Env.schema.enum.optional(['log', 'email'] as const),
+  SMTP_HOST: Env.schema.string.optional(),
+  SMTP_PORT: Env.schema.number.optional(),
+  SMTP_USER: Env.schema.string.optional(),
+  SMTP_PASSWORD: Env.schema.string.optional(),
+  MAIL_FROM: Env.schema.string.optional(),
+  EMAIL_ALMOXARIFE: Env.schema.string.optional(),
 })

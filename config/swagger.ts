@@ -70,7 +70,7 @@ export default {
   description: descricaoLinguagemUbiqua,
   tagIndex: 2,
   snakeCase: true,
-  ignore: ['/swagger', '/docs', '/'],
+  ignore: ['/swagger', '/docs', '/', '/health'],
   preferredPutPatch: 'PUT',
   common: {
     parameters: {},

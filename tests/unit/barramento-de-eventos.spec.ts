@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
-import { BarramentoDeEventos } from '#shared/infraestrutura/eventos/barramento-de-eventos'
-import type { EventoDeDominio } from '#shared/dominio/evento-de-dominio'
-import type { ManipuladorDeEvento } from '#shared/aplicacao/manipulador-de-evento'
+import { BarramentoDeEventos } from '#shared/frameworks-drivers/eventos/barramento-de-eventos'
+import type { EventoDeDominio } from '#shared/entities/evento-de-dominio'
+import type { ManipuladorDeEvento } from '#shared/use-cases/manipulador-de-evento'
 
 class EventoFake implements EventoDeDominio {
   readonly nome = 'teste.aconteceu'

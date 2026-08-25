@@ -1,23 +1,21 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import { barramentoDeEventos } from '#shared/infraestrutura/eventos/barramento-de-eventos'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
+import { barramentoDeEventos } from '#shared/frameworks-drivers/eventos/barramento-de-eventos'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 
-import { Peca } from '#modulos/estoque/dominio/entidades/peca'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
-import { UtilizarPeca } from '#modulos/estoque/aplicacao/casos-de-uso'
-import { SolicitarCompra } from '#modulos/estoque/aplicacao/compras'
-import type { RepositorioDePecas } from '#modulos/estoque/dominio/repositorios/repositorio-de-pecas'
-import type { RepositorioDeSolicitacoesCompra } from '#modulos/estoque/dominio/repositorios/repositorio-de-solicitacoes-compra'
-import type { SolicitacaoDeCompra } from '#modulos/estoque/dominio/entidades/solicitacao-de-compra'
+import { Peca } from '#modulos/estoque/entities/peca'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
+import { UtilizarPeca } from '#modulos/estoque/use-cases/utilizar-peca'
+import { SolicitarCompra } from '#modulos/estoque/use-cases/solicitar-compra'
+import type { RepositorioDePecas } from '#modulos/estoque/use-cases/ports/repositorio-de-pecas'
+import type { RepositorioDeSolicitacoesCompra } from '#modulos/estoque/use-cases/ports/repositorio-de-solicitacoes-compra'
+import type { SolicitacaoDeCompra } from '#modulos/estoque/entities/solicitacao-de-compra'
 
-import {
-  GerarCobranca,
-  RegistrarPagamento,
-  EmitirNotaFiscal,
-} from '#modulos/pagamento/aplicacao/casos-de-uso'
-import type { RepositorioDePagamentos } from '#modulos/pagamento/dominio/repositorios/repositorio-de-pagamentos'
-import type { Pagamento } from '#modulos/pagamento/dominio/entidades/pagamento'
+import { GerarCobranca } from '#modulos/pagamento/use-cases/gerar-cobranca'
+import { RegistrarPagamento } from '#modulos/pagamento/use-cases/registrar-pagamento'
+import { EmitirNotaFiscal } from '#modulos/pagamento/use-cases/emitir-nota-fiscal'
+import type { RepositorioDePagamentos } from '#modulos/pagamento/use-cases/ports/repositorio-de-pagamentos'
+import type { Pagamento } from '#modulos/pagamento/entities/pagamento'
 
 import { SolicitarCompraAoAtingirMinimo } from '#politicas/solicitar-compra-ao-atingir-minimo'
 import { EmitirNotaAoConfirmarPagamento } from '#politicas/emitir-nota-ao-confirmar-pagamento'

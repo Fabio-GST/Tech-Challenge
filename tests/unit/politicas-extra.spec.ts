@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
-import type { ServicoDeNotificacao } from '#shared/aplicacao/servico-de-notificacao'
+import type { ServicoDeNotificacao } from '#shared/use-cases/servico-de-notificacao'
 import { GerarCobrancaAoFinalizar } from '#politicas/gerar-cobranca-ao-finalizar'
 import { NotificarClienteSobreOS } from '#politicas/notificar-cliente-sobre-os'
-import { ServicoDeNotificacaoLog } from '#shared/infraestrutura/notificacao/servico-de-notificacao-log'
+import { ServicoDeNotificacaoLog } from '#shared/frameworks-drivers/notificacao/servico-de-notificacao-log'
 
 /** Espião do serviço de notificação. */
 function notificacaoFake() {

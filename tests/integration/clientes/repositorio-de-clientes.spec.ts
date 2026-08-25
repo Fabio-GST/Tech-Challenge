@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
-import { Cliente } from '#modulos/clientes/dominio/entidades/cliente'
-import { Documento } from '#modulos/clientes/dominio/objetos-de-valor/documento'
-import { RepositorioDeClientesLucid } from '#modulos/clientes/infraestrutura/persistencia/repositorios/repositorio-de-clientes-lucid'
+import { Cliente } from '#modulos/clientes/entities/cliente'
+import { Documento } from '#modulos/clientes/entities/objetos-de-valor/documento'
+import { RepositorioDeClientesLucid } from '#modulos/clientes/interface-adapters/gateways/repositorio-de-clientes-lucid'
 
 /**
  * Teste de integração: exercita o repositório Lucid contra o banco de teste

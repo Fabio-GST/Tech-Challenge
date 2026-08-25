@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
 import { prepararBanco } from '#tests/helpers/banco'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
-import { Peca } from '#modulos/estoque/dominio/entidades/peca'
-import { QuantidadeEstoque } from '#modulos/estoque/dominio/objetos-de-valor/quantidade-estoque'
-import { RepositorioDePecasLucid } from '#modulos/estoque/infraestrutura/persistencia/repositorios/repositorio-de-pecas-lucid'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
+import { Peca } from '#modulos/estoque/entities/peca'
+import { QuantidadeEstoque } from '#modulos/estoque/entities/objetos-de-valor/quantidade-estoque'
+import { RepositorioDePecasLucid } from '#modulos/estoque/interface-adapters/gateways/repositorio-de-pecas-lucid'
 
 test.group('RepositorioDePecasLucid', (group) => {
   prepararBanco(group)

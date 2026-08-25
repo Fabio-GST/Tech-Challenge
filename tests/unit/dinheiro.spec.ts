@@ -1,5 +1,5 @@
 import { test } from '@japa/runner'
-import { Dinheiro } from '#shared/dominio/objetos-de-valor/dinheiro'
+import { Dinheiro } from '#shared/entities/objetos-de-valor/dinheiro'
 
 test.group('Dinheiro', () => {
   test('cria a partir de reais convertendo para centavos', ({ assert }) => {
