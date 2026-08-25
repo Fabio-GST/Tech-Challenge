@@ -38,3 +38,6 @@ yarn-error.log
 
 # Platform specific
 .DS_Store
+
+# kubeconfig gerado pelo Terraform (credenciais do cluster)
+infra/oficina-config
