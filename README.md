@@ -126,8 +126,8 @@ Para regerar a spec após mudar rotas: suba a aplicação e salve a resposta de 
 
 ## Vídeo demonstrativo
 
-Vídeo (até 15 min) com o deploy, a execução do CI/CD, o consumo das APIs e a escalabilidade
-automática: **link em breve**.
+Vídeo (12min20s) com o deploy, a execução do CI/CD, o consumo das APIs e a escalabilidade
+automática: **[assistir ao vídeo](https://drive.google.com/file/d/1wLm3q3dAi6ljX0bM3NB71IYAEVS5qotA/view?usp=sharing)**.
 
 ---
 
